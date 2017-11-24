@@ -1,0 +1,157 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+a {
+    color: #000;
+}
+
+a:hover {
+    color: #000;
+}
+
+.xb-user {
+    padding: 20px 5px;
+    background-color: #317A1F;
+    color: #FFF;
+}
+
+.xb-user-img img {
+    width: 100%;
+    border-radius: 3px;
+}
+
+.xb-user-text {
+    padding: 10px 0;
+}
+
+.xb-logo {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    padding: 15px 10px;
+}
+
+@media screen and (max-height: 400px) {
+    .xb-logo {
+        display: none;
+    }
+
+    .xb-section {
+        height: calc(100% - 53px) !important;
+    }
+}
+
+.xb-logo img {
+    width: 100%;
+    border-radius: 3px;
+}
+
+.xb-list {
+    height: 100%;
+}
+
+.xb-list .am-list {
+    padding: 0 10px;
+}
+
+.xb-list .am-list li,
+.xb-list .am-list-static li,
+.xb-list .am-list-border li {
+    padding: 6px 4px;
+    border: none;
+    border-bottom: 1px solid #317A1F;
+    margin-bottom: 2px;
+    font-size: 16px;
+}
+
+.xb-list .am-list li a:hover {
+    background: none;
+}
+
+.xb-list .am-list li a span {
+    padding-left: 4px;
+}
+
+.am-header-default {
+    background-color: #317A1F;
+}
+
+.xb-bottom {
+    position: fixed;
+    bottom: 0;
+}
+
+.xb-tab {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    line-height: 20px;
+    padding: 6px 10px;
+    background-color: #317A1F;
+}
+
+.xb-tab a {
+    color: #FFF;
+}
+
+.xb-tab span {
+    display: block;
+    text-align: center;
+}
+
+.xb-tab .am-icon-fw {
+    width: auto;
+}
+
+.xb-100h {
+    height: 100% !important;
+}
+
+.xb-btn-green {
+    background-color: #317A1F !important;
+    color: #FFF !important;
+}
+
+.xb-section {
+    height: calc(100% - 109px);
+    /*background-color: rgba(0, 0, 0, 0.02);*/
+}
+
+.xb-form,
+.xb-form .swiper-container,
+.xb-form .swiper-wrapper,
+.xb-form .swiper-slide {
+    height: 100%;
+    position: relative;
+    padding: 0;
+}
+
+.xb-form .swiper-slide {
+    overflow-y: scroll;
+}
+
+.xb-form .swiper-container .swiper-wrapper {
+    position: relative;
+    margin-top: 10px;
+}
+
+.xb-form .swiper-pagination-progress {
+    height: 6px;
+    top: 2px;
+}
+
+.xb-form .swiper-pagination-progress .swiper-pagination-progressbar {
+    background-color: #317A1F;
+}
+
+.xb-form .am-form legend,
+.xb-form .am-form fieldset {
+    margin-bottom: 1rem;
+}
+
+.xb-form .am-form .am-checkbox {
+    font-size: 16px;
+}

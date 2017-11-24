@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>上饶农商四扫系统</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js" async></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.min.js"></script>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/javascripts/bmob.js"></script>
+</head>
+
+<body>
+    <!-- common header -->
+    <header data-am-widget="header" class="am-header am-header-default">
+        <div class="am-header-left am-header-nav">
+            <a href="javascript:window.history.back();" class="">
+                <i class="am-header-icon am-icon-angle-left am-icon-sm"></i>
+          	</a>
+        </div>
+        <h1 class="am-header-title">
+          	<a href="#" class="">个人用户</a>
+      	</h1>
+    </header>
+    <!-- end header -->
+    <!-- start contain -->
+    <style>
+    
+    </style>
+    <section class="xb-section">
+        <form action="/task/person" method="post" class="am-u-sm-12 xb-form" id="doc-vld-msg">
+            <div class="swiper-container swiper-container-horizontal">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="am-form">
+                            <fieldset>
+                                <legend>第一步：个人基本数据录入</legend>
+                                <div class="am-form-group">
+                                    <label for="name">姓名</label>
+                                    <input type="text" class="" id="name" name="name" placeholder="张三" minlength="2" required>
+                                </div>
+                                <div class="am-form-group">
+                                    <label for="tel">联系电话</label>
+                                    <input type="number" class="" id="tel" name="tel" placeholder="15745876594" minlength="11" data-validation-message="请输入正确的手机号码" required>
+                                </div>
+                                <script>
+                                	Bmob.initialize("538f776dcefb77707ab90e41cf31ed68", "c7f325c97022993c82b6d46b204e3f97");
+                                </script>
+                                <div class="am-form-group">
+                                    <label for="card">身份证号</label>
+                                    <input type="text" class="" id="card" name="card" placeholder="360424198402355846" minlength="18" maxlength="18" data-validation-message="请输入正确的身份证号" required>
+                                </div>
+                                <div class="am-form-group">
+                                    <label for="address">详细地址</label>
+                                    <input type="text" class="" id="address" name="address" placeholder="南昌市东湖区绿荫大道203号" data-validation-message="咋练自己住哪都忘了" required>
+                                </div>
+                                <div class="am-form-group">
+                                    <label for="member">家庭人口（人）</label>
+                                    <input type="number" class="" id="member" name="member" placeholder="4" min="1" max="100" data-validation-message="再好好想想家里几口人">
+                                </div>
+                                <div class="am-form-group">
+                                    <label for="income">家庭年收入（万元）</label>
+                                    <input type="number" class="" id="income" name="income" placeholder="12" data-validation-message="日进斗金啊">
+                                </div>
+                                <div class="am-form-group">
+                                    <label for="assets">家庭资产情况（万元）</label>
+                                    <input type="text" class="" id="assets" name="assets" placeholder="34" data-validation-message="偷偷想想还剩多少钱">
+                                </div>
+                                <div class="am-form-group">
+                                    <label for="work">经营项目或工作单位</label>
+                                    <input type="text" class="" id="work" name="work" placeholder="上饶农商银行" data-validation-message="请输入正确的经营项目或工作单位">
+                                </div>
+                                <div class="am-form-group">
+                                    <label for="work_date">经营或工作年限（年）</label>
+                                    <input type="text" class="" id="work_date" name="work_date" placeholder="3" min="0" max="100" data-validation-message="请输入正确的经营或工作年限">
+                                </div>
+                                <div class="am-g">
+                                    <div class="am-u-sm-4 am-u-sm-offset-4 am-text-center">
+                                        <button type="button" class="am-btn xb-btn-green xb-btn-next">下一步</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="am-form">
+                            <fieldset>
+                                <legend>第二步：金融产品选择</legend>
+                                <div class="am-form-group">
+                                    <h3>1.已有他行金融产品或金融服务（多选）</h3>
+                                    <% if(service.exsit_service){ %>
+										<% for(var i=0; i<service.exsit_service.length; i++){ %>
+										<label class="am-checkbox am-success">
+	                                        <input type="checkbox" value="<%= service.exsit_service[i].id %>" data-id="<%= service.exsit_service[i].serviceName %>" data-am-ucheck name="exsit_service"> <%= service.exsit_service[i].serviceName %>
+	                                    </label>
+										<% } %>
+                                    <% } %>
+                                </div>
+                                <div class="am-form-group">
+                                    <h3>2.本次营销我行金融服务（多选）</h3>
+                                    <% if(service.handle_service){ %>
+										<% for(var i=0; i<service.handle_service.length; i++){ %>
+										<label class="am-checkbox am-success">
+	                                        <input type="checkbox" value="<%= service.handle_service[i].id %>" data-id="<%= service.handle_service[i].serviceName %>" data-am-ucheck name="handle_service"> <%= service.handle_service[i].serviceName %>
+	                                    </label>
+										<% } %>
+                                    <% } %>
+                                </div>
+                                <div class="am-form-group">
+                                    <h3>3.意向我行金融服务（多选）</h3>
+                                    <% if(service.intention_service){ %>
+										<% for(var i=0; i<service.intention_service.length; i++){ %>
+										<label class="am-checkbox am-success">
+	                                        <input type="checkbox" value="<%= service.intention_service[i].id %>" data-id="<%= service.intention_service[i].serviceName %>" data-am-ucheck name="intention_service"> <%= service.intention_service[i].serviceName %>
+	                                    </label>
+										<% } %>
+                                    <% } %>
+                                </div>
+                                <div class="am-g">
+                                    <div class="am-u-sm-4 am-u-sm-offset-2 am-text-center">
+                                        <button type="button" class="am-btn xb-btn-green xb-btn-prev">上一步</button>
+                                    </div>
+                                    <div class="am-u-sm-4 am-u-end am-text-center">
+                                        <button type="button" class="am-btn xb-btn-green xb-btn-next">下一步</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="am-form">
+                            <fieldset>
+                                <legend>第三步：信息确认</legend>
+                                <style>
+                                .xb-formInfo {
+                                    display: block;
+                                    width: 100%;
+                                    line-height: 28px;
+                                    font-size: 16px;
+                                    color: rgba(0, 0, 0, 0.8);
+                                    clear: both;
+                                }
+
+                                .xb-formInfo ul,
+                                .xb-formInfo ul li {
+                                    list-style-type: none;
+                                    margin: 0;
+                                    padding: 0;
+                                }
+
+                                .xb-formInfo .xb-formInfo-key {
+                                    text-align: right;
+                                    font-weight: bold;
+                                }
+
+                                #formInfo {
+                                    margin-bottom: 20px;
+                                }
+                                </style>
+                                <div class="am-g" id="formInfo">
+                                    <div class="xb-formInfo">
+                                        <div class="am-u-sm-4 xb-formInfo-key">姓名</div>
+                                        <div class="am-u-sm-8 xb-formInfo-value"></div>
+                                    </div>
+                                    <div class="xb-formInfo">
+                                        <div class="am-u-sm-4 xb-formInfo-key">联系电话</div>
+                                        <div class="am-u-sm-8 xb-formInfo-value"></div>
+                                    </div>
+                                    <div class="xb-formInfo">
+                                        <div class="am-u-sm-4 xb-formInfo-key">身份证号</div>
+                                        <div class="am-u-sm-8 xb-formInfo-value"></div>
+                                    </div>
+                                    <div class="xb-formInfo">
+                                        <div class="am-u-sm-4 xb-formInfo-key">详细地址</div>
+                                        <div class="am-u-sm-8 xb-formInfo-value"></div>
+                                    </div>
+                                    <div class="xb-formInfo">
+                                        <div class="am-u-sm-4 xb-formInfo-key">家庭人口</div>
+                                        <div class="am-u-sm-8 xb-formInfo-value"></div>
+                                    </div>
+                                    <div class="xb-formInfo">
+                                        <div class="am-u-sm-4 xb-formInfo-key">家庭年收入</div>
+                                        <div class="am-u-sm-8 xb-formInfo-value"></div>
+                                    </div>
+                                    <div class="xb-formInfo">
+                                        <div class="am-u-sm-4 xb-formInfo-key">家庭资产情况</div>
+                                        <div class="am-u-sm-8 xb-formInfo-value"></div>
+                                    </div>
+                                    <div class="xb-formInfo">
+                                        <div class="am-u-sm-4 xb-formInfo-key">经营项目或工作单位</div>
+                                        <div class="am-u-sm-8 xb-formInfo-value"></div>
+                                    </div>
+                                    <div class="xb-formInfo">
+                                        <div class="am-u-sm-4 xb-formInfo-key">经营或工作年限</div>
+                                        <div class="am-u-sm-8 xb-formInfo-value"></div>
+                                    </div>
+                                    <div class="xb-formInfo">
+                                        <div class="am-u-sm-4 xb-formInfo-key">已有他行金融产品或金融服务</div>
+                                        <div class="am-u-sm-8 xb-formInfo-value">
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="xb-formInfo">
+                                        <div class="am-u-sm-4 xb-formInfo-key">本次营销我行金融服务</div>
+                                        <div class="am-u-sm-8 xb-formInfo-value">
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="xb-formInfo">
+                                        <div class="am-u-sm-4 xb-formInfo-key">意向我行金融服务</div>
+                                        <div class="am-u-sm-8 xb-formInfo-value">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="am-g">
+                                    <div class="am-u-sm-4 am-u-sm-offset-2 am-text-center">
+                                        <button type="button" class="am-btn xb-btn-green xb-btn-prev">上一步</button>
+                                    </div>
+                                    <div class="am-u-sm-4 am-u-end am-text-center">
+                                        <button type="submit" class="am-btn xb-btn-green">提&nbsp;交</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination swiper-pagination-progress"></div>
+                <div class="swiper-button-prev" style="display: none;"></div>
+                <div class="swiper-button-next" style="display: none;"></div>
+            </div>
+        </form>
+        <script>
+        var swiper = new Swiper('.swiper-container', {
+            initialSlide: 0,
+            hashnav: true,
+            hashnavWatchState: true,
+            pagination: '.swiper-pagination',
+            paginationType: 'progress',
+            prevButton: '.swiper-button-prev',
+            nextButton: '.swiper-button-next'
+        })
+        var prevButton = document.querySelector('.swiper-button-prev');
+        var nextButton = document.querySelector('.swiper-button-next');
+        var btnNext = document.querySelectorAll('.xb-btn-next');
+        var btnPrev = document.querySelectorAll('.xb-btn-prev');
+        for (var i = 0; i < btnNext.length; i++) {
+            btnNext[i].addEventListener("touchstart", function(e) {
+                e.preventDefault();
+                nextButton.click();
+            })
+        }
+        for (var i = 0; i < btnPrev.length; i++) {
+            btnPrev[i].addEventListener("touchstart", function(e) {
+                e.preventDefault();
+                prevButton.click();
+            })
+        }
+
+        var storage = window.localStorage;
+        var input = document.querySelectorAll('.am-form .am-form-group > input');
+        for (var i = 0; i < input.length; i++) {
+            input[i].addEventListener('change', function() {
+                storage.setItem(this.name, this.value);
+                updateForm();
+            });
+        }
+
+        var exsit_service = document.querySelectorAll('input[name="exsit_service"]');
+        for (var i = 0; i < exsit_service.length; i++) {
+            exsit_service[i].addEventListener('change', function(e) {
+                var checked_service = document.querySelectorAll('input[name="exsit_service"]:checked');
+                var checked_array = new Array();
+                for (var j = 0; j < checked_service.length; j++) {
+                    checked_array.push(checked_service[j].dataset.id);
+                }
+                storage.setItem('exsit_service', checked_array.toString() ? checked_array : "还没选择服务哦");
+                updateForm();
+            });
+        }
+
+        var handle_service = document.querySelectorAll('input[name="handle_service"]');
+        for (var i = 0; i < handle_service.length; i++) {
+            handle_service[i].addEventListener('change', function(e) {
+                var checked_service = document.querySelectorAll('input[name="handle_service"]:checked');
+                var checked_array = new Array();
+                for (var j = 0; j < checked_service.length; j++) {
+                    checked_array.push(checked_service[j].dataset.id);
+                }
+                storage.setItem('handle_service', checked_array.toString() ? checked_array : "还没选择服务哦");
+                updateForm();
+            });
+        }
+
+        var intention_service = document.querySelectorAll('input[name="intention_service"]');
+        for (var i = 0; i < intention_service.length; i++) {
+            intention_service[i].addEventListener('change', function(e) {
+                var checked_service = document.querySelectorAll('input[name="intention_service"]:checked');
+                var checked_array = new Array();
+                for (var j = 0; j < checked_service.length; j++) {
+                    checked_array.push(checked_service[j].dataset.id);
+                }
+                storage.setItem('intention_service', checked_array.toString() ? checked_array : "还没选择服务哦");
+                updateForm();
+            });
+        }
+
+
+        function updateForm() {
+            var formInfo = document.querySelectorAll('#formInfo > .xb-formInfo > .xb-formInfo-value');
+            formInfo[0].innerText = storage.name;
+            formInfo[1].innerText = storage.tel;
+            formInfo[2].innerText = storage.card;
+            formInfo[3].innerText = storage.address;
+            formInfo[4].innerText = storage.member + "（人）";
+            formInfo[5].innerText = storage.income + "（万元）";
+            formInfo[6].innerText = storage.assets + "（万元）";
+            formInfo[7].innerText = storage.work;
+            formInfo[8].innerText = storage.work_date + "（年）";
+
+            formInfo[9].innerHTML = "";
+            if (storage.exsit_service) {
+                var exsit_data = storage.exsit_service.split(',');
+                // console.log(exsit_data);
+                var ul = document.createElement('ul');
+                for (var i = 0; i < exsit_data.length; i++) {
+                    var li = document.createElement('li');
+                    li.innerText = exsit_data[i];
+                    ul.appendChild(li);
+                }
+                formInfo[9].appendChild(ul);
+            }
+
+            formInfo[10].innerHTML = "";
+            if (storage.handle_service) {
+                var handle_data = storage.handle_service.split(',');
+                // console.log(handle_data);
+                var ul = document.createElement('ul');
+                for (var i = 0; i < handle_data.length; i++) {
+                    var li = document.createElement('li');
+                    li.innerText = handle_data[i];
+                    ul.appendChild(li);
+                }
+                formInfo[10].appendChild(ul);
+            }
+
+            formInfo[11].innerHTML = "";
+            if (storage.intention_service) {
+                var intention_data = storage.intention_service.split(',');
+                // console.log(intention_data);
+                var ul = document.createElement('ul');
+                for (var i = 0; i < intention_data.length; i++) {
+                    var li = document.createElement('li');
+                    li.innerText = intention_data[i];
+                    ul.appendChild(li);
+                }
+                formInfo[11].appendChild(ul);
+            }
+        }
+
+        window.onload = function() {
+            $(function() {
+                $("#doc-vld-msg").validator({
+                    onValid: function(a) { $(a.field).closest(".am-form-group").find(".am-alert").hide() },
+                    onInValid: function(a) {
+                        var i = $(a.field),
+                            d = i.closest(".am-form-group"),
+                            e = d.find(".am-alert"),
+                            l = i.data("validationMessage") || this.getValidationMessage(a);
+                        e.length || (e = $('<div class="am-alert am-alert-danger"></div>').hide().appendTo(d)), e.html(l).show()
+                    }
+                })
+            })
+        }
+        </script>
+    </section>
+    <!-- end contain -->
+    <!-- common footer -->
+    <footer class="xb-logo">
+        <div class="am-g">
+            <div class="am-u-sm-6 am-u-sm-offset-3">
+                <img src="/images/logo.jpg" alt="">
+            </div>
+        </div>
+    </footer>
+    <!-- end footer -->
+</body>
+
+</html>
