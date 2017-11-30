@@ -1,1 +1,129 @@
-custom.ejs
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>上饶农商四扫系统</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js" async></script>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <!-- common header -->
+    <header data-am-widget="header" class="am-header am-header-default">
+        <div class="am-header-left am-header-nav">
+            <a href="javascript:window.history.back();" class="">
+                <i class="am-header-icon am-icon-angle-left am-icon-sm"></i>
+          	</a>
+        </div>
+        <h1 class="am-header-title">
+          	<a href="#" class="">周边客户</a>
+      	</h1>
+    </header>
+    <!-- end header -->
+    <!-- start contain -->
+    <style>
+        .xb-section {
+            height: calc(100% - 103px);
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        .xb-search {
+            padding-top: 10px;
+        }
+
+        .xb-search .am-btn-green {
+            background-color: #317A1F;
+            color: #FFF;
+        }
+
+        .xb-custom {
+            width: 100%;
+            height: calc(100% - 48px);
+        }
+
+        .xb-custom .custom-list {
+            height: 100%;
+            padding-top: 8px;
+            font-size: 16px;
+            clear: both;
+            overflow: hidden;
+            overflow-y: scroll;
+        }
+
+        .custom-list .custom-list-item {
+            width: 96%;
+            margin-left: 2%;
+            margin-right: 2%;
+            padding: 10px 10px;
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            border-radius: 3px;
+            background-color: #FFF;
+            margin-bottom: 10px;
+        }
+
+        .custom-list .custom-list-item span:nth-child(1) {
+            font-weight: bold;
+        }
+    </style>
+    <section class="xb-section">
+        <div class="am-g xb-search">
+            <div class="am-u-sm-12">
+                <form method="post" action="/custom/search" class="">
+                    <div class="am-input-group">
+                        <input type="text" class="am-form-field" id="queryCustom" name="queryCustom" placeholder="输入你想查询客户的姓名" maxlength="4">
+                        <span class="am-input-group-btn">
+                            <button class="am-btn am-btn-green" type="submit" id="btnSearch"><span class="am-icon-search"></span> </button>
+                        </span>
+                    </div>
+                </form>
+                <script type="text/javascript">
+                    // var search = document.querySelector("#btnSearch");
+                    // search.addEventListener("touchstart", function(e) {
+                    //     console.log(e);
+                    //     var custom = document.querySelector("#queryCustom").value;
+                    //
+                    // });
+                </script>
+            </div>
+        </div>
+        <div class="am-g xb-custom">
+            <div class="custom-list">
+                <% for(var i=0; i<10; i++){ %>
+                    <div class="am-u-sm-12 custom-list-item">
+                        <div class="am-u-sm-12 custom-item-group">
+                            <span>姓名：</span>
+                            <span>小波</span>
+                        </div>
+                        <div class="am-u-sm-12 custom-item-group">
+                            <span>联系方式：</span>
+                            <span>15798468245</span>
+                        </div>
+                        <div class="am-u-sm-12 custom-item-group">
+                            <span>已有金融服务：</span>
+                            <span>信用贷，影视贷，保险</span>
+                        </div>
+                        <div class="am-u-sm-12 custom-item-group">
+                            <span>详细地址：</span>
+                            <span>江西省南昌市经济开发区华东交通大学北区35栋302</span>
+                        </div>
+                    </div>
+                    <% } %>
+            </div>
+        </div>
+    </section>
+    <!-- end contain -->
+    <!-- common footer -->
+    <footer class="xb-logo">
+        <div class="am-g">
+            <div class="am-u-sm-6 am-u-sm-offset-3">
+                <img src="/images/logo.jpg" alt="">
+            </div>
+        </div>
+    </footer>
+    <!-- end footer -->
+</body>
+
+</html>

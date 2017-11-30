@@ -28,10 +28,9 @@
     <!-- end header -->
     <!-- start contain -->
     <style>
-    
     </style>
     <section class="xb-section">
-        <form action="/task/person" method="post" class="am-u-sm-12 xb-form" id="doc-vld-msg">
+        <form action="/task/shop" method="post" class="am-u-sm-12 xb-form" id="doc-vld-msg">
             <div class="swiper-container swiper-container-horizontal">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
@@ -40,7 +39,7 @@
                                 <legend>第一步：商户基本数据录入</legend>
                                 <div class="am-form-group">
                                     <label for="shop_name">商户名称</label>
-                                    <input type="text" class="" id="shop_name" name="shop_name" value="vans专卖店" placeholder="vans专卖店" minlength="2" required>
+                                    <input type="text" class="" id="shop_name" name="shop_name" placeholder="vans专卖店" minlength="2" required>
                                 </div>
                                 <div class="am-form-group">
                                     <label for="name">法人姓名</label>
@@ -56,34 +55,30 @@
                                 </div>
                                 <div class="am-form-group">
                                     <label for="shop_address">经营地址</label>
-                                    <input type="text" class="" id="shop_address" name="shop_address" value="南昌市东湖区绿荫大道203号" placeholder="南昌市东湖区绿荫大道203号"  data-validation-message="贵店座落何方啊" required>
+                                    <input type="text" class="" id="shop_address" name="shop_address" placeholder="南昌市东湖区绿荫大道203号" data-validation-message="贵店座落何方啊" required>
                                 </div>
                                 <script>
-                                	Bmob.initialize("538f776dcefb77707ab90e41cf31ed68", "c7f325c97022993c82b6d46b204e3f97");
+                                    Bmob.initialize("538f776dcefb77707ab90e41cf31ed68", "c7f325c97022993c82b6d46b204e3f97");
                                 </script>
                                 <div class="am-form-group">
                                     <label for="shop_year">经营年限</label>
-                                    <input type="number" class="" id="shop_year" name="shop_year" value="4" placeholder="4" min="1" max="200" data-validation-message="旺铺兴荣，年久不衰">
+                                    <input type="number" class="" id="shop_year" name="shop_year" placeholder="4" min="1" max="200" data-validation-message="旺铺兴荣，年久不衰">
                                 </div>
                                 <div class="am-form-group">
                                     <label for="shop_state">经营场所情况</label>
-                                    <input type="text" class="" id="shop_state" name="shop_state" value="" placeholder="" required>
+                                    <input type="text" class="" id="shop_state" name="shop_state" placeholder="自有或租赁" required>
                                 </div>
                                 <div class="am-form-group">
                                     <label for="income">年营业额（万元）</label>
-                                    <input type="number" class="" id="income" name="income" value="12" placeholder="12" data-validation-message="日进斗金啊">
+                                    <input type="number" class="" id="income" name="income" placeholder="12" data-validation-message="日进斗金啊">
                                 </div>
                                 <div class="am-form-group">
                                     <label for="high_authority">上级主管部门</label>
-                                    <input type="text" class="" id="high_authority" name="high_authority" value="工信部" placeholder="工信部" data-validation-message="想想老大是谁">
+                                    <input type="text" class="" id="high_authority" name="high_authority" placeholder="工信部" data-validation-message="想想老大是谁">
                                 </div>
                                 <div class="am-form-group">
-                                    <label for="work">经营项目或工作单位</label>
-                                    <input type="text" class="" id="work" name="work" value="上饶农商银行" placeholder="上饶农商银行" data-validation-message="请输入正确的经营项目或工作单位">
-                                </div>
-                                <div class="am-form-group">
-                                    <label for="work_date">经营或工作年限（年）</label>
-                                    <input type="text" class="" id="work_date" name="work_date" value="3" placeholder="3" min="0" max="100" data-validation-message="请输入正确的经营或工作年限">
+                                    <label for="person_in_charge">行业协会负责人</label>
+                                    <input type="text" class="" id="person_in_charge" name="person_in_charge" placeholder="张三" data-validation-message="想想老大是谁">
                                 </div>
                                 <div class="am-g">
                                     <div class="am-u-sm-4 am-u-sm-offset-4 am-text-center">
@@ -100,32 +95,32 @@
                                 <div class="am-form-group">
                                     <h3>1.已有他行金融产品或金融服务（多选）</h3>
                                     <% if(service.exsit_service){ %>
-										<% for(var i=0; i<service.exsit_service.length; i++){ %>
-										<label class="am-checkbox am-success">
-	                                        <input type="checkbox" value="<%= service.exsit_service[i].id %>" data-id="<%= service.exsit_service[i].serviceName %>" data-am-ucheck name="exsit_service"> <%= service.exsit_service[i].serviceName %>
-	                                    </label>
-										<% } %>
-                                    <% } %>
+                                        <% for(var i=0; i<service.exsit_service.length; i++){ %>
+                                            <label class="am-checkbox am-success">
+                                                <input type="checkbox" value="<%= service.exsit_service[i].id %>" data-id="<%= service.exsit_service[i].serviceName %>" data-am-ucheck name="exsit_service"> <%= service.exsit_service[i].serviceName %>
+                                            </label>
+                                            <% } %>
+                                                <% } %>
                                 </div>
                                 <div class="am-form-group">
                                     <h3>2.本次营销我行金融服务（多选）</h3>
                                     <% if(service.handle_service){ %>
-										<% for(var i=0; i<service.handle_service.length; i++){ %>
-										<label class="am-checkbox am-success">
+                                        <% for(var i=0; i<service.handle_service.length; i++){ %>
+                                            <label class="am-checkbox am-success">
 	                                        <input type="checkbox" value="<%= service.handle_service[i].id %>" data-id="<%= service.handle_service[i].serviceName %>" data-am-ucheck name="handle_service"> <%= service.handle_service[i].serviceName %>
 	                                    </label>
-										<% } %>
-                                    <% } %>
+                                            <% } %>
+                                                <% } %>
                                 </div>
                                 <div class="am-form-group">
                                     <h3>3.意向我行金融服务（多选）</h3>
                                     <% if(service.intention_service){ %>
-										<% for(var i=0; i<service.intention_service.length; i++){ %>
-										<label class="am-checkbox am-success">
+                                        <% for(var i=0; i<service.intention_service.length; i++){ %>
+                                            <label class="am-checkbox am-success">
 	                                        <input type="checkbox" value="<%= service.intention_service[i].id %>" data-id="<%= service.intention_service[i].serviceName %>" data-am-ucheck name="intention_service"> <%= service.intention_service[i].serviceName %>
 	                                    </label>
-										<% } %>
-                                    <% } %>
+                                            <% } %>
+                                                <% } %>
                                 </div>
                                 <div class="am-g">
                                     <div class="am-u-sm-4 am-u-sm-offset-2 am-text-center">
@@ -143,96 +138,85 @@
                             <fieldset>
                                 <legend>第三步：信息确认</legend>
                                 <style>
-                                .xb-formInfo {
-                                    display: block;
-                                    width: 100%;
-                                    line-height: 28px;
-                                    font-size: 16px;
-                                    color: rgba(0, 0, 0, 0.8);
-                                    clear: both;
-                                }
+                                    .xb-formInfo {
+                                        display: block;
+                                        width: 100%;
+                                        line-height: 28px;
+                                        font-size: 16px;
+                                        color: rgba(0, 0, 0, 0.8);
+                                        clear: both;
+                                    }
 
-                                .xb-formInfo ul,
-                                .xb-formInfo ul li {
-                                    list-style-type: none;
-                                    margin: 0;
-                                    padding: 0;
-                                }
+                                    .xb-formInfo ul,
+                                    .xb-formInfo ul li {
+                                        list-style-type: none;
+                                        margin: 0;
+                                        padding: 0;
+                                    }
 
-                                .xb-formInfo .xb-formInfo-key {
-                                    text-align: right;
-                                    font-weight: bold;
-                                }
+                                    .xb-formInfo .xb-formInfo-key {
+                                        text-align: right;
+                                        font-weight: bold;
+                                    }
 
-                                #formInfo {
-                                    margin-bottom: 20px;
-                                }
+                                    #formInfo {
+                                        margin-bottom: 20px;
+                                    }
                                 </style>
                                 <div class="am-g" id="formInfo">
                                     <div class="xb-formInfo">
-                                        <div class="am-u-sm-4 xb-formInfo-key">姓名</div>
-                                        <div class="am-u-sm-8 xb-formInfo-value">张三</div>
+                                        <div class="am-u-sm-4 xb-formInfo-key">商户名称</div>
+                                        <div class="am-u-sm-8 xb-formInfo-value"></div>
+                                    </div>
+                                    <div class="xb-formInfo">
+                                        <div class="am-u-sm-4 xb-formInfo-key">法人姓名</div>
+                                        <div class="am-u-sm-8 xb-formInfo-value"></div>
                                     </div>
                                     <div class="xb-formInfo">
                                         <div class="am-u-sm-4 xb-formInfo-key">联系电话</div>
-                                        <div class="am-u-sm-8 xb-formInfo-value">15745876594</div>
+                                        <div class="am-u-sm-8 xb-formInfo-value"></div>
                                     </div>
                                     <div class="xb-formInfo">
                                         <div class="am-u-sm-4 xb-formInfo-key">身份证号</div>
-                                        <div class="am-u-sm-8 xb-formInfo-value">360424198402355846</div>
+                                        <div class="am-u-sm-8 xb-formInfo-value"></div>
                                     </div>
                                     <div class="xb-formInfo">
-                                        <div class="am-u-sm-4 xb-formInfo-key">详细地址</div>
-                                        <div class="am-u-sm-8 xb-formInfo-value">南昌市东湖区绿荫大道203号</div>
+                                        <div class="am-u-sm-4 xb-formInfo-key">经营地址</div>
+                                        <div class="am-u-sm-8 xb-formInfo-value"></div>
                                     </div>
                                     <div class="xb-formInfo">
-                                        <div class="am-u-sm-4 xb-formInfo-key">家庭人口</div>
-                                        <div class="am-u-sm-8 xb-formInfo-value">4 <span>（人）</span></div>
+                                        <div class="am-u-sm-4 xb-formInfo-key">经营年限</div>
+                                        <div class="am-u-sm-8 xb-formInfo-value"></div>
                                     </div>
                                     <div class="xb-formInfo">
-                                        <div class="am-u-sm-4 xb-formInfo-key">家庭年收入</div>
-                                        <div class="am-u-sm-8 xb-formInfo-value">12 <span>（万元）</span></div>
+                                        <div class="am-u-sm-4 xb-formInfo-key">经营场所情况</div>
+                                        <div class="am-u-sm-8 xb-formInfo-value"></div>
                                     </div>
                                     <div class="xb-formInfo">
-                                        <div class="am-u-sm-4 xb-formInfo-key">家庭资产情况</div>
-                                        <div class="am-u-sm-8 xb-formInfo-value">34 <span>（万元）</span></div>
+                                        <div class="am-u-sm-4 xb-formInfo-key">年营业额（万元）</div>
+                                        <div class="am-u-sm-8 xb-formInfo-value"></div>
                                     </div>
                                     <div class="xb-formInfo">
-                                        <div class="am-u-sm-4 xb-formInfo-key">经营项目或工作单位</div>
-                                        <div class="am-u-sm-8 xb-formInfo-value">上饶农商银行</div>
+                                        <div class="am-u-sm-4 xb-formInfo-key">上级主管部门</div>
+                                        <div class="am-u-sm-8 xb-formInfo-value"></div>
                                     </div>
                                     <div class="xb-formInfo">
-                                        <div class="am-u-sm-4 xb-formInfo-key">经营或工作年限</div>
-                                        <div class="am-u-sm-8 xb-formInfo-value">3 <span>（年）</span></div>
+                                        <div class="am-u-sm-4 xb-formInfo-key">行业协会负责人</div>
+                                        <div class="am-u-sm-8 xb-formInfo-value"></div>
                                     </div>
                                     <div class="xb-formInfo">
                                         <div class="am-u-sm-4 xb-formInfo-key">已有他行金融产品或金融服务</div>
                                         <div class="am-u-sm-8 xb-formInfo-value">
-                                            <ul>
-                                                <li>影视贷</li>
-                                                <li>固定资产购置贷款</li>
-                                                <li>影视贷</li>
-                                            </ul>
                                         </div>
                                     </div>
                                     <div class="xb-formInfo">
                                         <div class="am-u-sm-4 xb-formInfo-key">本次营销我行金融服务</div>
                                         <div class="am-u-sm-8 xb-formInfo-value">
-                                            <ul>
-                                                <li>影视贷</li>
-                                                <li>影视贷</li>
-                                                <li>影视贷</li>
-                                            </ul>
                                         </div>
                                     </div>
                                     <div class="xb-formInfo">
                                         <div class="am-u-sm-4 xb-formInfo-key">意向我行金融服务</div>
                                         <div class="am-u-sm-8 xb-formInfo-value">
-                                            <ul>
-                                                <li>影视贷</li>
-                                                <li>影视贷</li>
-                                                <li>影视贷</li>
-                                            </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -254,147 +238,150 @@
             </div>
         </form>
         <script>
-        var swiper = new Swiper('.swiper-container', {
-            initialSlide: 1,
-            hashnav: true,
-            hashnavWatchState: true,
-            pagination: '.swiper-pagination',
-            paginationType: 'progress',
-            prevButton: '.swiper-button-prev',
-            nextButton: '.swiper-button-next'
-        })
-        var prevButton = document.querySelector('.swiper-button-prev');
-        var nextButton = document.querySelector('.swiper-button-next');
-        var btnNext = document.querySelectorAll('.xb-btn-next');
-        var btnPrev = document.querySelectorAll('.xb-btn-prev');
-        for (var i = 0; i < btnNext.length; i++) {
-            btnNext[i].addEventListener("touchstart", function(e) {
-                e.preventDefault();
-                nextButton.click();
+            var swiper = new Swiper('.swiper-container', {
+                initialSlide: 0,
+                hashnav: true,
+                hashnavWatchState: true,
+                pagination: '.swiper-pagination',
+                paginationType: 'progress',
+                prevButton: '.swiper-button-prev',
+                nextButton: '.swiper-button-next'
             })
-        }
-        for (var i = 0; i < btnPrev.length; i++) {
-            btnPrev[i].addEventListener("touchstart", function(e) {
-                e.preventDefault();
-                prevButton.click();
-            })
-        }
-
-        var storage = window.localStorage;
-        var input = document.querySelectorAll('.am-form .am-form-group > input');
-        for (var i = 0; i < input.length; i++) {
-            input[i].addEventListener('change', function() {
-                storage.setItem(this.name, this.value);
-                updateForm();
-            });
-        }
-
-        var exsit_service = document.querySelectorAll('input[name="exsit_service"]');
-        for (var i = 0; i < exsit_service.length; i++) {
-            exsit_service[i].addEventListener('change', function(e) {
-                var checked_service = document.querySelectorAll('input[name="exsit_service"]:checked');
-                var checked_array = new Array();
-                for (var j = 0; j < checked_service.length; j++) {
-                    checked_array.push(checked_service[j].dataset.id);
-                }
-                storage.setItem('exsit_service', checked_array.toString() ? checked_array : "还没选择服务哦");
-                updateForm();
-            });
-        }
-
-        var handle_service = document.querySelectorAll('input[name="handle_service"]');
-        for (var i = 0; i < handle_service.length; i++) {
-            handle_service[i].addEventListener('change', function(e) {
-                var checked_service = document.querySelectorAll('input[name="handle_service"]:checked');
-                var checked_array = new Array();
-                for (var j = 0; j < checked_service.length; j++) {
-                    checked_array.push(checked_service[j].dataset.id);
-                }
-                storage.setItem('handle_service', checked_array.toString() ? checked_array : "还没选择服务哦");
-                updateForm();
-            });
-        }
-
-        var intention_service = document.querySelectorAll('input[name="intention_service"]');
-        for (var i = 0; i < intention_service.length; i++) {
-            intention_service[i].addEventListener('change', function(e) {
-                var checked_service = document.querySelectorAll('input[name="intention_service"]:checked');
-                var checked_array = new Array();
-                for (var j = 0; j < checked_service.length; j++) {
-                    checked_array.push(checked_service[j].dataset.id);
-                }
-                storage.setItem('intention_service', checked_array.toString() ? checked_array : "还没选择服务哦");
-                updateForm();
-            });
-        }
-
-
-        function updateForm() {
-            var formInfo = document.querySelectorAll('#formInfo > .xb-formInfo > .xb-formInfo-value');
-            formInfo[0].innerText = storage.name;
-            formInfo[1].innerText = storage.tel;
-            formInfo[2].innerText = storage.card;
-            formInfo[3].innerText = storage.address;
-            formInfo[4].innerText = storage.member + "（人）";
-            formInfo[5].innerText = storage.income + "（万元）";
-            formInfo[6].innerText = storage.assets + "（万元）";
-            formInfo[7].innerText = storage.work;
-            formInfo[8].innerText = storage.work_date + "（年）";
-
-            formInfo[9].innerHTML = "";
-            if (storage.exsit_service) {
-                var exsit_data = storage.exsit_service.split(',');
-                console.log(exsit_data);
-                var ul = document.createElement('ul');
-                for (var i = 0; i < exsit_data.length; i++) {
-                    var li = document.createElement('li');
-                    li.innerText = exsit_data[i];
-                    ul.appendChild(li);
-                }
-                formInfo[9].appendChild(ul);
-            }
-
-            formInfo[10].innerHTML = "";
-            if (storage.handle_service) {
-                var handle_data = storage.handle_service.split(',');
-                console.log(handle_data);
-                var ul = document.createElement('ul');
-                for (var i = 0; i < handle_data.length; i++) {
-                    var li = document.createElement('li');
-                    li.innerText = handle_data[i];
-                    ul.appendChild(li);
-                }
-                formInfo[10].appendChild(ul);
-            }
-
-            formInfo[11].innerHTML = "";
-            if (storage.intention_service) {
-                var intention_data = storage.intention_service.split(',');
-                console.log(intention_data);
-                var ul = document.createElement('ul');
-                for (var i = 0; i < intention_data.length; i++) {
-                    var li = document.createElement('li');
-                    li.innerText = intention_data[i];
-                    ul.appendChild(li);
-                }
-                formInfo[11].appendChild(ul);
-            }
-        }
-
-        window.onload = function() {
-            $(function() {
-                $("#doc-vld-msg").validator({
-                    onValid: function(a) { $(a.field).closest(".am-form-group").find(".am-alert").hide() },
-                    onInValid: function(a) {
-                        var i = $(a.field),
-                            d = i.closest(".am-form-group"),
-                            e = d.find(".am-alert"),
-                            l = i.data("validationMessage") || this.getValidationMessage(a);
-                        e.length || (e = $('<div class="am-alert am-alert-danger"></div>').hide().appendTo(d)), e.html(l).show()
-                    }
+            var prevButton = document.querySelector('.swiper-button-prev');
+            var nextButton = document.querySelector('.swiper-button-next');
+            var btnNext = document.querySelectorAll('.xb-btn-next');
+            var btnPrev = document.querySelectorAll('.xb-btn-prev');
+            for (var i = 0; i < btnNext.length; i++) {
+                btnNext[i].addEventListener("touchstart", function(e) {
+                    e.preventDefault();
+                    nextButton.click();
                 })
-            })
-        }
+            }
+            for (var i = 0; i < btnPrev.length; i++) {
+                btnPrev[i].addEventListener("touchstart", function(e) {
+                    e.preventDefault();
+                    prevButton.click();
+                })
+            }
+
+            var storage = window.localStorage;
+            var input = document.querySelectorAll('.am-form .am-form-group > input');
+            for (var i = 0; i < input.length; i++) {
+                input[i].addEventListener('change', function() {
+                    storage.setItem(this.name, this.value);
+                    updateForm();
+                });
+            }
+
+            var exsit_service = document.querySelectorAll('input[name="exsit_service"]');
+            for (var i = 0; i < exsit_service.length; i++) {
+                exsit_service[i].addEventListener('change', function(e) {
+                    var checked_service = document.querySelectorAll('input[name="exsit_service"]:checked');
+                    var checked_array = new Array();
+                    for (var j = 0; j < checked_service.length; j++) {
+                        checked_array.push(checked_service[j].dataset.id);
+                    }
+                    storage.setItem('exsit_service', checked_array.toString() ? checked_array : "还没选择服务哦");
+                    updateForm();
+                });
+            }
+
+            var handle_service = document.querySelectorAll('input[name="handle_service"]');
+            for (var i = 0; i < handle_service.length; i++) {
+                handle_service[i].addEventListener('change', function(e) {
+                    var checked_service = document.querySelectorAll('input[name="handle_service"]:checked');
+                    var checked_array = new Array();
+                    for (var j = 0; j < checked_service.length; j++) {
+                        checked_array.push(checked_service[j].dataset.id);
+                    }
+                    storage.setItem('handle_service', checked_array.toString() ? checked_array : "还没选择服务哦");
+                    updateForm();
+                });
+            }
+
+            var intention_service = document.querySelectorAll('input[name="intention_service"]');
+            for (var i = 0; i < intention_service.length; i++) {
+                intention_service[i].addEventListener('change', function(e) {
+                    var checked_service = document.querySelectorAll('input[name="intention_service"]:checked');
+                    var checked_array = new Array();
+                    for (var j = 0; j < checked_service.length; j++) {
+                        checked_array.push(checked_service[j].dataset.id);
+                    }
+                    storage.setItem('intention_service', checked_array.toString() ? checked_array : "还没选择服务哦");
+                    updateForm();
+                });
+            }
+
+
+            function updateForm() {
+                var formInfo = document.querySelectorAll('#formInfo > .xb-formInfo > .xb-formInfo-value');
+                formInfo[0].innerText = storage.shop_name;
+                formInfo[1].innerText = storage.name;
+                formInfo[2].innerText = storage.tel;
+                formInfo[3].innerText = storage.card;
+                formInfo[4].innerText = storage.shop_address;
+                formInfo[5].innerText = storage.shop_year;
+                formInfo[6].innerText = storage.shop_state;
+                formInfo[7].innerText = storage.income;
+                formInfo[8].innerText = storage.high_authority;
+                formInfo[9].innerText = storage.person_in_charge;
+
+                formInfo[10].innerHTML = "";
+                if (storage.exsit_service) {
+                    var exsit_data = storage.exsit_service.split(',');
+                    console.log(exsit_data);
+                    var ul = document.createElement('ul');
+                    for (var i = 0; i < exsit_data.length; i++) {
+                        var li = document.createElement('li');
+                        li.innerText = exsit_data[i];
+                        ul.appendChild(li);
+                    }
+                    formInfo[10].appendChild(ul);
+                }
+
+                formInfo[11].innerHTML = "";
+                if (storage.handle_service) {
+                    var handle_data = storage.handle_service.split(',');
+                    console.log(handle_data);
+                    var ul = document.createElement('ul');
+                    for (var i = 0; i < handle_data.length; i++) {
+                        var li = document.createElement('li');
+                        li.innerText = handle_data[i];
+                        ul.appendChild(li);
+                    }
+                    formInfo[11].appendChild(ul);
+                }
+
+                formInfo[12].innerHTML = "";
+                if (storage.intention_service) {
+                    var intention_data = storage.intention_service.split(',');
+                    console.log(intention_data);
+                    var ul = document.createElement('ul');
+                    for (var i = 0; i < intention_data.length; i++) {
+                        var li = document.createElement('li');
+                        li.innerText = intention_data[i];
+                        ul.appendChild(li);
+                    }
+                    formInfo[12].appendChild(ul);
+                }
+            }
+
+            window.onload = function() {
+                $(function() {
+                    $("#doc-vld-msg").validator({
+                        onValid: function(a) {
+                            $(a.field).closest(".am-form-group").find(".am-alert").hide()
+                        },
+                        onInValid: function(a) {
+                            var i = $(a.field),
+                                d = i.closest(".am-form-group"),
+                                e = d.find(".am-alert"),
+                                l = i.data("validationMessage") || this.getValidationMessage(a);
+                            e.length || (e = $('<div class="am-alert am-alert-danger"></div>').hide().appendTo(d)), e.html(l).show()
+                        }
+                    })
+                })
+            }
         </script>
     </section>
     <!-- end contain -->
