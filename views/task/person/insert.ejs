@@ -135,35 +135,7 @@
                             <fieldset>
                                 <legend>第三步：信息确认</legend>
                                 <style>
-                                    .xb-formInfo {
-                                        display: block;
-                                        width: 100%;
-                                        line-height: 28px;
-                                        font-size: 16px;
-                                        color: rgba(0, 0, 0, 0.8);
-                                        clear: both;
-                                        text-align: left;
-                                    }
-
-                                    .xb-formInfo ul,
-                                    .xb-formInfo ul li {
-                                        list-style-type: none;
-                                        margin: 0;
-                                        padding: 0;
-                                    }
-
-                                    .xb-formInfo .xb-formInfo-key {
-                                        display: inline-block;
-                                        font-weight: bold;
-                                    }
-
-                                    .xb-formInfo .xb-formInfo-value{
-                                        display: inline-block;
-                                    }
-
-                                    #formInfo {
-                                        margin-bottom: 20px;
-                                    }
+                                    
                                 </style>
                                 <div class="am-g" id="formInfo">
                                     <div class="xb-formInfo">
@@ -330,45 +302,6 @@
                 formInfo[10].innerText = storage.handle_service;
                 formInfo[11].innerText = storage.intention_service;
 
-                // formInfo[9].innerHTML = "";
-                // if (storage.exsit_service) {
-                //     console.log(storage.exsit_service)
-                //     var exsit_data = storage.exsit_service.split(',');
-                //     // console.log(exsit_data);
-                //     var ul = document.createElement('ul');
-                //     for (var i = 0; i < exsit_data.length; i++) {
-                //         var li = document.createElement('li');
-                //         li.innerText = exsit_data[i];
-                //         ul.appendChild(li);
-                //     }
-                //     formInfo[9].appendChild(ul);
-                // }
-
-                // formInfo[10].innerHTML = "";
-                // if (storage.handle_service) {
-                //     var handle_data = storage.handle_service.split(',');
-                //     // console.log(handle_data);
-                //     var ul = document.createElement('ul');
-                //     for (var i = 0; i < handle_data.length; i++) {
-                //         var li = document.createElement('li');
-                //         li.innerText = handle_data[i];
-                //         ul.appendChild(li);
-                //     }
-                //     formInfo[10].appendChild(ul);
-                // }
-
-                // formInfo[11].innerHTML = "";
-                // if (storage.intention_service) {
-                //     var intention_data = storage.intention_service.split(',');
-                //     // console.log(intention_data);
-                //     var ul = document.createElement('ul');
-                //     for (var i = 0; i < intention_data.length; i++) {
-                //         var li = document.createElement('li');
-                //         li.innerText = intention_data[i];
-                //         ul.appendChild(li);
-                //     }
-                //     formInfo[11].appendChild(ul);
-                // }
             }
 
             window.onload = function() {

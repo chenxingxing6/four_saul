@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>上饶农商四扫系统</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js" async></script>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <!-- common header -->
+    <header data-am-widget="header" class="am-header am-header-default">
+        <div class="am-header-left am-header-nav">
+            <a href="javascript:window.history.back();" class="">
+                <i class="am-header-icon am-icon-angle-left am-icon-sm"></i>
+          	</a>
+        </div>
+        <h1 class="am-header-title">
+          	<a href="#" class="">营销任务</a>
+      	</h1>
+    </header>
+    <!-- end header -->
+    <!-- start contain -->
+    <style>
+    .xb-section {
+        height: calc(100% - 103px);
+        background-color: rgba(0, 0, 0, 0.02);
+    }
+
+    .xb-task {
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+        overflow-y: scroll;
+        padding: 15px 10px;
+    }
+
+    .xb-task .xb-task-item {
+        text-align: center;
+        padding: 10px;
+    }
+
+    .xb-task .xb-task-title {
+        margin: 0;
+        font-size: 20px;
+    }
+
+    .xb-task .xb-task-number {
+        /*margin-left: 15px;*/
+    }
+
+    .xb-task .xb-group {
+        margin-bottom: 16px;
+    }
+
+    .xb-task .xb-task-number .xb-task-success {
+        color: #317A1F;
+    }
+
+    .xb-task .xb-task-number .xb-task-danger {
+        color: #dd514c;
+    }
+
+    .xb-task .xb-group-member {
+        margin-bottom: 0;
+    }
+
+    .xb-task .xb-group-member tr>th {
+        text-align: center;
+    }
+    </style>
+    <section class="xb-section">
+        <div class="xb-task">
+            <div class="am-g">
+                <div class="am-u-sm-6">
+                    <ul class="am-list am-list-border">
+                        <li class="xb-task-item">
+                            <h2 class="xb-task-title">当月任务</h2>
+                            <div class="xb-task-number">
+                                需完成：<span><%= data.dutyMonth.shouldComplete %></span>人
+                            </div>
+                            <div class="xb-task-number">
+                                已完成：<span><%= data.dutyMonth.completed %></span>人
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="am-u-sm-6">
+                    <ul class="am-list am-list-border">
+                        <li class="xb-task-item">
+                            <h2 class="xb-task-title">上月任务</h2>
+                            <div class="xb-task-number">
+                                需完成：<span><%= data.lastMonth.shouldComplete %></span>人
+                            </div>
+                            <div class="xb-task-number">
+                                已完成：<span class="xb-task-danger"><%= data.lastMonth.completed %></span>人
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="am-g">
+                <div class="am-u-sm-12">
+                    <ul class="am-list am-list-border" style="margin-bottom: 0;">
+                        <li class="xb-task-item">
+                            <h2 class="xb-task-title">营销小组</h2>
+                            <style>
+                            
+                            </style>
+                            <div class="xb-table">
+                                <div class="xb-thead">
+                                    <div class="am-g xb-tr">
+                                        <div class="am-u-sm-4 xb-th">姓名</div>
+                                        <div class="am-u-sm-4 xb-th">应完成</div>
+                                        <div class="am-u-sm-4 xb-th">已完成</div>
+                                    </div>
+                                </div>
+                                <div class="xb-tbody">
+                                    <% for(var i=0; i<data.leaders.length; i++){ %>
+                                    <a href="/task/list/leader/<%= data.leaders[i].leaderId %>">
+                                        <div class="am-g xb-tr" style="<%= (i == data.leaders.length-1) ? 'border-bottom: none;' : ''; %>">
+                                            <div class="am-u-sm-4 xb-th"><%= data.leaders[i].name %></div>
+                                            <div class="am-u-sm-4 xb-th"><%= data.leaders[i].shouldComplete %></div>
+                                            <div class="am-u-sm-4 xb-th"><%= data.leaders[i].completed %></div>
+                                        </div>
+                                    </a>
+                                    <% } %>
+                                </div>
+                                <script>
+                                	var member = document.querySelectorAll('.xb-tbody > a');
+                                </script>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end contain -->
+    <!-- common footer -->
+    <footer class="xb-bottom am-g">
+        <div class="xb-tab am-u-sm-6">
+            <a href="/task/person" id="btn">
+                <span class="xb-tab-icon"><i class="am-icon-user am-icon-sm am-icon-fw"></i></span>
+                <span class="xb-tab-span">个人</span>
+            </a>
+        </div>
+        <div class="xb-tab am-u-sm-6">
+            <a href="/task/shop" id="btn">
+                <span class="xb-tab-icon"><i class="am-icon-tachometer am-icon-sm am-icon-fw"></i></span>
+                <span class="xb-tab-span">商户</span>
+            </a>
+        </div>
+    </footer>
+    <!-- end footer -->
+</body>
+
+</html>

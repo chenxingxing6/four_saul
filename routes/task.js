@@ -10,12 +10,166 @@ router.get('/', function(req, res, next) {
     });
 });
 
+router.get('/list/boss', function(req, res, next) {
+    var data = {
+        dutyMonth: {
+            shouldComplete: 3234,
+            completed: 3420
+        },
+        lastMonth: {
+            shouldComplete: 4209,
+            completed: 3402
+        },
+        leaders: [{
+            name: '张三',
+            shouldComplete: 320,
+            completed: 340,
+            leaderId: 12
+        }, {
+            name: '李四',
+            shouldComplete: 420,
+            completed: 410,
+            leaderId: 14
+        }, {
+            name: '王五',
+            shouldComplete: 230,
+            completed: 340,
+            leaderId: 13
+        }, {
+            name: '小星',
+            shouldComplete: 204,
+            completed: 194,
+            leaderId: 15
+        }]
+
+    };
+    res.render('task/list/boss', {
+        data: data
+    });
+});
+
+router.get('/list/leader/:id', function(req, res, next) {
+    var leaderId = req.params.id;
+    console.log(leaderId);
+    var data = {
+        dutyMonth: {
+            shouldComplete: 320,
+            completed: 230
+        },
+        lastMonth: {
+            shouldComplete: 330,
+            completed: 304
+        },
+        leaderName: '张三',
+        marketArea: '上饶县',
+        members: [{
+            name: '张三',
+            shouldComplete: 32,
+            completed: 34,
+            memberId: 12
+        }, {
+            name: '李四',
+            shouldComplete: 42,
+            completed: 41,
+            memberId: 14
+        }, {
+            name: '王五',
+            shouldComplete: 23,
+            completed: 34,
+            memberId: 13
+        }, {
+            name: '小星',
+            shouldComplete: 24,
+            completed: 14,
+            memberId: 15
+        }]
+
+    };
+    res.render('task/list/leader', {
+        data: data
+    });
+});
+
+router.get('/list/member/:id', function(req, res, next) {
+    var memberId = req.params.id;
+    console.log(memberId);
+    var data = {
+        dutyMonth: {
+            shouldComplete: 32,
+            completed: 23
+        },
+        lastMonth: {
+            shouldComplete: 33,
+            completed: 30
+        },
+        leaderName: '张三',
+        marketArea: '上饶县',
+        persons: [{
+            name: '张三',
+            marketing: 4,
+            marketed: 1,
+            personId: 12
+        }, {
+            name: '李四',
+            marketing: 3,
+            marketed: 3,
+            personId: 14
+        }, {
+            name: '王五',
+            marketing: 3,
+            marketed: 2,
+            personId: 13
+        }, {
+            name: '小星',
+            marketing: 2,
+            marketed: 3,
+            personId: 16
+        }],
+        shops: [{
+            name: '张家小店',
+            marketing: 3,
+            marketed: 3,
+            shopId: 14
+        }, {
+            name: 'vans专卖店',
+            marketing: 3,
+            marketed: 4,
+            shopId: 12
+        }, {
+            name: '李宁专卖店',
+            marketing: 2,
+            marketed: 5,
+            shopId: 16
+        }, {
+            name: '霸王车行',
+            marketing: 2,
+            marketed: 1,
+            shopId: 13
+        }]
+
+    };
+    res.render('task/list/member', {
+        data: data
+    });
+});
+
 router.get('/person', function(req, res, next) {
     request.get(config.userService, function(err, response, body) {
         // console.log(body);
         var _body = JSON.parse(body);
         console.log(_body);
-        res.render('task/person', {
+        res.render('task/person/insert', {
+            service: _body.obj
+        });
+    });
+});
+
+router.get('/person/update/:id', function(req, res, next) {
+    request.get(config.userService, function(err, response, body) {
+        // console.log(body);
+        var _body = JSON.parse(body);
+        console.log(_body);
+        res.render('task/person/update', {
             service: _body.obj
         });
     });
@@ -52,6 +206,16 @@ router.post('/person', function(req, res, next) {
 });
 
 router.get('/shop', function(req, res, next) {
+    request.get(config.shopService, function(err, response, body) {
+        var _body = JSON.parse(body);
+        // console.log(_body);
+        res.render('task/shop', {
+            service: _body.obj
+        });
+    });
+});
+
+router.get('/shop/update/:id', function(req, res, next) {
     request.get(config.shopService, function(err, response, body) {
         var _body = JSON.parse(body);
         // console.log(_body);

@@ -155,3 +155,62 @@ a:hover {
 .xb-form .am-form .am-checkbox {
     font-size: 16px;
 }
+
+
+.xb-formInfo {
+    display: block;
+    width: 100%;
+    line-height: 28px;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.8);
+    clear: both;
+    text-align: left;
+}
+
+.xb-formInfo ul,
+.xb-formInfo ul li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.xb-formInfo .xb-formInfo-key {
+    display: inline-block;
+    font-weight: bold;
+}
+
+.xb-formInfo .xb-formInfo-value {
+    display: inline-block;
+}
+
+#formInfo {
+    margin-bottom: 20px;
+}
+
+.xb-table {
+    letter-spacing: 1px;
+}
+
+.xb-table .xb-tr .xb-th {
+    display: inline-block;
+}
+
+.xb-table .xb-thead,
+.xb-table .xb-tbody {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.xb-table .xb-thead .xb-tr {
+    padding: 7px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.xb-table .xb-tbody .xb-tr {
+    padding: 7px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.8);
+}
