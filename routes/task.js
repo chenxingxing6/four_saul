@@ -169,8 +169,57 @@ router.get('/person/update/:id', function(req, res, next) {
         // console.log(body);
         var _body = JSON.parse(body);
         console.log(_body);
+
+        var data = {
+            person: {
+                name: '张三',
+                tel: '15745876594',
+                card: '360424198402355846',
+                address: '南昌市东湖区绿荫大道203号',
+                member: '4',
+                income: '12',
+                assets: '34',
+                work: '上饶农商银行',
+                work_date: '3'
+            },
+            service: {
+                value: {
+                    exsit: [1, 2, 4],
+                    handle: [2, 3],
+                    intention: [1, 3]
+                },
+                string: {
+                    exsit: ['房贷', '车贷', '人寿保险'],
+                    handle: ['车贷', '供房基金'],
+                    intention: ['房贷', '供房基金']
+                }
+            },
+            record: [{
+                name: '张三',
+                time: '2017-12-02 12-24-36',
+                content: '修改联系电话，由15985495849变为15789652354'
+            }, {
+                name: '张三',
+                time: '2017-12-02 12-24-36',
+                content: '修改联系电话，由15985495849变为15789652354'
+            }, {
+                name: '张三',
+                time: '2017-12-02 12-24-36',
+                content: '修改联系电话，由15985495849变为15789652354'
+            }, {
+                name: '张三',
+                time: '2017-12-02 12-24-36',
+                content: '修改联系电话，由15985495849变为15789652354'
+            }, {
+                name: '张三',
+                time: '2017-12-02 12-24-36',
+                content: '修改联系电话，由15985495849变为15789652354'
+            }]
+        };
+
         res.render('task/person/update', {
-            service: _body.obj
+            service: _body.obj,
+            data: data
         });
     });
 });

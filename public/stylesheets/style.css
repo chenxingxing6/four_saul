@@ -180,7 +180,7 @@ a:hover {
 }
 
 .xb-formInfo .xb-formInfo-value {
-    display: inline-block;
+    display: inline;
 }
 
 #formInfo {
@@ -213,4 +213,8 @@ a:hover {
     border-bottom: 1px solid rgba(0, 0, 0, 0.16);
     font-size: 16px;
     color: rgba(0, 0, 0, 0.8);
+}
+
+.xb-section .swiper-slide {
+    background-color: rgba(0, 0, 0, 0.02);
 }
