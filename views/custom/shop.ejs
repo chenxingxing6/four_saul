@@ -19,7 +19,7 @@
             </a>
         </div>
         <h1 class="am-header-title">
-            <a href="#" class="">周边客户</a>
+            <a href="#" class="">周边商户</a>
         </h1>
     </header>
     <!-- end header -->
@@ -29,51 +29,13 @@
         height: calc(100% - 103px);
         background-color: rgba(0, 0, 0, 0.02);
     }
-
-    .xb-search {
-        padding-top: 10px;
-    }
-
-    .xb-search .am-btn-green {
-        background-color: #317A1F;
-        color: #FFF;
-    }
-
-    .xb-custom {
-        width: 100%;
-        height: calc(100% - 48px);
-    }
-
-    .xb-custom .custom-list {
-        height: 100%;
-        padding-top: 8px;
-        font-size: 16px;
-        clear: both;
-        overflow: hidden;
-        overflow-y: scroll;
-    }
-
-    .custom-list .custom-list-item {
-        width: 96%;
-        margin-left: 2%;
-        margin-right: 2%;
-        padding: 10px 10px;
-        border: 1px solid rgba(0, 0, 0, 0.12);
-        border-radius: 3px;
-        background-color: #FFF;
-        margin-bottom: 10px;
-    }
-
-    .custom-list .custom-list-item span:nth-child(1) {
-        font-weight: bold;
-    }
     </style>
     <section class="xb-section">
         <div class="am-g xb-search">
             <div class="am-u-sm-12">
-                <form method="post" action="/custom/search" class="">
+                <form method="post" action="/custom/shop/search" class="">
                     <div class="am-input-group">
-                        <input type="text" class="am-form-field" id="queryCustom" name="queryCustom" placeholder="输入你想查询客户的姓名" maxlength="4">
+                        <input type="text" class="am-form-field" id="queryCustom" name="queryCustom" placeholder="输入你想查询商铺的名称" maxlength="4">
                         <span class="am-input-group-btn">
                             <button class="am-btn am-btn-green" type="submit" id="btnSearch"><span class="am-icon-search"></span> </button>
                         </span>
@@ -87,10 +49,10 @@
         <div class="am-g xb-custom">
             <div class="custom-list">
                 <% for(var i=0; i<data.length; i++){ %>
-                    <a href="/task/person/update/<%= data[i].personId %>">
+                    <a href="/task/shop/update/<%= data[i].shopId %>">
                         <div class="am-u-sm-12 custom-list-item">
                             <div class="am-u-sm-12 custom-item-group">
-                                <span>姓名：</span>
+                                <span>商铺：</span>
                                 <span><%= data[i].name %></span>
                             </div>
                             <div class="am-u-sm-12 custom-item-group">

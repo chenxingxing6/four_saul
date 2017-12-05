@@ -235,3 +235,41 @@ a:hover {
 .xb-record-item .xb-record-group span:nth-child(1) {
     font-weight: bold;
 }
+
+.xb-search {
+    padding-top: 10px;
+}
+
+.xb-search .am-btn-green {
+    background-color: #317A1F;
+    color: #FFF;
+}
+
+.xb-custom {
+    width: 100%;
+    height: calc(100% - 48px);
+}
+
+.xb-custom .custom-list {
+    height: 100%;
+    padding-top: 8px;
+    font-size: 16px;
+    clear: both;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.custom-list .custom-list-item {
+    width: 96%;
+    margin-left: 2%;
+    margin-right: 2%;
+    padding: 10px 10px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 3px;
+    background-color: #FFF;
+    margin-bottom: 10px;
+}
+
+.custom-list .custom-list-item span:nth-child(1) {
+    font-weight: bold;
+}

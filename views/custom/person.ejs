@@ -29,49 +29,11 @@
         height: calc(100% - 103px);
         background-color: rgba(0, 0, 0, 0.02);
     }
-
-    .xb-search {
-        padding-top: 10px;
-    }
-
-    .xb-search .am-btn-green {
-        background-color: #317A1F;
-        color: #FFF;
-    }
-
-    .xb-custom {
-        width: 100%;
-        height: calc(100% - 48px);
-    }
-
-    .xb-custom .custom-list {
-        height: 100%;
-        padding-top: 8px;
-        font-size: 16px;
-        clear: both;
-        overflow: hidden;
-        overflow-y: scroll;
-    }
-
-    .custom-list .custom-list-item {
-        width: 96%;
-        margin-left: 2%;
-        margin-right: 2%;
-        padding: 10px 10px;
-        border: 1px solid rgba(0, 0, 0, 0.12);
-        border-radius: 3px;
-        background-color: #FFF;
-        margin-bottom: 10px;
-    }
-
-    .custom-list .custom-list-item span:nth-child(1) {
-        font-weight: bold;
-    }
     </style>
     <section class="xb-section">
         <div class="am-g xb-search">
             <div class="am-u-sm-12">
-                <form method="post" action="/custom/search" class="">
+                <form method="post" action="/custom/person/search" class="">
                     <div class="am-input-group">
                         <input type="text" class="am-form-field" id="queryCustom" name="queryCustom" placeholder="输入你想查询客户的姓名" maxlength="4">
                         <span class="am-input-group-btn">
