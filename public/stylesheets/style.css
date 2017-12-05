@@ -218,3 +218,20 @@ a:hover {
 .xb-section .swiper-slide {
     background-color: rgba(0, 0, 0, 0.02);
 }
+
+.xb-record-item {
+    font-style: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 3px;
+    background-color: #FFF;
+    margin-bottom: 10px;
+    padding: 6px 10px;
+}
+
+.xb-record-item .xb-record-group {
+    padding: 0;
+}
+
+.xb-record-item .xb-record-group span:nth-child(1) {
+    font-weight: bold;
+}

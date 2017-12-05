@@ -157,7 +157,7 @@ router.get('/person', function(req, res, next) {
     request.get(config.userService, function(err, response, body) {
         // console.log(body);
         var _body = JSON.parse(body);
-        console.log(_body);
+        // console.log(_body);
         res.render('task/person/insert', {
             service: _body.obj
         });
@@ -168,7 +168,7 @@ router.get('/person/update/:id', function(req, res, next) {
     request.get(config.userService, function(err, response, body) {
         // console.log(body);
         var _body = JSON.parse(body);
-        console.log(_body);
+        // console.log(_body);
 
         var data = {
             person: {
@@ -258,7 +258,7 @@ router.get('/shop', function(req, res, next) {
     request.get(config.shopService, function(err, response, body) {
         var _body = JSON.parse(body);
         // console.log(_body);
-        res.render('task/shop', {
+        res.render('task/shop/insert', {
             service: _body.obj
         });
     });
@@ -268,8 +268,58 @@ router.get('/shop/update/:id', function(req, res, next) {
     request.get(config.shopService, function(err, response, body) {
         var _body = JSON.parse(body);
         // console.log(_body);
-        res.render('task/shop', {
-            service: _body.obj
+
+        var data = {
+            shop: {
+                shop_name: 'vans专卖店',
+                name: '张三',
+                tel: '15745876594',
+                card: '360424198402355846',
+                shop_address: '南昌市东湖区绿荫大道203号',
+                shop_year: '4',
+                shop_state: '自有',
+                income: '12',
+                high_authority: '工信部',
+                person_in_charge: '张三'
+            },
+            service: {
+                value: {
+                    exsit: [1, 2, 4],
+                    handle: [2, 3],
+                    intention: [1, 3]
+                },
+                string: {
+                    exsit: ['房贷', '车贷', '人寿保险'],
+                    handle: ['车贷', '供房基金'],
+                    intention: ['房贷', '供房基金']
+                }
+            },
+            record: [{
+                name: '张三',
+                time: '2017-12-02 12-24-36',
+                content: '修改联系电话，由15985495849变为15789652354'
+            }, {
+                name: '张三',
+                time: '2017-12-02 12-24-36',
+                content: '修改联系电话，由15985495849变为15789652354'
+            }, {
+                name: '张三',
+                time: '2017-12-02 12-24-36',
+                content: '修改联系电话，由15985495849变为15789652354'
+            }, {
+                name: '张三',
+                time: '2017-12-02 12-24-36',
+                content: '修改联系电话，由15985495849变为15789652354'
+            }, {
+                name: '张三',
+                time: '2017-12-02 12-24-36',
+                content: '修改联系电话，由15985495849变为15789652354'
+            }]
+        };
+
+        res.render('task/shop/update', {
+            service: _body.obj,
+            data: data
         });
     });
 });
