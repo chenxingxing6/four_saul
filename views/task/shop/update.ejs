@@ -320,6 +320,20 @@
         }
 
         var storage = window.localStorage;
+        storage.clear();
+        storage.setItem('shop_name', '<%= data.shop.shop_name %>');
+        storage.setItem('name', '<%= data.shop.name %>');
+        storage.setItem('tel', <%= data.shop.tel %>);
+        storage.setItem('card', <%= data.shop.card %>);
+        storage.setItem('shop_address', '<%= data.shop.shop_address %>');
+        storage.setItem('shop_year', <%= data.shop.shop_year %>);
+        storage.setItem('shop_state', '<%= data.shop.shop_state %>');
+        storage.setItem('income', <%= data.shop.income %>);
+        storage.setItem('high_authority', '<%= data.shop.high_authority %>');
+        storage.setItem('person_in_charge', '<%= data.shop.person_in_charge %>');
+        storage.setItem('exsit_service', '<%= data.service.string.exsit %>');
+        storage.setItem('handle_service', '<%= data.service.string.handle %>');
+        storage.setItem('intention_service', '<%= data.service.string.intention %>');
         var input = document.querySelectorAll('.am-form .am-form-group > input');
         for (var i = 0; i < input.length; i++) {
             input[i].addEventListener('change', function() {

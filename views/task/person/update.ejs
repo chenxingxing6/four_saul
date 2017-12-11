@@ -19,11 +19,11 @@
         <div class="am-header-left am-header-nav">
             <a href="javascript:window.history.back();" class="">
                 <i class="am-header-icon am-icon-angle-left am-icon-sm"></i>
-          	</a>
+            </a>
         </div>
         <h1 class="am-header-title">
-          	<a href="#" class="">个人用户</a>
-      	</h1>
+            <a href="#" class="">个人用户</a>
+        </h1>
     </header>
     <!-- end header -->
     <!-- start contain -->
@@ -153,7 +153,7 @@
                             <fieldset>
                                 <legend>第三步：营销记录</legend>
                                 <style>
-                                
+
                                 </style>
                                 <div class="am-g xb-record">
                                     <% for(var i=0; i<data.record.length; i++){ %>
@@ -306,6 +306,19 @@
         }
 
         var storage = window.localStorage;
+        storage.clear();
+        storage.setItem('name', '<%= data.person.name %>');
+        storage.setItem('tel', <%= data.person.tel %>);
+        storage.setItem('card', <%= data.person.card %>);
+        storage.setItem('address', '<%= data.person.address %>');
+        storage.setItem('member', <%= data.person.member %>);
+        storage.setItem('income', <%= data.person.income %>);
+        storage.setItem('assets', <%= data.person.assets %>);
+        storage.setItem('work', '<%= data.person.work %>');
+        storage.setItem('work_date', <%= data.person.work_date %>);
+        storage.setItem('exsit_service', '<%= data.service.string.exsit %>');
+        storage.setItem('handle_service', '<%= data.service.string.handle %>');
+        storage.setItem('intention_service', '<%= data.service.string.intention %>');
         var input = document.querySelectorAll('.am-form .am-form-group > input');
         for (var i = 0; i < input.length; i++) {
             input[i].addEventListener('change', function() {

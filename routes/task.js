@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var request = require('request');
 var config = require('../config/config');
+var async = require('async');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -10,146 +11,124 @@ router.get('/', function(req, res, next) {
     });
 });
 
-router.get('/list/boss', function(req, res, next) {
-    var data = {
-        dutyMonth: {
-            shouldComplete: 3234,
-            completed: 3420
-        },
-        lastMonth: {
-            shouldComplete: 4209,
-            completed: 3402
-        },
-        leaders: [{
-            name: '张三',
-            shouldComplete: 320,
-            completed: 340,
-            leaderId: 12
-        }, {
-            name: '李四',
-            shouldComplete: 420,
-            completed: 410,
-            leaderId: 14
-        }, {
-            name: '王五',
-            shouldComplete: 230,
-            completed: 340,
-            leaderId: 13
-        }, {
-            name: '小星',
-            shouldComplete: 204,
-            completed: 194,
-            leaderId: 15
-        }]
+router.get('/list/boss/:id', function(req, res, next) {
+    var id = req.params.id;
+    // console.log(id);
+    request.get(config.detail + '/' + id, function(err, response, body) {
+        // console.log(body);
+        var _body = JSON.parse(JSON.parse(body));
+        console.log(_body);
+        var data = {
+            dutyMonth: {
+                shouldComplete: _body.obj.thisMonthNeed,
+                completed: _body.obj.thisMonthDone
+            },
+            lastMonth: {
+                shouldComplete: _body.obj.prevMonthNeed,
+                completed: _body.obj.prevMonthDone
+            },
+            leaders: []
+        };
 
-    };
-    res.render('task/list/boss', {
-        data: data
+        for (var i = 0; i < _body.obj.leaderList.length; i++) {
+            console.log(_body.obj.leaderList[i]);
+            var leader = {
+                name: _body.obj.leaderList[i].name,
+                shouldComplete: _body.obj.leaderList[i].thisMonthNeed,
+                completed: _body.obj.leaderList[i].thisMonthDone,
+                leaderId: _body.obj.leaderList[i].id
+            }
+            data.leaders.push(leader);
+        }
+        res.render('task/list/boss', {
+            data: data
+        });
     });
 });
 
 router.get('/list/leader/:id', function(req, res, next) {
-    var leaderId = req.params.id;
-    console.log(leaderId);
-    var data = {
-        dutyMonth: {
-            shouldComplete: 320,
-            completed: 230
-        },
-        lastMonth: {
-            shouldComplete: 330,
-            completed: 304
-        },
-        leaderName: '张三',
-        marketArea: '上饶县',
-        members: [{
-            name: '张三',
-            shouldComplete: 32,
-            completed: 34,
-            memberId: 12
-        }, {
-            name: '李四',
-            shouldComplete: 42,
-            completed: 41,
-            memberId: 14
-        }, {
-            name: '王五',
-            shouldComplete: 23,
-            completed: 34,
-            memberId: 13
-        }, {
-            name: '小星',
-            shouldComplete: 24,
-            completed: 14,
-            memberId: 15
-        }]
+    var id = req.params.id;
+    console.log(id);
+    request.get(config.detail + '/' + id, function(err, response, body) {
+        // console.log(body);
+        var _body = JSON.parse(JSON.parse(body));
+        console.log(_body);
 
-    };
-    res.render('task/list/leader', {
-        data: data
+        var data = {
+            dutyMonth: {
+                shouldComplete: _body.obj.groupCount.thisMonthNeed,
+                completed: _body.obj.groupCount.thisMonthDone
+            },
+            lastMonth: {
+                shouldComplete: _body.obj.groupCount.prevMonthNeed,
+                completed: _body.obj.groupCount.prevMonthDone
+            },
+            leaderName: _body.obj.name,
+            marketArea: _body.obj.location,
+            members: []
+        };
+        for (var i = 0; i < _body.obj.group.length; i++) {
+            console.log(_body.obj.group[i]);
+            var member = {
+                name: _body.obj.group[i].name,
+                shouldComplete: _body.obj.group[i].thisMonthNeed,
+                completed: _body.obj.group[i].thisMonthDone,
+                memberId: _body.obj.group[i].id
+            };
+            data.members.push(member);
+        }
+        res.render('task/list/leader', {
+            data: data
+        });
     });
 });
 
 router.get('/list/member/:id', function(req, res, next) {
-    var memberId = req.params.id;
-    console.log(memberId);
-    var data = {
-        dutyMonth: {
-            shouldComplete: 32,
-            completed: 23
-        },
-        lastMonth: {
-            shouldComplete: 33,
-            completed: 30
-        },
-        leaderName: '张三',
-        marketArea: '上饶县',
-        persons: [{
-            name: '张三',
-            marketing: 4,
-            marketed: 1,
-            personId: 12
-        }, {
-            name: '李四',
-            marketing: 3,
-            marketed: 3,
-            personId: 14
-        }, {
-            name: '王五',
-            marketing: 3,
-            marketed: 2,
-            personId: 13
-        }, {
-            name: '小星',
-            marketing: 2,
-            marketed: 3,
-            personId: 16
-        }],
-        shops: [{
-            name: '张家小店',
-            marketing: 3,
-            marketed: 3,
-            shopId: 14
-        }, {
-            name: 'vans专卖店',
-            marketing: 3,
-            marketed: 4,
-            shopId: 12
-        }, {
-            name: '李宁专卖店',
-            marketing: 2,
-            marketed: 5,
-            shopId: 16
-        }, {
-            name: '霸王车行',
-            marketing: 2,
-            marketed: 1,
-            shopId: 13
-        }]
+    var id = req.params.id;
+    console.log(id);
+    request.get(config.detail + '/' + id, function(err, response, body) {
+        // console.log(body);
+        var _body = JSON.parse(JSON.parse(body));
+        console.log(_body);
 
-    };
-    res.render('task/list/member', {
-        data: data
+        var data = {
+            dutyMonth: {
+                shouldComplete: _body.obj.selfCount.thisMonthNeed,
+                completed: _body.obj.selfCount.thisMonthDone
+            },
+            lastMonth: {
+                shouldComplete: _body.obj.selfCount.prevMonthNeed,
+                completed: _body.obj.selfCount.prevMonthDone
+            },
+            leaderName: _body.obj.leadername,
+            marketArea: _body.obj.location,
+            persons: [],
+            shops: []
+        };
+        for (var i = 0; i < _body.obj.tbUser.length; i++) {
+            console.log(_body.obj.tbUser[i]);
+            var person = {
+                name: _body.obj.tbUser[i].name,
+                marketing: _body.obj.tbUser[i].recommondServiceCount,
+                marketed: _body.obj.tbUser[i].doneServiceCount,
+                personId: _body.obj.tbUser[i].id
+            };
+            data.persons.push(person);
+        }
+        for (var i = 0; i < _body.obj.tbShop.length; i++) {
+            console.log(_body.obj.tbShop[i]);
+            var shop = {
+                name: _body.obj.tbShop[i].name,
+                marketing: _body.obj.tbShop[i].recommondServiceCount,
+                marketed: _body.obj.tbShop[i].doneServiceCount,
+                shopId: _body.obj.tbShop[i].id
+            };
+            data.shops.push(shop);
+        }
+
+        res.render('task/list/member', {
+            data: data
+        });
     });
 });
 
@@ -164,64 +143,62 @@ router.get('/person', function(req, res, next) {
     });
 });
 
-router.get('/person/update/:id', function(req, res, next) {
-    request.get(config.userService, function(err, response, body) {
-        // console.log(body);
-        var _body = JSON.parse(body);
-        // console.log(_body);
+function fetchUrl(url, callback) {
+    request.get(url, function(err, response, body) {
+        callback(null, body);
+    });
+}
 
+router.get('/person/update/:id', function(req, res, next) {
+    var id = req.params.id;
+    var urls = [config.userService, config.userUpdate + id];
+    async.mapLimit(urls, 2, function(url, callback) {
+        fetchUrl(url, callback);
+    }, function(err, results) {
+        if (err) throw err;
+        var service = JSON.parse(results[0]);
+        var update = JSON.parse(results[1]);
         var data = {
             person: {
-                name: '张三',
-                tel: '15745876594',
-                card: '360424198402355846',
-                address: '南昌市东湖区绿荫大道203号',
-                member: '4',
-                income: '12',
-                assets: '34',
-                work: '上饶农商银行',
-                work_date: '3'
+                name: update.obj.people.name,
+                tel: update.obj.people.tel,
+                card: update.obj.people.card,
+                address: update.obj.people.address,
+                member: update.obj.people.member,
+                income: update.obj.people.income,
+                assets: update.obj.people.assets,
+                work: update.obj.people.work,
+                work_date: update.obj.people.work_date
             },
             service: {
                 value: {
-                    exsit: [1, 2, 4],
-                    handle: [2, 3],
-                    intention: [1, 3]
+                    exsit: update.obj.service.value.exsit.split(','),
+                    handle: update.obj.service.value.handle.split(','),
+                    intention: update.obj.service.value.intention.split(',')
                 },
                 string: {
-                    exsit: ['房贷', '车贷', '人寿保险'],
-                    handle: ['车贷', '供房基金'],
-                    intention: ['房贷', '供房基金']
+                    exsit: update.obj.service.string.exsit,
+                    handle: update.obj.service.string.handle,
+                    intention: update.obj.service.string.intention
                 }
             },
-            record: [{
-                name: '张三',
-                time: '2017-12-02 12-24-36',
-                content: '修改联系电话，由15985495849变为15789652354'
-            }, {
-                name: '张三',
-                time: '2017-12-02 12-24-36',
-                content: '修改联系电话，由15985495849变为15789652354'
-            }, {
-                name: '张三',
-                time: '2017-12-02 12-24-36',
-                content: '修改联系电话，由15985495849变为15789652354'
-            }, {
-                name: '张三',
-                time: '2017-12-02 12-24-36',
-                content: '修改联系电话，由15985495849变为15789652354'
-            }, {
-                name: '张三',
-                time: '2017-12-02 12-24-36',
-                content: '修改联系电话，由15985495849变为15789652354'
-            }]
+            record: []
         };
-
+        for (var i = 0; i < update.obj.record.length; i++) {
+            var item = {
+                name: update.obj.record[i].name,
+                time: update.obj.record[i].operateTime,
+                content: update.obj.record[i].content
+            }
+            data.record.push(item);
+        }
+        console.log(data);
         res.render('task/person/update', {
-            service: _body.obj,
+            service: service.obj,
             data: data
         });
     });
+
 });
 
 router.post('/person', function(req, res, next) {
@@ -265,60 +242,54 @@ router.get('/shop', function(req, res, next) {
 });
 
 router.get('/shop/update/:id', function(req, res, next) {
-    request.get(config.shopService, function(err, response, body) {
-        var _body = JSON.parse(body);
-        // console.log(_body);
-
+    var id = req.params.id;
+    var urls = [config.userService, config.shopUpdate + id];
+    async.mapLimit(urls, 2, function(url, callback) {
+        fetchUrl(url, callback);
+    }, function(err, results) {
+        if (err) throw err;
+        // console.log(results)
+        var service = JSON.parse(results[0]);
+        var update = JSON.parse(results[1]);
+        console.log(update)
         var data = {
             shop: {
-                shop_name: 'vans专卖店',
-                name: '张三',
-                tel: '15745876594',
-                card: '360424198402355846',
-                shop_address: '南昌市东湖区绿荫大道203号',
-                shop_year: '4',
-                shop_state: '自有',
-                income: '12',
-                high_authority: '工信部',
-                person_in_charge: '张三'
+                shop_name: update.obj.people.shop_name,
+                name: update.obj.people.name,
+                tel: update.obj.people.tel,
+                card: update.obj.people.card,
+                shop_address: update.obj.people.shop_address,
+                shop_year: update.obj.people.shop_year,
+                shop_state: update.obj.people.shop_state,
+                income: update.obj.people.income,
+                high_authority: update.obj.people.high_authority,
+                person_in_charge: 'dasd'
             },
             service: {
                 value: {
-                    exsit: [1, 2, 4],
-                    handle: [2, 3],
-                    intention: [1, 3]
+                    exsit: update.obj.service.value.exsit.split(','),
+                    handle: update.obj.service.value.handle.split(','),
+                    intention: update.obj.service.value.intention.split(',')
                 },
                 string: {
-                    exsit: ['房贷', '车贷', '人寿保险'],
-                    handle: ['车贷', '供房基金'],
-                    intention: ['房贷', '供房基金']
+                    exsit: update.obj.service.string.exsit,
+                    handle: update.obj.service.string.handle,
+                    intention: update.obj.service.string.intention
                 }
             },
-            record: [{
-                name: '张三',
-                time: '2017-12-02 12-24-36',
-                content: '修改联系电话，由15985495849变为15789652354'
-            }, {
-                name: '张三',
-                time: '2017-12-02 12-24-36',
-                content: '修改联系电话，由15985495849变为15789652354'
-            }, {
-                name: '张三',
-                time: '2017-12-02 12-24-36',
-                content: '修改联系电话，由15985495849变为15789652354'
-            }, {
-                name: '张三',
-                time: '2017-12-02 12-24-36',
-                content: '修改联系电话，由15985495849变为15789652354'
-            }, {
-                name: '张三',
-                time: '2017-12-02 12-24-36',
-                content: '修改联系电话，由15985495849变为15789652354'
-            }]
+            record: []
         };
-
+        for (var i = 0; i < update.obj.record.length; i++) {
+            var item = {
+                name: update.obj.record[i].name,
+                time: update.obj.record[i].operateTime,
+                content: update.obj.record[i].content
+            }
+            data.record.push(item);
+        }
+        console.log(data);
         res.render('task/shop/update', {
-            service: _body.obj,
+            service: service.obj,
             data: data
         });
     });
