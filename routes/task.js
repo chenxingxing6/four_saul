@@ -243,7 +243,7 @@ router.get('/shop', function(req, res, next) {
 
 router.get('/shop/update/:id', function(req, res, next) {
     var id = req.params.id;
-    var urls = [config.userService, config.shopUpdate + id];
+    var urls = [config.shopService, config.shopUpdate + id];
     async.mapLimit(urls, 2, function(url, callback) {
         fetchUrl(url, callback);
     }, function(err, results) {
