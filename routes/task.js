@@ -17,7 +17,7 @@ router.get('/list/boss/:id', function(req, res, next) {
     request.get(config.detail + '/' + id, function(err, response, body) {
         // console.log(body);
         var _body = JSON.parse(JSON.parse(body));
-        console.log(_body);
+        // console.log(_body);
         var data = {
             dutyMonth: {
                 shouldComplete: _body.obj.thisMonthNeed,
@@ -31,7 +31,7 @@ router.get('/list/boss/:id', function(req, res, next) {
         };
 
         for (var i = 0; i < _body.obj.leaderList.length; i++) {
-            console.log(_body.obj.leaderList[i]);
+            // console.log(_body.obj.leaderList[i]);
             var leader = {
                 name: _body.obj.leaderList[i].name,
                 shouldComplete: _body.obj.leaderList[i].thisMonthNeed,
@@ -48,11 +48,11 @@ router.get('/list/boss/:id', function(req, res, next) {
 
 router.get('/list/leader/:id', function(req, res, next) {
     var id = req.params.id;
-    console.log(id);
+    // console.log(id);
     request.get(config.detail + '/' + id, function(err, response, body) {
         // console.log(body);
         var _body = JSON.parse(JSON.parse(body));
-        console.log(_body);
+        // console.log(_body);
 
         var data = {
             dutyMonth: {
@@ -68,7 +68,7 @@ router.get('/list/leader/:id', function(req, res, next) {
             members: []
         };
         for (var i = 0; i < _body.obj.group.length; i++) {
-            console.log(_body.obj.group[i]);
+            // console.log(_body.obj.group[i]);
             var member = {
                 name: _body.obj.group[i].name,
                 shouldComplete: _body.obj.group[i].thisMonthNeed,
@@ -85,11 +85,11 @@ router.get('/list/leader/:id', function(req, res, next) {
 
 router.get('/list/member/:id', function(req, res, next) {
     var id = req.params.id;
-    console.log(id);
+    // console.log(id);
     request.get(config.detail + '/' + id, function(err, response, body) {
         // console.log(body);
         var _body = JSON.parse(JSON.parse(body));
-        console.log(_body);
+        // console.log(_body);
 
         var data = {
             dutyMonth: {
@@ -106,7 +106,7 @@ router.get('/list/member/:id', function(req, res, next) {
             shops: []
         };
         for (var i = 0; i < _body.obj.tbUser.length; i++) {
-            console.log(_body.obj.tbUser[i]);
+            // console.log(_body.obj.tbUser[i]);
             var person = {
                 name: _body.obj.tbUser[i].name,
                 marketing: _body.obj.tbUser[i].recommondServiceCount,
@@ -116,7 +116,7 @@ router.get('/list/member/:id', function(req, res, next) {
             data.persons.push(person);
         }
         for (var i = 0; i < _body.obj.tbShop.length; i++) {
-            console.log(_body.obj.tbShop[i]);
+            // console.log(_body.obj.tbShop[i]);
             var shop = {
                 name: _body.obj.tbShop[i].name,
                 marketing: _body.obj.tbShop[i].recommondServiceCount,
@@ -160,6 +160,7 @@ router.get('/person/update/:id', function(req, res, next) {
         var update = JSON.parse(results[1]);
         var data = {
             person: {
+                id: id,
                 name: update.obj.people.name,
                 tel: update.obj.people.tel,
                 card: update.obj.people.card,
@@ -192,7 +193,7 @@ router.get('/person/update/:id', function(req, res, next) {
             }
             data.record.push(item);
         }
-        console.log(data);
+        // console.log(data);
         res.render('task/person/update', {
             service: service.obj,
             data: data
@@ -202,10 +203,12 @@ router.get('/person/update/:id', function(req, res, next) {
 });
 
 router.post('/person', function(req, res, next) {
+    console.log(req.body);
     var exsit_service = req.body.exsit_service.toString();
     var handle_service = req.body.handle_service.toString();
     var intention_service = req.body.intention_service.toString();
     var formData = {
+        id: req.body.id,
         name: req.body.name,
         phoneNum: req.body.tel,
         idCard: req.body.card,
@@ -220,7 +223,7 @@ router.post('/person', function(req, res, next) {
     };
     // console.log(formData);
     request.post({
-        url: config.user,
+        url: config.userUpdate,
         form: formData
     }, function(err, response, body) {
         var _body = JSON.parse(body);
@@ -232,28 +235,36 @@ router.post('/person', function(req, res, next) {
 });
 
 router.get('/shop', function(req, res, next) {
-    request.get(config.shopService, function(err, response, body) {
-        var _body = JSON.parse(body);
-        // console.log(_body);
+    var urls = [config.shopService, config.industry];
+    async.mapLimit(urls, 2, function(url, callback) {
+        fetchUrl(url, callback);
+    }, function(err, results) {
+        if (err) throw err;
+        var service = JSON.parse(results[0]);
+        var industry = JSON.parse(results[1]);
+        console.log(industry.obj)
         res.render('task/shop/insert', {
-            service: _body.obj
+            service: service.obj,
+            industry: industry.obj
         });
     });
 });
 
 router.get('/shop/update/:id', function(req, res, next) {
     var id = req.params.id;
-    var urls = [config.shopService, config.shopUpdate + id];
-    async.mapLimit(urls, 2, function(url, callback) {
+    var urls = [config.shopService, config.shopUpdate + id, config.industry];
+    async.mapLimit(urls, 3, function(url, callback) {
         fetchUrl(url, callback);
     }, function(err, results) {
         if (err) throw err;
         // console.log(results)
         var service = JSON.parse(results[0]);
         var update = JSON.parse(results[1]);
+        var industry = JSON.parse(results[2]);
         console.log(update)
         var data = {
             shop: {
+                industry: update.obj.people.industryid,
                 shop_name: update.obj.people.shop_name,
                 name: update.obj.people.name,
                 tel: update.obj.people.tel,
@@ -287,10 +298,11 @@ router.get('/shop/update/:id', function(req, res, next) {
             }
             data.record.push(item);
         }
-        console.log(data);
+        // console.log(data);
         res.render('task/shop/update', {
             service: service.obj,
-            data: data
+            data: data,
+            industry: industry.obj
         });
     });
 });
@@ -301,6 +313,7 @@ router.post('/shop', function(req, res, next) {
     var intention_service = req.body.intention_service.toString();
     // console.log(req.body);
     var formData = {
+        industryId: req.body.industry,
         name: req.body.shop_name,
         owerName: req.body.name,
         phoneNum: req.body.tel,
@@ -317,11 +330,11 @@ router.post('/shop', function(req, res, next) {
     };
     // console.log(formData);
     request.post({
-        url: config.shop,
+        url: config.shopUpdate,
         form: formData
     }, function(err, response, body) {
         var _body = JSON.parse(body);
-        console.log(_body.msg);
+        // console.log(_body.msg);
         res.render('task/success', {
             service: _body
         });

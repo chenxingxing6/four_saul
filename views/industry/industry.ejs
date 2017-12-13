@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>上饶农商四扫系统</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js" async></script>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <!-- common header -->
+    <header data-am-widget="header" class="am-header am-header-default">
+        <div class="am-header-left am-header-nav">
+            <a href="javascript:window.history.back();" class="">
+                <i class="am-header-icon am-icon-angle-left am-icon-sm"></i>
+            </a>
+        </div>
+        <h1 class="am-header-title">
+            <a href="#" class="">商户一览</a>
+        </h1>
+    </header>
+    <!-- end header -->
+    <!-- start contain -->
+    <style>
+    .xb-section {
+        height: calc(100% - 103px);
+        background-color: rgba(0, 0, 0, 0.02);
+    }
+    </style>
+    <section class="xb-section">
+        <div class="am-g xb-search">
+            <div class="am-u-sm-12">
+                <form method="post" action="/industry" class="">
+                    <div class="am-input-group">
+                        <input type="text" class="am-form-field" id="queryCustom" name="info" placeholder="输入你想查询的商户类型" maxlength="4">
+                        <span class="am-input-group-btn">
+                            <button class="am-btn am-btn-green" type="submit" id="btnSearch"><span class="am-icon-search"></span> </button>
+                        </span>
+                    </div>
+                </form>
+                <script type="text/javascript">
+                
+                </script>
+            </div>
+        </div>
+        <style>
+        	.custom-item-btn{
+        		position: absolute;
+        		right: 4px;
+        		top: 20px;
+        	}
+        </style>
+        <div class="am-g xb-custom">
+            <div class="custom-list">
+                <% if(data.length){ %>
+                <% for(var i=0; i<data.length; i++){ %>
+                    <a href="<%= (data[i].marketState == 0) ? 'javascript:void(0);' : '/industry/'+data[i].id %>">
+                        <div class="am-u-sm-12 custom-list-item">
+                            <div class="am-u-sm-12 custom-item-group">
+                                <span>商户类型：</span>
+                                <span><%= data[i].industryName %></span>
+                            </div>
+                            <div class="am-u-sm-12 custom-item-group">
+                                <span>营销情况：</span>
+                                <span><%= data[i].marketState %>户</span>
+                            </div>
+                            <div class="custom-item-btn">
+                            	<i class="am-icon-angle-right am-icon-fw am-icon-sm"></i>
+                            </div>
+                        </div>
+                    </a>
+                <% } %>
+                <% }else{ %>
+                    <h2 class="am-text-center">该商户类型不存在，换个试试吧！</h2>
+                <% } %>
+            </div>
+        </div>
+    </section>
+    <!-- end contain -->
+    <!-- common footer -->
+    <footer class="xb-logo">
+        <div class="am-g">
+            <div class="am-u-sm-6 am-u-sm-offset-3">
+                <img src="/images/logo.jpg" alt="">
+            </div>
+        </div>
+    </footer>
+    <!-- end footer -->
+</body>
+
+</html>

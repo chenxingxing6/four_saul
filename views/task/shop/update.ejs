@@ -19,11 +19,11 @@
         <div class="am-header-left am-header-nav">
             <a href="javascript:window.history.back();" class="">
                 <i class="am-header-icon am-icon-angle-left am-icon-sm"></i>
-          	</a>
+            </a>
         </div>
         <h1 class="am-header-title">
-          	<a href="#" class="">商户</a>
-      	</h1>
+            <a href="#" class="">商户</a>
+        </h1>
     </header>
     <!-- end header -->
     <!-- start contain -->
@@ -80,6 +80,19 @@
                                 <div class="am-form-group">
                                     <label for="person_in_charge">行业协会负责人</label>
                                     <input type="text" class="" id="person_in_charge" name="person_in_charge" value="<%= data.shop.person_in_charge %>" placeholder="<%= data.shop.person_in_charge %>" data-validation-message="想想老大是谁">
+                                </div>
+                                <div class="am-form-group">
+                                    <label for="industry">商户类型</label>
+                                    <div class="am-sm-u-12" id="industry">
+                                        <select name="industry" required data-am-selected="{btnWidth: '100%', btnSize: 'md', searchBox: 1}">
+                                            <% for(var i=0;i<industry.length;i++){ %>
+                                                <option value="<%= industry[i].id %>" 
+                                                    <%= (data.shop.industry==industry[i].id) ? "selected" : "" %> >
+                                                    <%= industry[i].industryName %>
+                                                </option>
+                                                <% } %>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="am-g">
                                     <div class="am-u-sm-4 am-u-sm-offset-4 am-text-center">
@@ -205,55 +218,55 @@
                                     <div class="xb-formInfo">
                                         <div class=" xb-formInfo-key">法人姓名：</div>
                                         <div class=" xb-formInfo-value">
-                                        	<%= data.shop.name %>
+                                            <%= data.shop.name %>
                                         </div>
                                     </div>
                                     <div class="xb-formInfo">
                                         <div class=" xb-formInfo-key">联系电话：</div>
                                         <div class=" xb-formInfo-value">
-                                        	<%= data.shop.tel %>
+                                            <%= data.shop.tel %>
                                         </div>
                                     </div>
                                     <div class="xb-formInfo">
                                         <div class=" xb-formInfo-key">身份证号：</div>
                                         <div class=" xb-formInfo-value">
-                                        	<%= data.shop.card %>
+                                            <%= data.shop.card %>
                                         </div>
                                     </div>
                                     <div class="xb-formInfo">
                                         <div class=" xb-formInfo-key">经营地址：</div>
                                         <div class=" xb-formInfo-value">
-                                        	<%= data.shop.shop_address %>
+                                            <%= data.shop.shop_address %>
                                         </div>
                                     </div>
                                     <div class="xb-formInfo">
                                         <div class=" xb-formInfo-key">经营年限：</div>
                                         <div class=" xb-formInfo-value">
-                                        	<%= data.shop.shop_year %>年
+                                            <%= data.shop.shop_year %>年
                                         </div>
                                     </div>
                                     <div class="xb-formInfo">
                                         <div class=" xb-formInfo-key">经营场所情况：</div>
                                         <div class=" xb-formInfo-value">
-                                        	<%= data.shop.shop_state %>
+                                            <%= data.shop.shop_state %>
                                         </div>
                                     </div>
                                     <div class="xb-formInfo">
                                         <div class=" xb-formInfo-key">年营业额：</div>
                                         <div class=" xb-formInfo-value">
-                                        	<%= data.shop.income %>万元
+                                            <%= data.shop.income %>万元
                                         </div>
                                     </div>
                                     <div class="xb-formInfo">
                                         <div class=" xb-formInfo-key">上级主管部门：</div>
                                         <div class=" xb-formInfo-value">
-                                        	<%= data.shop.high_authority %>
+                                            <%= data.shop.high_authority %>
                                         </div>
                                     </div>
                                     <div class="xb-formInfo">
                                         <div class=" xb-formInfo-key">行业协会负责人：</div>
                                         <div class=" xb-formInfo-value">
-                                        	<%= data.shop.person_in_charge %>
+                                            <%= data.shop.person_in_charge %>
                                         </div>
                                     </div>
                                     <div class="xb-formInfo">
@@ -391,7 +404,7 @@
             formInfo[4].innerText = storage.shop_address;
             formInfo[5].innerText = storage.shop_year + '年';
             formInfo[6].innerText = storage.shop_state;
-            formInfo[7].innerText = storage.income  + '万元';
+            formInfo[7].innerText = storage.income + '万元';
             formInfo[8].innerText = storage.high_authority;
             formInfo[9].innerText = storage.person_in_charge;
 

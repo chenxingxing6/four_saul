@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>上饶农商四扫系统</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js" async></script>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <!-- common header -->
+    <style>
+    .xb-head {
+        font-size: 30px;
+        line-height: 32px;
+        letter-spacing: 2px;
+        margin: 20px;
+    }
+    </style>
+    <header class="xb-user">
+        <div class="am-g">
+            <h2 class="am-text-center xb-head">上饶农商四扫系统</h2>
+        </div>
+    </header>
+    <!-- end header -->
+    <!-- start contain -->
+    <style>
+    .xb-section {
+        height: calc(100% - 172px);
+    }
+
+    .xb-login .login-body {
+        top: 10px;
+    }
+
+    .xb-login .am-text-center {
+        color: #265F18;
+        font-size: 26px;
+    }
+
+    .xb-login .am-btn-success {
+        background-color: #317A1F;
+    }
+    </style>
+    <section class="xb-section xb-login">
+        <div class="am-u-sm-8 am-u-sm-offset-2 login-body am-u-end">
+            <form class="am-form am-vertical-align am-text-center" action="/login" method="post">
+                <fieldset class="am-vertical-align-middle">
+                    <legend class="am-text-center">员工绑定</legend>
+                    <div class="am-form-group am-text-left">
+                        <label for="worker_num">职工编号</label>
+                        <input type="number" class="" id="number" name="number" value="" placeholder="123456">
+                    </div>
+                    <div class="am-form-group am-text-left">
+                        <label for="worker_name">姓名</label>
+                        <input type="text" class="" id="name" name="name" value="" placeholder="刘小波">
+                    </div>
+                    <div style="display: none;">
+                        <input type="hidden" id="openid" name="openid" value="<%= data.openid %>">
+                        <input type="hidden" id="wxImg" name="wxImg" value="<%= data.wxImg %>">
+                    </div>
+                    <div class="am-u-sm-8 am-u-sm-offset-2 am-text-center">
+                        <button type="submit" id="login_submit" style="display: none;" class="am-btn am-btn-success">绑定</button>
+                        <button type="button" id="login_btn" class="am-btn am-btn-success">绑定</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </section>
+    <!-- end contain -->
+    <!-- common footer -->
+    <footer class="xb-logo">
+        <div class="am-g">
+            <div class="am-u-sm-6 am-u-sm-offset-3">
+                <img src="/images/logo.jpg" alt="">
+            </div>
+        </div>
+    </footer>
+    <div class="am-modal am-modal-no-btn xb-login-modal" tabindex="-1" id="login_modal">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd">信息确认
+                <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close="">×</a>
+            </div>
+            <div class="am-modal-bd">
+                <div class="am-g xb-userMsg">
+                    <div class="am-u-sm-12 xb-userMsg-item">
+                        <div class="am-u-sm-6 am-text-right xb-item-key"></div>
+                        <div class="am-u-sm-6 am-text-left xb-item-value"></div>
+                    </div>
+                    <div class="am-u-sm-12 xb-userMsg-item">
+                        <div class="am-u-sm-6 am-text-right xb-item-key"></div>
+                        <div class="am-u-sm-6 am-text-left xb-item-value"></div>
+                    </div>
+                    <div class="am-u-sm-12 xb-userMsg-item">
+                        <div class="am-u-sm-6 am-text-right xb-item-key"></div>
+                        <div class="am-u-sm-6 am-text-left xb-item-value"></div>
+                    </div>
+                    <div class="am-u-sm-12 am-text-center"></div>
+                    <div class="am-u-sm-12 xb-userMsg-btn">
+                        <div class="am-u-sm-4 am-u-sm-offset-2 xb-mg-left">
+                            <button type="button" id="modal_btn_close" class="am-btn am-btn-default">取消</button>
+                        </div>
+                        <div class="am-u-sm-4 am-u-end">
+                            <button type="button" id="modal_btn_submit" class="am-btn am-btn-success">确认</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    $("#login_btn").on("click", function() {
+        var data = {
+            username: document.querySelector("#name").value,
+            staffid: document.querySelector("#number").value,
+            openid: document.querySelector("#openid").value,
+            wxImg: document.querySelector("#wxImg").value,
+        };
+        console.log(data);
+        $.ajax({
+            url: "/login",
+            method: "POST",
+            data: data,
+            success: function(res) {
+                var _res = [{
+                    key: "职工编号",
+                    value: res.staffid
+                }, {
+                    key: "姓名",
+                    value: res.username
+                }, {
+                    key: "公司职位",
+                    value: res.userjob
+                }];
+                if (res.status == 200) {
+                    var items = document.querySelectorAll(".xb-userMsg > .xb-userMsg-item");
+                    for (var i = 0; i < items.length; i++) {
+                        items[i].classList.add("xb-userMsg-item-show");
+                        items[i].querySelector(".xb-item-key").innerHTML = _res[i].key;
+                        items[i].querySelector(".xb-item-value").innerHTML = _res[i].value;
+                    }
+                    var text = document.querySelector(".xb-userMsg > .am-text-center");
+                    text.innerHTML = "";
+                } else {
+                    var items = document.querySelectorAll(".xb-userMsg > .xb-userMsg-item");
+                    for (var i = 0; i < items.length; i++) {
+                        items[i].classList.remove("xb-userMsg-item-show");
+                    }
+                    var text = document.querySelector(".xb-userMsg > .am-text-center");
+                    text.innerHTML = res.msg;
+
+                    document.querySelector("#name").value = "";
+                    document.querySelector("#number").value = "";
+                }
+
+                $("#login_modal").modal('open');
+            },
+            error: function(err) {
+                console.log(err);
+                $("#login_modal").modal('open');
+            }
+        });
+    });
+    // $("#login_btn").click();
+    $("#modal_btn_close").on("click", function() {
+        $("#login_modal").modal('close');
+    })
+    $("#modal_btn_submit").on("click", function() {
+        $("#login_submit").click();
+    })
+    </script>
+    <!-- end footer -->
+</body>
+
+</html>
