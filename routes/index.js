@@ -4,7 +4,7 @@ var router = express.Router();
 router.get('/wechat', function(req, res, next) {
     res.cookie('openid', req.query.openid);
     res.cookie('name', req.query.name);
-    res.cookie('staffId', req.query.staffId);
+    res.cookie('staffId', req.query.staffid);
     res.cookie('id', req.query.id);
     res.cookie('type', req.query.type);
     res.cookie('headPic', req.query.headPic);
