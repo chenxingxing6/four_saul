@@ -242,7 +242,7 @@ router.get('/shop', function(req, res, next) {
         if (err) throw err;
         var service = JSON.parse(results[0]);
         var industry = JSON.parse(results[1]);
-        console.log(industry.obj)
+        // console.log(industry.obj)
         res.render('task/shop/insert', {
             service: service.obj,
             industry: industry.obj
@@ -261,7 +261,7 @@ router.get('/shop/update/:id', function(req, res, next) {
         var service = JSON.parse(results[0]);
         var update = JSON.parse(results[1]);
         var industry = JSON.parse(results[2]);
-        console.log(update)
+        // console.log(update)
         var data = {
             shop: {
                 industry: update.obj.people.industryid,

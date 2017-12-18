@@ -11,5 +11,8 @@ module.exports = {
     shopSearch: 'http://stars77.6655.la:8080/srnswx/tbshop/getbyna?name=',
     detail: 'http://stars77.6655.la:8080/srnswx/tbstaff/getdetail',
     industry: 'http://stars77.6655.la:8080/srnswx/tbindustry/get',
-    industryDetail: 'http://stars77.6655.la:8080/srnswx/tbshop/getbyin/'
+    industryDetail: 'http://stars77.6655.la:8080/srnswx/tbshop/getbyin/',
+    getbyop: 'http://srnswx.huahuayu.com.cn/srnswx/tbstaff/getbyop?openid=',
+    check: 'http://srnswx.huahuayu.com.cn/srnswx/tbstaff/checkstaff',
+    login: 'http://srnswx.huahuayu.com.cn/srnswx/tbstaff/checkstaff'
 }

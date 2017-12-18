@@ -2,17 +2,27 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/wechat', function(req, res, next) {
-    var openid = 'asd12312a131f354';
-    var wxImg = '12321.jpg';
-    res.cookie('openid', openid);
-    res.cookie('wxImg', wxImg);
-    res.redirect('/login');
+    res.cookie('openid', req.query.openid);
+    res.cookie('name', req.query.name);
+    res.cookie('staffId', req.query.staffId);
+    res.cookie('id', req.query.id);
+    res.cookie('type', req.query.type);
+    res.cookie('headPic', req.query.headPic);
+    // console.log(req.query);
+    if(req.query.id){
+    	res.redirect('/');
+    }else{
+    	res.redirect('/login');
+    }
 });
 
 router.get('/', function(req, res, next) {
-    // var id = req.params.id;
-    // console.log(id);
-    res.render('index', { title: 'Express' });
+    // console.log(req.cookies);
+    if(!req.cookies.openid){
+    	res.redirect('/wechat');
+    }else{
+    	res.render('index', { data: req.cookies });
+    }
 });
 
 module.exports = router;
