@@ -222,7 +222,7 @@ router.post('/person', function(req, res, next) {
         recommendService: handle_service,
         wantService: intention_service
     };
-    // console.log(formData);
+    console.log(formData);
     request.post({
         url: config.userUpdate,
         form: formData
@@ -275,7 +275,7 @@ router.get('/shop/update/:id', function(req, res, next) {
                 shop_state: update.obj.people.shop_state,
                 income: update.obj.people.income,
                 high_authority: update.obj.people.high_authority,
-                person_in_charge: 'dasd'
+                person_in_charge: update.obj.people.person_in_charge
             },
             service: {
                 value: {
@@ -330,7 +330,7 @@ router.post('/shop', function(req, res, next) {
         recommendService: handle_service,
         wantService: intention_service
     };
-    // console.log(formData);
+    console.log(formData);
     request.post({
         url: config.shopUpdate,
         form: formData
