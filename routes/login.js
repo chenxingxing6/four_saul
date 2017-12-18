@@ -5,7 +5,7 @@ var config = require('../config/config');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    console.log(req.cookies);
+    // console.log(req.cookies);
     res.render('login', { data: req.cookies });
 });
 

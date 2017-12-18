@@ -208,7 +208,7 @@ router.post('/person', function(req, res, next) {
     var handle_service = req.body.handle_service.toString();
     var intention_service = req.body.intention_service.toString();
     var formData = {
-        staffid: req.cookies.staffid,
+        staffid: req.cookies.staffId,
         id: req.body.id,
         name: req.body.name,
         phoneNum: req.body.tel,
@@ -314,7 +314,7 @@ router.post('/shop', function(req, res, next) {
     var intention_service = req.body.intention_service.toString();
     // console.log(req.body);
     var formData = {
-        staffid: req.cookies.staffid,
+        staffid: req.cookies.staffId,
         industryId: req.body.industry,
         name: req.body.shop_name,
         owerName: req.body.name,
