@@ -208,6 +208,39 @@ router.post('/person', function(req, res, next) {
     var handle_service = req.body.handle_service.toString();
     var intention_service = req.body.intention_service.toString();
     var formData = {
+        staffid: req.cookies.id,
+        id: req.body.id,
+        name: req.body.name,
+        phoneNum: req.body.tel,
+        idCard: req.body.card,
+        familyMeberNum: req.body.member,
+        annualIncome: req.body.income,
+        familyAsset: req.body.assets,
+        workUnit: req.body.work,
+        workYear: req.body.work_date,
+        otherBankService: exsit_service,
+        recommendService: handle_service,
+        wantService: intention_service
+    };
+    console.log(formData);
+    request.post({
+        url: config.user,
+        form: formData
+    }, function(err, response, body) {
+        var _body = JSON.parse(body);
+        // console.log(_body);
+        res.render('task/success', {
+            service: _body
+        });
+    });
+});
+
+router.post('/person/update', function(req, res, next) {
+    console.log(req.body);
+    var exsit_service = req.body.exsit_service.toString();
+    var handle_service = req.body.handle_service.toString();
+    var intention_service = req.body.intention_service.toString();
+    var formData = {
         staffid: req.cookies.staffId,
         id: req.body.id,
         name: req.body.name,
@@ -309,6 +342,41 @@ router.get('/shop/update/:id', function(req, res, next) {
 });
 
 router.post('/shop', function(req, res, next) {
+    var exsit_service = req.body.exsit_service.toString();
+    var handle_service = req.body.handle_service.toString();
+    var intention_service = req.body.intention_service.toString();
+    // console.log(req.body);
+    var formData = {
+        staffid: req.cookies.staffId,
+        industryId: req.body.industry,
+        name: req.body.shop_name,
+        owerName: req.body.name,
+        phoneNum: req.body.tel,
+        idCard: req.body.card,
+        address: req.body.shop_address,
+        operateYear: req.body.shop_year,
+        location: req.body.shop_state,
+        operateIncome: req.body.income,
+        superiorDepartment: req.body.high_authority,
+        principal: req.body.person_in_charge,
+        otherBankService: exsit_service,
+        recommendService: handle_service,
+        wantService: intention_service
+    };
+    console.log(formData);
+    request.post({
+        url: config.shop,
+        form: formData
+    }, function(err, response, body) {
+        var _body = JSON.parse(body);
+        // console.log(_body.msg);
+        res.render('task/success', {
+            service: _body
+        });
+    });
+});
+
+router.post('/shop/update', function(req, res, next) {
     var exsit_service = req.body.exsit_service.toString();
     var handle_service = req.body.handle_service.toString();
     var intention_service = req.body.intention_service.toString();
