@@ -300,6 +300,7 @@ router.get('/shop/update/:id', function(req, res, next) {
         // console.log(update)
         var data = {
             shop: {
+                id: id,
                 industry: update.obj.people.industryid,
                 shop_name: update.obj.people.shop_name,
                 name: update.obj.people.name,
@@ -350,6 +351,7 @@ router.post('/shop', function(req, res, next) {
     // console.log(req.body);
     var formData = {
         staffid: req.cookies.id,
+        location: '',
         industryId: req.body.industry,
         name: req.body.shop_name,
         owerName: req.body.name,
@@ -357,7 +359,7 @@ router.post('/shop', function(req, res, next) {
         idCard: req.body.card,
         address: req.body.shop_address,
         operateYear: req.body.shop_year,
-        location: req.body.shop_state,
+        operateAddressStatus: req.body.shop_state,
         operateIncome: req.body.income,
         superiorDepartment: req.body.high_authority,
         principal: req.body.person_in_charge,
@@ -385,6 +387,7 @@ router.post('/shop/update', function(req, res, next) {
     // console.log(req.body);
     var formData = {
         staffid: req.cookies.staffId,
+        id: req.body.id,
         industryId: req.body.industry,
         name: req.body.shop_name,
         owerName: req.body.name,
@@ -392,7 +395,7 @@ router.post('/shop/update', function(req, res, next) {
         idCard: req.body.card,
         address: req.body.shop_address,
         operateYear: req.body.shop_year,
-        location: req.body.shop_state,
+        operateAddressStatus: req.body.shop_state,
         operateIncome: req.body.income,
         superiorDepartment: req.body.high_authority,
         principal: req.body.person_in_charge,

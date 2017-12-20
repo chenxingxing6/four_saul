@@ -41,6 +41,7 @@
                                 <div class="am-form-group">
                                     <label for="shop_name">商户名称</label>
                                     <input type="text" class="" id="shop_name" name="shop_name" value="<%= data.shop.shop_name %>" placeholder="<%= data.shop.shop_name %>" minlength="2" required>
+                                    <input type="hidden" value="<%= data.shop.id %>" name="id">
                                 </div>
                                 <div class="am-form-group">
                                     <label for="name">法人姓名</label>
@@ -86,8 +87,7 @@
                                     <div class="am-sm-u-12" id="industry">
                                         <select name="industry" required data-am-selected="{btnWidth: '100%', btnSize: 'md', searchBox: 1}">
                                             <% for(var i=0;i<industry.length;i++){ %>
-                                                <option value="<%= industry[i].id %>" 
-                                                    <%= (data.shop.industry==industry[i].id) ? "selected" : "" %> >
+                                                <option value="<%= industry[i].id %>" <%=( data.shop.industry==industry[i].id) ? "selected" : "" %> >
                                                     <%= industry[i].industryName %>
                                                 </option>
                                                 <% } %>
