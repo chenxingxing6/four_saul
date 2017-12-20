@@ -213,6 +213,7 @@ router.post('/person', function(req, res, next) {
         name: req.body.name,
         phoneNum: req.body.tel,
         idCard: req.body.card,
+        address: req.body.address,
         familyMeberNum: req.body.member,
         annualIncome: req.body.income,
         familyAsset: req.body.assets,
@@ -246,6 +247,7 @@ router.post('/person/update', function(req, res, next) {
         name: req.body.name,
         phoneNum: req.body.tel,
         idCard: req.body.card,
+        address: req.body.address,
         familyMeberNum: req.body.member,
         annualIncome: req.body.income,
         familyAsset: req.body.assets,
@@ -347,7 +349,7 @@ router.post('/shop', function(req, res, next) {
     var intention_service = req.body.intention_service.toString();
     // console.log(req.body);
     var formData = {
-        staffid: req.cookies.staffId,
+        staffid: req.cookies.id,
         industryId: req.body.industry,
         name: req.body.shop_name,
         owerName: req.body.name,
