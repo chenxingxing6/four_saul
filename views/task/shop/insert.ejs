@@ -11,6 +11,38 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.min.js"></script>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="/javascripts/bmob.js"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script>
+    $.ajax({
+        url: "/weixin",
+        type: 'post',
+        dataType: 'json',
+        data: { 'url': encodeURI(location.origin + location.pathname) },
+        success: function(res) {
+            wx.config({
+                debug: false,
+                appId: res.appid,
+                timestamp: res.timestamp,
+                nonceStr: res.noncestr,
+                signature: res.signature,
+                jsApiList: ['getLocation']
+            });
+        },
+        error: function(err) {
+            console.log(err)
+        }
+    });
+
+    wx.ready(function() {
+        wx.getLocation({
+            type: 'wgs84',
+            success: function(res) {
+                var area = document.querySelector('#area');
+                area.value = res.toString();
+            }
+        });
+    })
+    </script>
 </head>
 
 <body>
@@ -57,6 +89,7 @@
                                 <div class="am-form-group">
                                     <label for="shop_address">经营地址</label>
                                     <input type="text" class="" id="shop_address" name="shop_address" placeholder="南昌市东湖区绿荫大道203号" data-validation-message="贵店座落何方啊" required>
+                                    <input type="hidden" name="area" value="">
                                 </div>
                                 <script>
                                 Bmob.initialize("538f776dcefb77707ab90e41cf31ed68", "c7f325c97022993c82b6d46b204e3f97");

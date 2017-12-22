@@ -11,6 +11,38 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.min.js"></script>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="/javascripts/bmob.js"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script>
+    $.ajax({
+        url: "/weixin",
+        type: 'post',
+        dataType: 'json',
+        data: { 'url': encodeURI(location.origin + location.pathname) },
+        success: function(res) {
+            wx.config({
+                debug: false,
+                appId: res.appid,
+                timestamp: res.timestamp,
+                nonceStr: res.noncestr,
+                signature: res.signature,
+                jsApiList: ['getLocation']
+            });
+        },
+        error: function(err) {
+            console.log(err)
+        }
+    });
+
+    wx.ready(function() {
+        wx.getLocation({
+            type: 'wgs84',
+            success: function(res) {
+                var area = document.querySelector('#area');
+                area.value = res.toString();
+            }
+        });
+    })
+    </script>
 </head>
 
 <body>
@@ -56,6 +88,7 @@
                                 <div class="am-form-group">
                                     <label for="address">详细地址</label>
                                     <input type="text" class="" id="address" name="address" placeholder="南昌市东湖区绿荫大道203号" data-validation-message="咋练自己住哪都忘了" required>
+                                    <input type="hidden" name="area" id="area" value="">
                                 </div>
                                 <div class="am-form-group">
                                     <label for="member">家庭人口（人）</label>
