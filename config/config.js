@@ -14,5 +14,6 @@ module.exports = {
     industryDetail: 'http://stars77.6655.la:8080/srnswx/tbshop/getbyin/',
     getbyop: 'http://srnswx.huahuayu.com.cn/srnswx/tbstaff/getbyop?openid=',
     check: 'http://srnswx.huahuayu.com.cn/srnswx/tbstaff/checkstaff',
-    login: 'http://srnswx.huahuayu.com.cn/srnswx/tbstaff/checkstaff'
+    login: 'http://srnswx.huahuayu.com.cn/srnswx/tbstaff/checkstaff',
+    weixin: 'http://srnswx.huahuayu.com.cn/srnswx/jssdkconfig'
 }

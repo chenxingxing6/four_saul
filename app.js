@@ -12,6 +12,7 @@ var custom = require('./routes/custom');
 var exam = require('./routes/exam');
 var industry = require('./routes/industry');
 var login = require('./routes/login');
+var weixin = require('./routes/weixin');
 
 var app = express();
 
@@ -34,6 +35,7 @@ app.use('/custom', custom);
 app.use('/exam', exam);
 app.use('/industry', industry);
 app.use('/login', login);
+app.use('/weixin', weixin);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
