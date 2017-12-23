@@ -38,7 +38,7 @@
             type: 'wgs84',
             success: function(res) {
                 var area = document.querySelector('#area');
-                area.value = res.toString();
+                area.value = JSON.stringify(res);
             }
         });
     })
