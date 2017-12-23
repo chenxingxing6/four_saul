@@ -100,11 +100,11 @@
                                 </div>
                                 <div class="am-form-group">
                                     <label for="shop_state">经营场所情况</label>
-                                    <input type="text" class="" id="shop_state" value="<%= data.shop.shop_state %>" style="display: none;">
+                                    <input type="text" class="" id="shop_state" value="自有" style="display: none;">
                                     <select name="shop_state" required data-am-selected="{btnWidth: '100%', btnSize: 'md'}">
-                                        <option value="1" <%=( data.shop.shop_state == "自有") ? "selected" : "" %> > 自有
+                                        <option value="1"> 自有
                                         </option>
-                                        <option value="0" <%=( data.shop.shop_state == "租赁") ? "selected" : "" %> > 租赁
+                                        <option value="0"> 租赁
                                         </option>
                                     </select>
                                 </div>
