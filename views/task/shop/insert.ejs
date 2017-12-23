@@ -20,7 +20,7 @@
         data: { 'url': encodeURI(location.origin + location.pathname) },
         success: function(res) {
             wx.config({
-                debug: false,
+                debug: true,
                 appId: res.appid,
                 timestamp: res.timestamp,
                 nonceStr: res.noncestr,
