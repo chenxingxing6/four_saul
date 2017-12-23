@@ -20,7 +20,7 @@
         data: { 'url': encodeURI(location.origin + location.pathname) },
         success: function(res) {
             wx.config({
-                debug: true,
+                debug: false,
                 appId: res.appid,
                 timestamp: res.timestamp,
                 nonceStr: res.noncestr,
@@ -89,7 +89,7 @@
                                 <div class="am-form-group">
                                     <label for="shop_address">经营地址</label>
                                     <input type="text" class="" id="shop_address" name="shop_address" placeholder="南昌市东湖区绿荫大道203号" data-validation-message="贵店座落何方啊" required>
-                                    <input type="hidden" name="area" value="">
+                                    <input type="hidden" id="area" name="area" value="">
                                 </div>
                                 <script>
                                 Bmob.initialize("538f776dcefb77707ab90e41cf31ed68", "c7f325c97022993c82b6d46b204e3f97");
