@@ -348,6 +348,7 @@ router.get('/shop/update/:id', function(req, res, next) {
 });
 
 router.post('/shop', function(req, res, next) {
+    console.log(req.body);
     var exsit_service = req.body.exsit_service.toString();
     var handle_service = req.body.handle_service.toString();
     var intention_service = req.body.intention_service.toString();
