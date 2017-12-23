@@ -100,7 +100,13 @@
                                 </div>
                                 <div class="am-form-group">
                                     <label for="shop_state">经营场所情况</label>
-                                    <input type="text" class="" id="shop_state" name="shop_state" placeholder="自有或租赁" required>
+                                    <input type="text" class="" id="shop_state" value="<%= data.shop.shop_state %>" style="display: none;">
+                                    <select name="shop_state" required data-am-selected="{btnWidth: '100%', btnSize: 'md'}">
+                                        <option value="1" <%=( data.shop.shop_state == "自有") ? "selected" : "" %> > 自有
+                                        </option>
+                                        <option value="0" <%=( data.shop.shop_state == "租赁") ? "selected" : "" %> > 租赁
+                                        </option>
+                                    </select>
                                 </div>
                                 <div class="am-form-group">
                                     <label for="income">年营业额（万元）</label>
