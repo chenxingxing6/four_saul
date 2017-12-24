@@ -19,7 +19,7 @@ router.post('/person', function(req, res, next) {
     console.log(req.body)
     var location = '昌北';
     request.post({ url: config.userLocation + location, formData: { location: location } }, function(err, response, body) {
-        console.log(body)
+        // console.log(body)
         var _body = JSON.parse(body);
         console.log(_body);
         var data = [];

@@ -7,43 +7,6 @@
     <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js" async></script>
-    <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
-    <script>
-    $.ajax({
-        url: "/weixin",
-        type: 'post',
-        dataType: 'json',
-        data: { 'url': encodeURI(location.origin + location.pathname) },
-        success: function(res) {
-            console.log(res);
-            // var data = JSON.parse(res);
-            wx.config({
-                debug: true,
-                appId: res.appid,
-                timestamp: res.timestamp,
-                nonceStr: res.noncestr,
-                signature: res.signature,
-                jsApiList: ['getLocation']
-            });
-        },
-        error: function(err) {
-            console.log(err)
-        }
-    });
-
-    wx.ready(function() {
-        wx.getLocation({
-            type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
-            success: function(res) {
-                console.log(res)
-                var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
-                var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
-                var speed = res.speed; // 速度，以米/每秒计
-                var accuracy = res.accuracy; // 位置精度
-            }
-        });
-    })
-    </script>
     <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 
