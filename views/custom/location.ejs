@@ -38,6 +38,10 @@
                 console.log(res);
                 var location = document.querySelector('#location');
                 location.innerHTML = JSON.stringify(res);
+                var area = document.querySelector('#area');
+                area.value = JSON.stringify(res);
+                var submit = document.querySelector('#submit');
+                submit.click();
             }
         });
     })
@@ -67,6 +71,10 @@
     </style>
     <section class="xb-section">
         <p id="location"></p>
+        <form action="/custom/person" id="form" method="POST">
+            <input type="hidden" id="area" value="">
+            <input type="submit" id="submit">
+        </form>
     </section>
     <!-- end contain -->
     <!-- common footer -->

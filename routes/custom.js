@@ -15,7 +15,8 @@ router.get('/person/location', function(req, res, next) {
     res.render('custom/location', {});
 });
 
-router.get('/person', function(req, res, next) {
+router.post('/person', function(req, res, next) {
+    console.log(req.body)
     var location = '昌北';
     request.post({ url: config.userLocation + location, formData: { location: location } }, function(err, response, body) {
         console.log(body)
