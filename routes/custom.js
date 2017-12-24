@@ -17,7 +17,7 @@ router.get('/person/location', function(req, res, next) {
 
 router.post('/person', function(req, res, next) {
     console.log(req.body)
-    request.post({ url: config.userLocation, form: { area: req.body.area } }, function(err, response, body) {
+    request.post({ url: config.userLocation, form: { location: req.body.area } }, function(err, response, body) {
         console.log(body)
         var _body = JSON.parse(body);
         console.log(_body);
@@ -61,7 +61,7 @@ router.post('/person/search', function(req, res, next) {
 
 router.get('/shop', function(req, res, next) {
     var location = '昌北';
-    request.post({ url: config.shopLocation + location, formData: { location: location } }, function(err, response, body) {
+    request.post({ url: config.shopLocation + location, form: { location: location } }, function(err, response, body) {
         // console.log(body);
         var _body = JSON.parse(body);
         // console.log(_body);
