@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>上饶农商四扫系统</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js" async></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script>
+    $.ajax({
+        url: "/weixin",
+        type: 'post',
+        dataType: 'json',
+        data: { 'url': encodeURI(location.origin + location.pathname) },
+        success: function(res) {
+            console.log(res);
+            // var data = JSON.parse(res);
+            wx.config({
+                debug: true,
+                appId: res.appid,
+                timestamp: res.timestamp,
+                nonceStr: res.noncestr,
+                signature: res.signature,
+                jsApiList: ['getLocation']
+            });
+        },
+        error: function(err) {
+            console.log(err)
+        }
+    });
+
+    wx.ready(function() {
+        wx.getLocation({
+            type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+            success: function(res) {
+                console.log(res);
+                var location = document.querySelector('#location');
+                location.innerHTML = JSON.stringify(res);
+            }
+        });
+    })
+    </script>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <!-- common header -->
+    <header data-am-widget="header" class="am-header am-header-default">
+        <div class="am-header-left am-header-nav">
+            <a href="javascript:window.history.back();" class="">
+                <i class="am-header-icon am-icon-angle-left am-icon-sm"></i>
+            </a>
+        </div>
+        <h1 class="am-header-title">
+            <a href="#" class="">业务员实时位置</a>
+        </h1>
+    </header>
+    <!-- end header -->
+    <!-- start contain -->
+    <style>
+    .xb-section {
+        height: calc(100% - 103px);
+        background-color: rgba(0, 0, 0, 0.02);
+    }
+    </style>
+    <section class="xb-section">
+        <p id="location"></p>
+    </section>
+    <!-- end contain -->
+    <!-- common footer -->
+    <footer class="xb-logo">
+        <div class="am-g">
+            <div class="am-u-sm-6 am-u-sm-offset-3">
+                <img src="/images/logo.jpg" alt="">
+            </div>
+        </div>
+    </footer>
+    <!-- end footer -->
+</body>
+
+</html>

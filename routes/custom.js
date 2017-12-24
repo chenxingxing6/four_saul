@@ -11,11 +11,16 @@ router.get('/', function(req, res, next) {
     });
 });
 
+router.get('/person/location', function(req, res, next) {
+    res.render('custom/location', {});
+});
+
 router.get('/person', function(req, res, next) {
     var location = '昌北';
     request.post({ url: config.userLocation + location, formData: { location: location } }, function(err, response, body) {
+        console.log(body)
         var _body = JSON.parse(body);
-        // console.log(_body);
+        console.log(_body);
         var data = [];
         for (var i = 0; i < _body.obj.length; i++) {
             var item = {
