@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/person/location', function(req, res, next) {
-    res.render('custom/location', {});
+    res.render('custom/location', { data: '/custom/person' });
 });
 
 router.post('/person', function(req, res, next) {
@@ -60,7 +60,7 @@ router.post('/person/search', function(req, res, next) {
 });
 
 router.get('/shop/location', function(req, res, next) {
-    res.render('custom/location', {});
+    res.render('custom/location', { data: '/custom/shop' });
 });
 
 router.get('/shop', function(req, res, next) {
