@@ -63,7 +63,7 @@ router.get('/shop/location', function(req, res, next) {
     res.render('custom/location', { data: '/custom/shop' });
 });
 
-router.get('/shop', function(req, res, next) {
+router.post('/shop', function(req, res, next) {
     console.log(req.body);
     request.post({ url: config.shopLocation, form: { location: req.body.area } }, function(err, response, body) {
         // console.log(body);
