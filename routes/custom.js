@@ -18,7 +18,7 @@ router.get('/person/location', function(req, res, next) {
 router.post('/person', function(req, res, next) {
     console.log(req.body)
     request.post({ url: config.userLocation, form: { location: req.body.area } }, function(err, response, body) {
-        console.log(body)
+        // console.log(body)
         var _body = JSON.parse(body);
         console.log(_body);
         var data = [];
@@ -59,12 +59,16 @@ router.post('/person/search', function(req, res, next) {
     })
 });
 
+router.get('/shop/location', function(req, res, next) {
+    res.render('custom/location', {});
+});
+
 router.get('/shop', function(req, res, next) {
-    var location = '昌北';
-    request.post({ url: config.shopLocation + location, form: { location: location } }, function(err, response, body) {
+    console.log(req.body);
+    request.post({ url: config.shopLocation, form: { location: req.body.area } }, function(err, response, body) {
         // console.log(body);
         var _body = JSON.parse(body);
-        // console.log(_body);
+        console.log(_body);
         var data = [];
         for (var i = 0; i < _body.obj.length; i++) {
             var item = {
