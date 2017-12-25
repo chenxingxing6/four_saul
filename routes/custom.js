@@ -64,12 +64,11 @@ router.get('/shop/location', function(req, res, next) {
 });
 
 router.post('/shop', function(req, res, next) {
-    console.log(req.body);
-    var a_body = { area: '{"latitude":"36.74904","speed":"0.0","accuracy":"240.0","longitude":"196.86346","errMsg":"getLocation:ok"}' }
-    request.post({ url: config.shopLocation, form: { location: a_body.area } }, function(err, response, body) {
+    // console.log(req.body);
+    request.post({ url: config.shopLocation, form: { location: req.body.area } }, function(err, response, body) {
         // console.log(body);
         var _body = JSON.parse(body);
-        console.log(_body);
+        // console.log(_body);
         var data = [];
         for (var i = 0; i < _body.obj.length; i++) {
             var item = {
