@@ -194,7 +194,7 @@ router.get('/person/update/:id', function(req, res, next) {
             }
             data.record.push(item);
         }
-        // console.log(data);
+        console.log(data);
         res.render('task/person/update', {
             service: service.obj,
             data: data
