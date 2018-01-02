@@ -194,7 +194,7 @@ router.get('/person/update/:id', function(req, res, next) {
             }
             data.record.push(item);
         }
-        console.log(data);
+        // console.log(data);
         res.render('task/person/update', {
             service: service.obj,
             data: data
@@ -216,10 +216,10 @@ router.post('/person', function(req, res, next) {
         area: req.body.area,
         address: req.body.address,
         familyMeberNum: req.body.member,
-        annualIncome: req.body.income == 'undefined' ? 0 : req.body.income,
-        familyAsset: req.body.assets == 'undefined' ? 0 : req.body.assets,
-        workUnit:  req.body.work == 'undefined' ? 0 : req.body.work,
-        workYear: req.body.work_date == 'undefined' ? 0 : req.body.work_date,
+        annualIncome: req.body.income,
+        familyAsset: req.body.assets,
+        workUnit: req.body.work,
+        workYear: req.body.work_date,
         otherBankService: exsit_service,
         recommendService: handle_service,
         wantService: intention_service
@@ -251,10 +251,10 @@ router.post('/person/update', function(req, res, next) {
         address: req.body.address,
         area: req.body.area,
         familyMeberNum: req.body.member,
-        annualIncome: req.body.income == 'undefined' ? 0 : req.body.income,
-        familyAsset: req.body.assets == 'undefined' ? 0 : req.body.assets,
-        workUnit:  req.body.work == 'undefined' ? 0 : req.body.work,
-        workYear: req.body.work_date == 'undefined' ? 0 : req.body.work_date,
+        annualIncome: req.body.income,
+        familyAsset: req.body.assets,
+        workUnit: req.body.work,
+        workYear: req.body.work_date,
         otherBankService: exsit_service,
         recommendService: handle_service,
         wantService: intention_service
