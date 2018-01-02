@@ -205,9 +205,9 @@ router.get('/person/update/:id', function(req, res, next) {
 
 router.post('/person', function(req, res, next) {
     console.log(req.body);
-    var exsit_service = req.body.exsit_service.toString();
-    var handle_service = req.body.handle_service.toString();
-    var intention_service = req.body.intention_service.toString();
+    var exsit_service = req.body.exsit_service ? req.body.exsit_service.toString() : '';
+    var handle_service = req.body.handle_service ? req.body.handle_service.toString() : '';
+    var intention_service = req.body.intention_service ? req.body.intention_service.toString() : '';
     var formData = {
         staffid: req.cookies.id,
         name: req.body.name,
@@ -239,9 +239,9 @@ router.post('/person', function(req, res, next) {
 
 router.post('/person/update', function(req, res, next) {
     console.log(req.body);
-    var exsit_service = req.body.exsit_service.toString();
-    var handle_service = req.body.handle_service.toString();
-    var intention_service = req.body.intention_service.toString();
+    var exsit_service = req.body.exsit_service ? req.body.exsit_service.toString() : '';
+    var handle_service = req.body.handle_service ? req.body.handle_service.toString() : '';
+    var intention_service = req.body.intention_service ? req.body.intention_service.toString() : '';
     var formData = {
         staffid: req.cookies.staffId,
         id: req.body.id,
@@ -349,9 +349,9 @@ router.get('/shop/update/:id', function(req, res, next) {
 
 router.post('/shop', function(req, res, next) {
     console.log(req.body);
-    var exsit_service = req.body.exsit_service.toString();
-    var handle_service = req.body.handle_service.toString();
-    var intention_service = req.body.intention_service.toString();
+    var exsit_service = req.body.exsit_service ? req.body.exsit_service.toString() : '';
+    var handle_service = req.body.handle_service ? req.body.handle_service.toString() : '';
+    var intention_service = req.body.intention_service ? req.body.intention_service.toString() : '';
     // console.log(req.body);
     var formData = {
         staffid: req.cookies.id,
@@ -386,9 +386,9 @@ router.post('/shop', function(req, res, next) {
 });
 
 router.post('/shop/update', function(req, res, next) {
-    var exsit_service = req.body.exsit_service.toString();
-    var handle_service = req.body.handle_service.toString();
-    var intention_service = req.body.intention_service.toString();
+    var exsit_service = req.body.exsit_service ? req.body.exsit_service.toString() : '';
+    var handle_service = req.body.handle_service ? req.body.handle_service.toString() : '';
+    var intention_service = req.body.intention_service ? req.body.intention_service.toString() : '';
     // console.log(req.body);
     var formData = {
         staffid: req.cookies.staffId,
