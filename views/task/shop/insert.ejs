@@ -301,7 +301,7 @@
         var input = document.querySelectorAll('.am-form .am-form-group > input');
         for (var i = 0; i < input.length; i++) {
             input[i].addEventListener('change', function() {
-                storage.setItem(this.name, this.value ? this.value : 0);
+                storage.setItem(this.name, this.value == 'undefind' ? this.value : 0);
                 updateForm();
             });
         }
