@@ -282,7 +282,8 @@ router.get('/shop', function(req, res, next) {
         if (err) throw err;
         var service = JSON.parse(results[0]);
         var industry = JSON.parse(results[1]);
-        // console.log(industry.obj)
+        // console.log(service);
+        // console.log(industry);
         res.render('task/shop/insert', {
             service: service.obj,
             industry: industry.obj

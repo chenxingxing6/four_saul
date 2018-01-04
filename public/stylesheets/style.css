@@ -273,3 +273,9 @@ a:hover {
 .custom-list .custom-list-item span:nth-child(1) {
     font-weight: bold;
 }
+
+.am-form .am-form-group .am-textarea {
+    resize: none;
+    border: 1px solid #ccc !important;
+    border-radius: 3px;
+}
