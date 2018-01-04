@@ -48,7 +48,7 @@
             sourceType: ['album', 'camera'],
             success: function(res) {
                 var media = document.querySelector('#imageMedia');
-                media.value = JSON.stringify(res);
+                media.innerHTML = JSON.stringify(res);
             }
         });
     })
