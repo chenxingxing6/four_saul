@@ -149,6 +149,8 @@ function fetchUrl(url, callback) {
     });
 }
 
+var imagePath = 'http://srnswx.huahuayu.com.cn/srnswx/images/';
+
 router.get('/person/update/:id', function(req, res, next) {
     var id = req.params.id;
     var urls = [config.userService, config.userUpdate + id];
@@ -165,7 +167,7 @@ router.get('/person/update/:id', function(req, res, next) {
                 name: update.obj.people.name,
                 tel: update.obj.people.tel,
                 card: update.obj.people.card,
-                house: update.obj.people.liveSituation,
+                house: imagePath + update.obj.people.liveSituation,
                 address: update.obj.people.address,
                 area: update.obj.people.area,
                 member: update.obj.people.member,
