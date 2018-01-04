@@ -49,6 +49,7 @@
                     sizeType: ['original', 'compressed'],
                     sourceType: ['album', 'camera'],
                     success: function(res) {
+                        $uploaderFiles.empty();
                         $uploaderFiles.append($(tmpl.replace('#url#', res.localIds[0])));
                         wx.uploadImage({
                             localId: res.localIds[0],
@@ -77,6 +78,14 @@
 </head>
 
 <body>
+    <div class="weui-gallery" id="gallery">
+        <span class="weui-gallery__img" id="galleryImg"></span>
+        <div class="weui-gallery__opr">
+            <a href="javascript:" class="weui-gallery__del" id="gallery_btn">
+                <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+            </a>
+        </div>
+    </div>
     <!-- common header -->
     <header data-am-widget="header" class="am-header am-header-default">
         <div class="am-header-left am-header-nav">

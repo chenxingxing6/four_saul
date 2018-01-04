@@ -81,6 +81,7 @@
                     sizeType: ['original', 'compressed'],
                     sourceType: ['album', 'camera'],
                     success: function(res) {
+                        $uploaderFiles.empty();
                         $uploaderFiles2.append($(tmpl.replace('#url#', res.localIds[0])));
                         wx.uploadImage({
                             localId: res.localIds[0],
