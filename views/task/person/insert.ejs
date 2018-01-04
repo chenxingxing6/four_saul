@@ -38,7 +38,6 @@
         wx.getLocation({
             type: 'wgs84',
             success: function(res) {
-                alert(res)
                 var area = document.querySelector('#area');
                 area.value = JSON.stringify(res);
             }
@@ -48,6 +47,7 @@
             sizeType: ['original', 'compressed'],
             sourceType: ['album', 'camera'],
             success: function(res) {
+                alert(res);
                 var localId = res.localIds[0];
             }
         });
