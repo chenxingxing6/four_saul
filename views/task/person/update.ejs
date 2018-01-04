@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.min.js"></script>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src="/javascripts/bmob.js"></script>
 </head>
 
 <body>
@@ -40,44 +39,57 @@
                                 <input type="hidden" name="id" value="<%= data.person.id %>">
                                 <legend>第一步：个人基本数据录入</legend>
                                 <div class="am-form-group">
-                                    <label for="name">姓名</label>
-                                    <input type="text" class="" id="name" name="name" value="<%= data.person.name %>" placeholder="<%= data.person.name %>" minlength="2" required>
+                                    <label for="name">姓名 <b>*</b></label>
+                                    <input type="text" class="" id="name" name="name" value="<%= data.person.name %>" placeholder="" minlength="2" required>
                                 </div>
                                 <div class="am-form-group">
-                                    <label for="tel">联系电话</label>
-                                    <input type="number" class="" id="tel" name="tel" value="<%= data.person.tel %>" placeholder="<%= data.person.tel %>" minlength="11" data-validation-message="请输入正确的手机号码" required>
-                                </div>
-                                <script>
-                                Bmob.initialize("538f776dcefb77707ab90e41cf31ed68", "c7f325c97022993c82b6d46b204e3f97");
-                                </script>
-                                <div class="am-form-group">
-                                    <label for="card">身份证号</label>
-                                    <input type="text" class="" id="card" name="card" value="<%= data.person.card %>" placeholder="<%= data.person.card %>" minlength="18" maxlength="18" data-validation-message="请输入正确的身份证号" required>
+                                    <label for="tel">联系电话 <b>*</b></label>
+                                    <input type="number" class="" id="tel" name="tel" value="<%= data.person.tel %>" placeholder="" minlength="11" maxlength="11" data-validation-message="请输入正确的手机号码" required>
                                 </div>
                                 <div class="am-form-group">
-                                    <label for="address">详细地址</label>
-                                    <input type="text" class="" id="address" name="address" value="<%= data.person.address %>" placeholder="<%= data.person.address %>" data-validation-message="咋练自己住哪都忘了" required>
+                                    <label for="card">身份证号 <b>*</b></label>
+                                    <input type="text" class="" id="card" name="card" value="<%= data.person.card %>" placeholder="" minlength="18" maxlength="18" data-validation-message="请输入正确的身份证号" required>
                                 </div>
-                                <input type="hidden" name="area" value="<%= data.person.area %>">
+                                <div class="am-form-group">
+                                    <label for="address">详细地址 <b>*</b></label>
+                                    <input type="text" class="" id="address" name="address" value="<%= data.person.address %>" placeholder="" data-validation-message="请输入正确的地址" required>
+                                    <input type="hidden" name="area" id="area" value="<%= data.person.area %>">
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label for="house">住宅情况 <b>*</b></label>
+                                    <input type="hidden" id="house" name="house" value="<%= data.person.house %>">
+                                    <div class="am-g">
+                                        <div class="weui-uploader">
+                                            <div class="weui-uploader__bd">
+                                                <ul class="weui-uploader__files" id="uploaderFiles" style="margin: 0;padding-left: 0;">
+                                                </ul>
+                                                <div class="weui-uploader__input-box">
+                                                    <input id="uploaderInput" class="weui-uploader__input" type="button">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="am-form-group">
                                     <label for="member">家庭人口（人）</label>
-                                    <input type="number" class="" id="member" name="member" value="<%= data.person.member %>" placeholder="<%= data.person.member %>" min="1" max="100" data-validation-message="再好好想想家里几口人">
+                                    <input type="number" class="" id="member" name="member" value="<%= data.person.member %>" placeholder="" min="1" max="100" data-validation-message="请输入您的家庭人口数">
                                 </div>
                                 <div class="am-form-group">
                                     <label for="income">家庭年收入（万元）</label>
-                                    <input type="number" class="" id="income" name="income" value="<%= data.person.income %>" placeholder="<%= data.person.income %>" data-validation-message="日进斗金啊">
+                                    <input type="number" class="" id="income" name="income" value="<%= data.person.income %>" placeholder="" data-validation-message="请输入您的家庭年收入额">
                                 </div>
                                 <div class="am-form-group">
                                     <label for="assets">家庭资产情况（万元）</label>
-                                    <input type="text" class="" id="assets" name="assets" value="<%= data.person.assets %>" placeholder="<%= data.person.assets %>" data-validation-message="偷偷想想还剩多少钱">
+                                    <input type="text" class="" id="assets" name="assets" value="<%= data.person.assets %>" placeholder="" data-validation-message="请输入您的家庭资产情况">
                                 </div>
                                 <div class="am-form-group">
                                     <label for="work">经营项目或工作单位</label>
-                                    <input type="text" class="" id="work" name="work" value="<%= data.person.work %>" placeholder="<%= data.person.work %>" data-validation-message="请输入正确的经营项目或工作单位">
+                                    <input type="text" class="" id="work" name="work" value="<%= data.person.work %>" placeholder="" data-validation-message="请输入正确的经营项目或工作单位">
                                 </div>
                                 <div class="am-form-group">
                                     <label for="work_date">经营或工作年限（年）</label>
-                                    <input type="text" class="" id="work_date" name="work_date" value="<%= data.person.work_date %>" placeholder="<%= data.person.work_date %>" min="0" max="100" data-validation-message="请输入正确的经营或工作年限">
+                                    <input type="text" class="" id="work_date" name="work_date" value="<%= data.person.work_date %>" placeholder="" min="0" max="100" data-validation-message="请输入正确的经营或工作年限">
                                 </div>
                                 <div class="am-g">
                                     <div class="am-u-sm-4 am-u-sm-offset-4 am-text-center">
@@ -189,79 +201,9 @@
                     <div class="swiper-slide">
                         <div class="am-form">
                             <fieldset>
-                                <legend>第四步：信息确认</legend>
-                                <style>
-
-                                </style>
-                                <div class="am-g" id="formInfo">
-                                    <div class="xb-formInfo">
-                                        <div class="xb-formInfo-key">姓名：</div>
-                                        <div class="xb-formInfo-value">
-                                            <%= data.person.name %>
-                                        </div>
-                                    </div>
-                                    <div class="xb-formInfo">
-                                        <div class="xb-formInfo-key">联系电话：</div>
-                                        <div class="xb-formInfo-value">
-                                            <%= data.person.tel %>
-                                        </div>
-                                    </div>
-                                    <div class="xb-formInfo">
-                                        <div class="xb-formInfo-key">身份证号：</div>
-                                        <div class="xb-formInfo-value">
-                                            <%= data.person.card %>
-                                        </div>
-                                    </div>
-                                    <div class="xb-formInfo">
-                                        <div class="xb-formInfo-key">详细地址：</div>
-                                        <div class="xb-formInfo-value">
-                                            <%= data.person.address %>
-                                        </div>
-                                    </div>
-                                    <div class="xb-formInfo">
-                                        <div class="xb-formInfo-key">家庭人口：</div>
-                                        <div class="xb-formInfo-value">
-                                            <%= data.person.member %>人</div>
-                                    </div>
-                                    <div class="xb-formInfo">
-                                        <div class="xb-formInfo-key">家庭年收入：</div>
-                                        <div class="xb-formInfo-value">
-                                            <%= data.person.income %>万元</div>
-                                    </div>
-                                    <div class="xb-formInfo">
-                                        <div class="xb-formInfo-key">家庭资产情况：</div>
-                                        <div class="xb-formInfo-value">
-                                            <%= data.person.assets %>万元</div>
-                                    </div>
-                                    <div class="xb-formInfo">
-                                        <div class="xb-formInfo-key">经营项目或工作单位：</div>
-                                        <div class="xb-formInfo-value">
-                                            <%= data.person.work %>
-                                        </div>
-                                    </div>
-                                    <div class="xb-formInfo">
-                                        <div class="xb-formInfo-key">经营或工作年限：</div>
-                                        <div class="xb-formInfo-value">
-                                            <%= data.person.work_date %>年</div>
-                                    </div>
-                                    <div class="xb-formInfo">
-                                        <div class="xb-formInfo-key">已有他行金融产品或金融服务：</div>
-                                        <div class="xb-formInfo-value">
-                                            <%= data.service.string.exsit.toString() %>
-                                        </div>
-                                    </div>
-                                    <div class="xb-formInfo">
-                                        <div class="xb-formInfo-key">本次营销我行金融服务：</div>
-                                        <div class="xb-formInfo-value">
-                                            <%= data.service.string.handle.toString() %>
-                                        </div>
-                                    </div>
-                                    <div class="xb-formInfo">
-                                        <div class="xb-formInfo-key">意向我行金融服务：</div>
-                                        <div class="xb-formInfo-value">
-                                            <%= data.service.string.intention.toString() %>
-                                        </div>
-                                    </div>
+                                <legend>第四步：营销日志</legend>
+                                <div class="am-form-group">
+                                    <textarea id="user_detail" name="user_detail" class="am-textarea" value="<%= data.person.user_detail %>" rows="15" placeholder="在这里记录对客户的营销信息或你的营销情况"></textarea>
                                 </div>
                                 <div class="am-g">
                                     <div class="am-u-sm-4 am-u-sm-offset-2 am-text-center">

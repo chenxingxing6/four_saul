@@ -165,13 +165,15 @@ router.get('/person/update/:id', function(req, res, next) {
                 name: update.obj.people.name,
                 tel: update.obj.people.tel,
                 card: update.obj.people.card,
+                house: update.obj.people.liveSituation,
                 address: update.obj.people.address,
                 area: update.obj.people.area,
                 member: update.obj.people.member,
                 income: update.obj.people.income,
                 assets: update.obj.people.assets,
                 work: update.obj.people.work,
-                work_date: update.obj.people.work_date
+                work_date: update.obj.people.work_date,
+                user_detail: update.obj.people.remark,
             },
             service: {
                 value: {
