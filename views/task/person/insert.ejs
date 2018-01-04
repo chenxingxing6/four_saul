@@ -26,7 +26,7 @@
                 timestamp: res.timestamp,
                 nonceStr: res.noncestr,
                 signature: res.signature,
-                jsApiList: ['getLocation']
+                jsApiList: ['getLocation', 'chooseImage']
             });
         },
         error: function(err) {
@@ -38,6 +38,7 @@
         wx.getLocation({
             type: 'wgs84',
             success: function(res) {
+                alert(res)
                 var area = document.querySelector('#area');
                 area.value = JSON.stringify(res);
             }
