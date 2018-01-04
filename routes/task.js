@@ -210,6 +210,8 @@ router.post('/person', function(req, res, next) {
     var intention_service = req.body.intention_service ? req.body.intention_service.toString() : '';
     var formData = {
         staffid: req.cookies.id,
+        liveSituation: req.body.house,
+        remark: req.body.user_detail,
         name: req.body.name,
         phoneNum: req.body.tel,
         idCard: req.body.card,
