@@ -26,7 +26,7 @@
                 timestamp: res.timestamp,
                 nonceStr: res.noncestr,
                 signature: res.signature,
-                jsApiList: ['getLocation', 'chooseImage', 'uploadImage', 'downloadImage']
+                jsApiList: ['getLocation', 'chooseImage', 'uploadImage']
             });
         },
         error: function(err) {
@@ -42,22 +42,42 @@
                 area.value = JSON.stringify(res);
             }
         });
-        wx.chooseImage({
-            count: 1,
-            sizeType: ['original', 'compressed'],
-            sourceType: ['album', 'camera'],
-            success: function(res) {
-                var imgMedia = document.querySelector('#imgMedia');
-                imgMedia.style = "background-image:url(" + res.localIds[0] + ")";
-                wx.uploadImage({
-                    localId: res.localIds[0],
-                    isShowProgressTips: 1,
-                    success: function(response) {
-                        var media = document.querySelector('#imageMedia');
-                        media.innerHTML = imgMedia.style;
+        $(function() {
+            var $gallery = $("#gallery"),
+                $galleryImg = $("#galleryImg"),
+                $gallery_btn = $("#gallery_btn"),
+                $uploaderInput = $("#uploaderInput"),
+                $uploaderFiles = $("#uploaderFiles");
+
+            $uploaderInput.on("click", function(e) {
+                wx.chooseImage({
+                    count: 1,
+                    sizeType: ['original', 'compressed'],
+                    sourceType: ['album', 'camera'],
+                    success: function(res) {
+                        var imgMedia = document.querySelector('#imgMedia');
+                        imgMedia.style = "background-image:url(" + res.localIds[0] + ")";
+                        wx.uploadImage({
+                            localId: res.localIds[0],
+                            isShowProgressTips: 1,
+                            success: function(response) {
+                                var media = document.querySelector('#imageMedia');
+                                media.innerHTML = JSON.stringify(response);
+                            }
+                        });
                     }
                 });
-            }
+            });
+            $uploaderFiles.on("click", "li", function() {
+                $galleryImg.attr("style", this.getAttribute("style"));
+                $gallery.fadeIn(100);
+            });
+            $gallery.on("click", function() {
+                $gallery.fadeOut(100);
+            });
+            $gallery_btn.on("click", function() {
+                $uploaderFiles.empty();
+            })
         });
     })
     </script>
@@ -123,47 +143,10 @@
                                                     <li id="imgMedia" class="weui-uploader__file"></li>
                                                 </ul>
                                                 <div class="weui-uploader__input-box">
-                                                    <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                                                    <input id="uploaderInput" class="weui-uploader__input" type="button">
                                                 </div>
                                             </div>
                                         </div>
-                                        <script>
-                                        $(function() {
-                                            var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#)"></li>',
-                                                $gallery = $("#gallery"),
-                                                $galleryImg = $("#galleryImg"),
-                                                $gallery_btn = $("#gallery_btn"),
-                                                $uploaderInput = $("#uploaderInput"),
-                                                $uploaderFiles = $("#uploaderFiles");
-
-                                            $uploaderInput.on("change", function(e) {
-
-                                                var src, url = window.URL || window.webkitURL || window.mozURL,
-                                                    files = e.target.files;
-                                                for (var i = 0, len = files.length; i < len; ++i) {
-                                                    var file = files[i];
-
-                                                    if (url) {
-                                                        src = url.createObjectURL(file);
-                                                    } else {
-                                                        src = e.target.result;
-                                                    }
-
-                                                    $uploaderFiles.append($(tmpl.replace('#url#', src)));
-                                                }
-                                            });
-                                            $uploaderFiles.on("click", "li", function() {
-                                                $galleryImg.attr("style", this.getAttribute("style"));
-                                                $gallery.fadeIn(100);
-                                            });
-                                            $gallery.on("click", function() {
-                                                $gallery.fadeOut(100);
-                                            });
-                                            $gallery_btn.on("click", function() {
-                                                $uploaderFiles.empty();
-                                            })
-                                        });
-                                        </script>
                                     </div>
                                 </div>
                                 <div class="am-form-group">
