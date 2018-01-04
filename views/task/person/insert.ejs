@@ -26,7 +26,7 @@
                 timestamp: res.timestamp,
                 nonceStr: res.noncestr,
                 signature: res.signature,
-                jsApiList: ['getLocation', 'chooseImage', 'uploadImage']
+                jsApiList: ['chooseImage', 'uploadImage']
             });
         },
         error: function(err) {
@@ -35,13 +35,6 @@
     });
 
     wx.ready(function() {
-        wx.getLocation({
-            type: 'wgs84',
-            success: function(res) {
-                var area = document.querySelector('#area');
-                area.value = JSON.stringify(res);
-            }
-        });
         $(function() {
             var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#)"></li>',
                 $gallery = $("#gallery"),
