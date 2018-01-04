@@ -48,13 +48,13 @@
             sourceType: ['album', 'camera'],
             success: function(res) {
                 var imgMedia = document.querySelector('#imgMedia');
-                imgMedia.src = res.localIds[0];
+                imgMedia.style = "background-image:url(" + res.localIds[0] + ")";
                 wx.uploadImage({
                     localId: res.localIds[0],
                     isShowProgressTips: 1,
                     success: function(response) {
                         var media = document.querySelector('#imageMedia');
-                        media.innerHTML = JSON.stringify(response);
+                        media.innerHTML = imgMedia.style;
                     }
                 });
             }
@@ -115,12 +115,12 @@
                                 </div>
                                 <div class="am-form-group">
                                     <label for="house">住宅情况 <b>*</b></label>
-                                    <img id="imgMedia" src="" alt="">
                                     <p id="imageMedia"></p>
                                     <div class="am-g">
                                         <div class="weui-uploader">
                                             <div class="weui-uploader__bd">
                                                 <ul class="weui-uploader__files" id="uploaderFiles" style="margin: 0;padding-left: 0;">
+                                                    <li id="imgMedia" class="weui-uploader__file"></li>
                                                 </ul>
                                                 <div class="weui-uploader__input-box">
                                                     <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">
