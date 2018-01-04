@@ -43,7 +43,8 @@
             }
         });
         $(function() {
-            var $gallery = $("#gallery"),
+            var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#)"></li>',
+                $gallery = $("#gallery"),
                 $galleryImg = $("#galleryImg"),
                 $gallery_btn = $("#gallery_btn"),
                 $uploaderInput = $("#uploaderInput"),
@@ -55,8 +56,7 @@
                     sizeType: ['original', 'compressed'],
                     sourceType: ['album', 'camera'],
                     success: function(res) {
-                        var imgMedia = document.querySelector('#imgMedia');
-                        imgMedia.style = "background-image:url(" + res.localIds[0] + ")";
+                        $uploaderFiles.append($(tmpl.replace('#url#', res.localIds[0])));
                         wx.uploadImage({
                             localId: res.localIds[0],
                             isShowProgressTips: 1,
@@ -140,7 +140,6 @@
                                         <div class="weui-uploader">
                                             <div class="weui-uploader__bd">
                                                 <ul class="weui-uploader__files" id="uploaderFiles" style="margin: 0;padding-left: 0;">
-                                                    <li id="imgMedia" class="weui-uploader__file"></li>
                                                 </ul>
                                                 <div class="weui-uploader__input-box">
                                                     <input id="uploaderInput" class="weui-uploader__input" type="button">
