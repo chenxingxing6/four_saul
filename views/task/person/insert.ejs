@@ -31,7 +31,6 @@
         },
         error: function(err) {
             console.log(err)
-            alert(err);
         }
     });
 
@@ -44,14 +43,13 @@
             }
         });
         wx.chooseImage({
-                count: 1,
-                sizeType: ['original', 'compressed'],
-                sourceType: ['album', 'camera'],
-                success: function(res) {
-                    var localId = res.localIds[0];
-                }
-            )
-        };
+            count: 1,
+            sizeType: ['original', 'compressed'],
+            sourceType: ['album', 'camera'],
+            success: function(res) {
+                var localId = res.localIds[0];
+            }
+        });
     })
     </script>
 </head>
