@@ -158,6 +158,7 @@ router.get('/person/update/:id', function(req, res, next) {
         if (err) throw err;
         var service = JSON.parse(results[0]);
         var update = JSON.parse(results[1]);
+        console.log(update);
         var data = {
             person: {
                 id: id,
@@ -186,6 +187,7 @@ router.get('/person/update/:id', function(req, res, next) {
             },
             record: []
         };
+        console.log(data);
         for (var i = 0; i < update.obj.record.length; i++) {
             var item = {
                 name: update.obj.record[i].name,
