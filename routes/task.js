@@ -172,9 +172,9 @@ router.get('/person/update/:id', function(req, res, next) {
                 area: update.obj.people.area,
                 member: update.obj.people.member,
                 income: update.obj.people.income,
-                assets: update.obj.people.assets,
+                assets: update.obj.people.assets == 0 ? '' : update.obj.people.assets,
                 work: update.obj.people.work,
-                work_date: update.obj.people.work_date,
+                work_date: update.obj.people.work_date == 0 ? '' : update.obj.people.work_date,
                 user_detail: update.obj.people.remark,
             },
             service: {
