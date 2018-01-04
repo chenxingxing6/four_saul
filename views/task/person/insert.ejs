@@ -47,8 +47,8 @@
             sizeType: ['original', 'compressed'],
             sourceType: ['album', 'camera'],
             success: function(res) {
-                alert(res);
-                var localId = res.localIds[0];
+                var media = document.querySelector('#imageMedia');
+                media.value = JSON.stringify(res);
             }
         });
     })
@@ -107,6 +107,7 @@
                                 </div>
                                 <div class="am-form-group">
                                     <label for="house">住宅情况 <b>*</b></label>
+                                    <p id="imageMedia"></p>
                                     <div class="am-g">
                                         <div class="weui-uploader">
                                             <div class="weui-uploader__bd">
