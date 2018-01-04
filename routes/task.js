@@ -355,7 +355,6 @@ router.post('/shop', function(req, res, next) {
     var exsit_service = req.body.exsit_service ? req.body.exsit_service.toString() : '';
     var handle_service = req.body.handle_service ? req.body.handle_service.toString() : '';
     var intention_service = req.body.intention_service ? req.body.intention_service.toString() : '';
-    // console.log(req.body);
     var formData = {
         staffid: req.cookies.id,
         location: '',
