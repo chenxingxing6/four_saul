@@ -62,7 +62,7 @@
                     sourceType: ['album', 'camera'],
                     success: function(res) {
                         $uploaderFiles1.empty();
-                        $uploaderFiles1.append($(tmpl.replace('#url#', res.localIds[0])));
+                        $uploaderFiles1.append($(tmpl.replace('#url#', res.localIds[0]).replace('#url#', res.localIds[0])));
                         wx.uploadImage({
                             localId: res.localIds[0],
                             isShowProgressTips: 1,
@@ -87,7 +87,7 @@
                     sourceType: ['album', 'camera'],
                     success: function(res) {
                         $uploaderFiles2.empty();
-                        $uploaderFiles2.append($(tmpl.replace('#url#', res.localIds[0])));
+                        $uploaderFiles2.append($(tmpl.replace('#url#', res.localIds[0]).replace('#url#', res.localIds[0])));
                         wx.uploadImage({
                             localId: res.localIds[0],
                             isShowProgressTips: 1,
