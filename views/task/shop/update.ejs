@@ -10,10 +10,133 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.min.js"></script>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src="/javascripts/bmob.js"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
+    <script type="text/javascript" src="https://res.wx.qq.com/open/libs/weuijs/1.1.3/weui.min.js"></script>
+    <script>
+    $.ajax({
+        url: "/weixin",
+        type: 'post',
+        dataType: 'json',
+        data: { 'url': encodeURI(location.origin + location.pathname) },
+        success: function(res) {
+            wx.config({
+                debug: true,
+                appId: res.appid,
+                timestamp: res.timestamp,
+                nonceStr: res.noncestr,
+                signature: res.signature,
+                jsApiList: ['getLocation', 'chooseImage', 'uploadImage']
+            });
+        },
+        error: function(err) {
+            console.log(err)
+        }
+    });
+
+    wx.ready(function() {
+        wx.getLocation({
+            type: 'wgs84',
+            success: function(res) {
+                var area = document.querySelector('#area');
+                area.value = JSON.stringify(res);
+            }
+        });
+        $(function() {
+            var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#)"></li>',
+                $gallery1 = $("#gallery1"),
+                $galleryImg1 = $("#galleryImg1"),
+                $gallery_btn1 = $("#gallery_btn1"),
+                $gallery2 = $("#gallery2"),
+                $galleryImg2 = $("#galleryImg2"),
+                $gallery_btn2 = $("#gallery_btn2"),
+                $uploaderInput1 = $("#uploaderInput1"),
+                $uploaderFiles1 = $("#uploaderFiles1"),
+                $uploaderInput2 = $("#uploaderInput2"),
+                $uploaderFiles2 = $("#uploaderFiles2");
+
+            $uploaderInput1.on("click", function(e) {
+                wx.chooseImage({
+                    count: 1,
+                    sizeType: ['original', 'compressed'],
+                    sourceType: ['album', 'camera'],
+                    success: function(res) {
+                        $uploaderFiles1.empty();
+                        $uploaderFiles1.append($(tmpl.replace('#url#', res.localIds[0])));
+                        wx.uploadImage({
+                            localId: res.localIds[0],
+                            isShowProgressTips: 1,
+                            success: function(response) {
+                                var media = document.querySelector('#passport');
+                                media.value = JSON.stringify(response);
+                            }
+                        });
+                    }
+                });
+            });
+            $uploaderFiles1.on("click", "li", function() {
+                $galleryImg1.attr("style", this.getAttribute("style"));
+                $gallery1.fadeIn(100);
+            });
+
+            $uploaderInput2.on("click", function(e) {
+                wx.chooseImage({
+                    count: 1,
+                    sizeType: ['original', 'compressed'],
+                    sourceType: ['album', 'camera'],
+                    success: function(res) {
+                        $uploaderFiles2.empty();
+                        $uploaderFiles2.append($(tmpl.replace('#url#', res.localIds[0])));
+                        wx.uploadImage({
+                            localId: res.localIds[0],
+                            isShowProgressTips: 1,
+                            success: function(response) {
+                                var media = document.querySelector('#shop_img');
+                                media.value = JSON.stringify(response);
+                            }
+                        });
+                    }
+                });
+            });
+            $uploaderFiles2.on("click", "li", function() {
+                $galleryImg2.attr("style", this.getAttribute("style"));
+                $gallery2.fadeIn(100);
+            });
+
+            $gallery1.on("click", function() {
+                $gallery1.fadeOut(100);
+            });
+            $gallery2.on("click", function() {
+                $gallery2.fadeOut(100);
+            });
+            $gallery_btn1.on("click", function() {
+                $uploaderFiles1.empty();
+            })
+            $gallery_btn2.on("click", function() {
+                $uploaderFiles2.empty();
+            })
+        });
+    })
+    </script>
 </head>
 
 <body>
+    <div class="weui-gallery" id="gallery1">
+        <span class="weui-gallery__img" id="galleryImg1"></span>
+        <div class="weui-gallery__opr">
+            <a href="javascript:" class="weui-gallery__del" id="gallery_btn1">
+                <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+            </a>
+        </div>
+    </div>
+    <div class="weui-gallery" id="gallery2">
+        <span class="weui-gallery__img" id="galleryImg2"></span>
+        <div class="weui-gallery__opr">
+            <a href="javascript:" class="weui-gallery__del" id="gallery_btn2">
+                <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+            </a>
+        </div>
+    </div>
     <!-- common header -->
     <header data-am-widget="header" class="am-header am-header-default">
         <div class="am-header-left am-header-nav">
@@ -97,7 +220,7 @@
                                 </div>
                                 <div class="am-form-group">
                                     <label for="shop_address">经营地址 <b>*</b></label>
-                                    <input type="text" class="" id="shop_address" name="shop_address" placeholder="" data-validation-message="请输入正确的经营地址" required>
+                                    <input type="text" class="" id="shop_address" name="shop_address" value="<%= data.shop.shop_address %>" placeholder="" data-validation-message="请输入正确的经营地址" required>
                                     <input type="hidden" id="area" name="area" value="<%= data.shop.area %>">
                                 </div>
                                 <div class="am-form-group">
@@ -108,9 +231,9 @@
                                     <label for="shop_state">经营场所情况</label>
                                     <input type="text" class="" id="shop_state" value="<%= data.shop.shop_state %>" style="display: none;">
                                     <select name="shop_state" required data-am-selected="{btnWidth: '100%', btnSize: 'md'}">
-                                        <option value="1" <%=( data.shop.shop_state == "自有") ? "selected" : "" %> > 自有
+                                        <option value="1" <%=( data.shop.shop_state=="自有" ) ? "selected" : "" %> > 自有
                                         </option>
-                                        <option value="0" <%=( data.shop.shop_state == "租赁") ? "selected" : "" %> > 租赁
+                                        <option value="0" <%=( data.shop.shop_state=="租赁" ) ? "selected" : "" %> > 租赁
                                         </option>
                                     </select>
                                 </div>
@@ -247,7 +370,9 @@
                             <fieldset>
                                 <legend>第四步：营销日志</legend>
                                 <div class="am-form-group">
-                                    <textarea id="shop_detail" name="shop_detail" class="am-textarea" value="<%= data.shop.shop_detail %>" rows="15" placeholder="在这里记录对商户的营销信息或你的营销情况"><%= data.shop.shop_detail %></textarea>
+                                    <textarea id="shop_detail" name="shop_detail" class="am-textarea" value="<%= data.shop.shop_detail %>" rows="15" placeholder="在这里记录对商户的营销信息或你的营销情况">
+                                        <%= data.shop.shop_detail %>
+                                    </textarea>
                                 </div>
                                 <div class="am-g">
                                     <div class="am-u-sm-4 am-u-sm-offset-2 am-text-center">
