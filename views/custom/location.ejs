@@ -36,9 +36,6 @@
             debug: false,
             type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
             success: function(res) {
-                console.log(res);
-                var location = document.querySelector('#location');
-                location.innerHTML = JSON.stringify(res);
                 var area = document.querySelector('#area');
                 area.value = JSON.stringify(res);
                 var submit = document.querySelector('#submit');
@@ -69,12 +66,11 @@
     <!-- start contain -->
     <style>
     .xb-section {
-        height: calc(100% - 103px);
+        height: 100%;
         background-color: rgba(0, 0, 0, 0.02);
     }
     </style>
     <section class="xb-section">
-        <p id="location"></p>
         <form action="<%= data %>" id="form" method="POST" style="display: none;">
             <input type="hidden" id="area" name="area" value="">
             <input type="submit" id="submit">
