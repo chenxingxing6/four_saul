@@ -21,7 +21,7 @@
         data: { 'url': encodeURI(location.origin + location.pathname) },
         success: function(res) {
             wx.config({
-                debug: true,
+                debug: false,
                 appId: res.appid,
                 timestamp: res.timestamp,
                 nonceStr: res.noncestr,
