@@ -72,6 +72,7 @@
             });
             $uploaderFiles.on("click", "li", function() {
                 $galleryImg.attr("style", this.getAttribute("style"));
+                $galleryImg.html(this.innerHTML);
                 $gallery.fadeIn(100);
             });
             $gallery.on("click", function() {
