@@ -57,6 +57,8 @@
                     sourceType: ['album', 'camera'],
                     success: function(res) {
                         $uploaderFiles.empty();
+                        var btnImg = document.querySelector('#btnImg');
+                        btnImg.src = res.localIds[0];
                         $uploaderFiles.append($(tmpl.replace('#url#', res.localIds[0])));
                         wx.uploadImage({
                             localId: res.localIds[0],
@@ -140,6 +142,7 @@
                                     <div class="am-g">
                                         <div class="weui-uploader">
                                             <div class="weui-uploader__bd">
+                                                <img id="btnImg" src="" alt="">
                                                 <ul class="weui-uploader__files" id="uploaderFiles" style="margin: 0;padding-left: 0;">
                                                 </ul>
                                                 <div class="weui-uploader__input-box">
