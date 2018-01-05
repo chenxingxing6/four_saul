@@ -26,7 +26,7 @@
                 timestamp: res.timestamp,
                 nonceStr: res.noncestr,
                 signature: res.signature,
-                jsApiList: ['chooseImage', 'uploadImage']
+                jsApiList: ['getLocation', 'chooseImage', 'uploadImage']
             });
         },
         error: function(err) {
@@ -35,6 +35,13 @@
     });
 
     wx.ready(function() {
+        wx.getLocation({
+            type: 'wgs84',
+            success: function(res) {
+                var area = document.querySelector('#area');
+                area.value = JSON.stringify(res);
+            }
+        });
         $(function() {
             var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#)"></li>',
                 $gallery = $("#gallery"),
@@ -129,7 +136,7 @@
                                 </div>
                                 <div class="am-form-group">
                                     <label for="house">住宅情况 <b>*</b></label>
-                                    <input type="hidden" id="house" name="house" >
+                                    <input type="hidden" id="house" name="house">
                                     <div class="am-g">
                                         <div class="weui-uploader">
                                             <div class="weui-uploader__bd">
