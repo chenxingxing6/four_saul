@@ -279,4 +279,5 @@ a:hover {
     border: 1px solid #ccc !important;
     border-radius: 3px;
     text-align: left !important;
+    line-height: 16px;
 }
