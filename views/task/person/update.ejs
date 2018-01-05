@@ -147,15 +147,15 @@
                                 </div>
                                 <div class="am-form-group">
                                     <label for="member">家庭人口（人）</label>
-                                    <input type="number" class="" id="member" name="member" value="<%= data.person.member %>" >
+                                    <input type="number" class="" id="member" name="member" value="<%= data.person.member == 0 ? '' : data.person.member %>" >
                                 </div>
                                 <div class="am-form-group">
                                     <label for="income">家庭年收入（万元）</label>
-                                    <input type="number" class="" id="income" name="income" value="<%= data.person.income %>" >
+                                    <input type="number" class="" id="income" name="income" value="<%= data.person.income == 0 ? '' : data.person.income %>" >
                                 </div>
                                 <div class="am-form-group">
                                     <label for="assets">家庭资产情况（万元）</label>
-                                    <input type="number" class="" id="assets" name="assets" value="<%= data.person.assets %>" >
+                                    <input type="number" class="" id="assets" name="assets" value="<%= data.person.assets == 0 ? '' : data.person.assets %>" >
                                 </div>
                                 <div class="am-form-group">
                                     <label for="work">经营项目或工作单位</label>
@@ -163,7 +163,7 @@
                                 </div>
                                 <div class="am-form-group">
                                     <label for="work_date">经营或工作年限（年）</label>
-                                    <input type="number" class="" id="work_date" name="work_date" value="<%= data.person.work_date %>" >
+                                    <input type="number" class="" id="work_date" name="work_date" value="<%= data.person.work_date == 0 ? '' : data.person.work_date %>" >
                                 </div>
                                 <div class="am-g">
                                     <div class="am-u-sm-4 am-u-sm-offset-4 am-text-center">
