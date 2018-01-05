@@ -33,7 +33,7 @@
 
     wx.ready(function() {
         wx.getLocation({
-        	debug: false,
+            debug: false,
             type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
             success: function(res) {
                 console.log(res);
@@ -51,18 +51,21 @@
 </head>
 
 <body>
-    <!-- common header -->
-    <header data-am-widget="header" class="am-header am-header-default">
-        <div class="am-header-left am-header-nav">
-            <a href="javascript:window.history.back();" class="">
-                <i class="am-header-icon am-icon-angle-left am-icon-sm"></i>
-            </a>
+    <button type="button" style="display: none;" id="loadingBtn" data-am-modal="{target: '#my-modal-loading'}">
+        Modal Loading
+    </button>
+    <div class="am-modal am-modal-loading am-modal-no-btn" tabindex="-1" id="my-modal-loading">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd">正在载入...</div>
+            <div class="am-modal-bd">
+                <span class="am-icon-spinner am-icon-spin"></span>
+            </div>
         </div>
-        <h1 class="am-header-title">
-            <a href="#" class="">业务员实时位置</a>
-        </h1>
-    </header>
-    <!-- end header -->
+    </div>
+    <script>
+    var load = document.querySelector('#loadingBtn');
+    load.click();
+    </script>
     <!-- start contain -->
     <style>
     .xb-section {
