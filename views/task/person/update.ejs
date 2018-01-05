@@ -36,7 +36,7 @@
 
     wx.ready(function() {
         $(function() {
-            var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#)"></li>',
+            var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#);overflow:hidden;"><img style="width:100%;height:100%;" src="#url#"></li>',
                 $gallery = $("#gallery"),
                 $galleryImg = $("#galleryImg"),
                 $gallery_btn = $("#gallery_btn"),
@@ -50,7 +50,7 @@
                     sourceType: ['album', 'camera'],
                     success: function(res) {
                         $uploaderFiles.empty();
-                        $uploaderFiles.append($(tmpl.replace('#url#', res.localIds[0])));
+                        $uploaderFiles.append($(tmpl.replace('#url#', res.localIds[0]).replace('#url#', res.localIds[0])));
                         wx.uploadImage({
                             localId: res.localIds[0],
                             isShowProgressTips: 1,
