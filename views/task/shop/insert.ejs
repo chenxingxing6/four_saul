@@ -44,9 +44,12 @@
         });
         $(function() {
             var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#)"></li>',
-                $gallery = $("#gallery"),
-                $galleryImg = $("#galleryImg"),
-                $gallery_btn = $("#gallery_btn"),
+                $gallery1 = $("#gallery1"),
+                $galleryImg1 = $("#galleryImg1"),
+                $gallery_btn1 = $("#gallery_btn1"),
+                $gallery2 = $("#gallery2"),
+                $galleryImg2 = $("#galleryImg2"),
+                $gallery_btn2 = $("#gallery_btn2"),
                 $uploaderInput1 = $("#uploaderInput1"),
                 $uploaderFiles1 = $("#uploaderFiles1"),
                 $uploaderInput2 = $("#uploaderInput2"),
@@ -72,8 +75,8 @@
                 });
             });
             $uploaderFiles1.on("click", "li", function() {
-                $galleryImg.attr("style", this.getAttribute("style"));
-                $gallery.fadeIn(100);
+                $galleryImg1.attr("style", this.getAttribute("style"));
+                $gallery1.fadeIn(100);
             });
 
             $uploaderInput2.on("click", function(e) {
@@ -96,15 +99,21 @@
                 });
             });
             $uploaderFiles2.on("click", "li", function() {
-                $galleryImg.attr("style", this.getAttribute("style"));
-                $gallery.fadeIn(100);
+                $galleryImg2.attr("style", this.getAttribute("style"));
+                $gallery2.fadeIn(100);
             });
 
-            $gallery.on("click", function() {
-                $gallery.fadeOut(100);
+            $gallery1.on("click", function() {
+                $gallery1.fadeOut(100);
             });
-            $gallery_btn.on("click", function() {
-                $uploaderFiles.empty();
+            $gallery2.on("click", function() {
+                $gallery2.fadeOut(100);
+            });
+            $gallery_btn1.on("click", function() {
+                $uploaderFiles1.empty();
+            })
+            $gallery_btn2.on("click", function() {
+                $uploaderFiles2.empty();
             })
         });
     })
@@ -112,10 +121,18 @@
 </head>
 
 <body>
-    <div class="weui-gallery" id="gallery">
-        <span class="weui-gallery__img" id="galleryImg"></span>
+    <div class="weui-gallery" id="gallery1">
+        <span class="weui-gallery__img" id="galleryImg1"></span>
         <div class="weui-gallery__opr">
-            <a href="javascript:" class="weui-gallery__del" id="gallery_btn">
+            <a href="javascript:" class="weui-gallery__del" id="gallery_btn1">
+                <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+            </a>
+        </div>
+    </div>
+    <div class="weui-gallery" id="gallery2">
+        <span class="weui-gallery__img" id="galleryImg2"></span>
+        <div class="weui-gallery__opr">
+            <a href="javascript:" class="weui-gallery__del" id="gallery_btn2">
                 <i class="weui-icon-delete weui-icon_gallery-delete"></i>
             </a>
         </div>
