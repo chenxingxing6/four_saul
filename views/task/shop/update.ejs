@@ -225,7 +225,7 @@
                                 </div>
                                 <div class="am-form-group">
                                     <label for="shop_year">经营年限</label>
-                                    <input type="number" class="" id="shop_year" name="shop_year" value="<%= data.shop.shop_year %>" placeholder="">
+                                    <input type="number" class="" id="shop_year" name="shop_year" value="<%= data.shop.shop_year == 0 ? '' : data.shop.shop_year %>" placeholder="">
                                 </div>
                                 <div class="am-form-group">
                                     <label for="shop_state">经营场所情况</label>
@@ -239,7 +239,7 @@
                                 </div>
                                 <div class="am-form-group">
                                     <label for="income">年营业额（万元）</label>
-                                    <input type="number" class="" id="income" name="income" value="<%= data.shop.income %>">
+                                    <input type="number" class="" id="income" name="income" value="<%= data.shop.income == 0 ? '' : data.shop.income %>">
                                 </div>
                                 <div class="am-form-group">
                                     <label for="high_authority">上级主管部门</label>
