@@ -39,33 +39,70 @@
                             <fieldset>
                                 <legend>第一步：商户基本数据录入</legend>
                                 <div class="am-form-group">
-                                    <label for="shop_name">商户名称</label>
-                                    <input type="text" class="" id="shop_name" name="shop_name" value="<%= data.shop.shop_name %>" placeholder="<%= data.shop.shop_name %>" minlength="2" required>
-                                    <input type="hidden" value="<%= data.shop.id %>" name="id">
+                                    <label for="shop_name">商户名称 <b>*</b></label>
+                                    <input type="text" class="" id="shop_name" name="shop_name" value="<%= data.shop.shop_name %>" placeholder="" minlength="2" required>
+                                </div>
+                                <input type="hidden" value="<%= data.shop.id %>" name="id">
+                                <div class="am-form-group">
+                                    <label for="name">法人姓名 <b>*</b></label>
+                                    <input type="text" class="" id="name" name="name" value="<%= data.shop.name %>" placeholder="" minlength="2" required>
                                 </div>
                                 <div class="am-form-group">
-                                    <label for="name">法人姓名</label>
-                                    <input type="text" class="" id="name" name="name" value="<%= data.shop.name %>" placeholder="<%= data.shop.name %>" minlength="2" required>
+                                    <label for="tel">联系电话 <b>*</b></label>
+                                    <input type="number" class="" id="tel" name="tel" value="<%= data.shop.tel %>" placeholder="" minlength="11" maxlength="11" data-validation-message="请输入正确的手机号码" required>
                                 </div>
                                 <div class="am-form-group">
-                                    <label for="tel">联系电话</label>
-                                    <input type="number" class="" id="tel" name="tel" value="<%= data.shop.tel %>" placeholder="<%= data.shop.tel %>" minlength="11" data-validation-message="请输入正确的手机号码" required>
+                                    <label for="card">身份证号 <b>*</b></label>
+                                    <input type="text" class="" id="card" name="card" value="<%= data.shop.card %>" placeholder="" minlength="18" maxlength="18" data-validation-message="请输入正确的身份证号" required>
                                 </div>
                                 <div class="am-form-group">
-                                    <label for="card">身份证号</label>
-                                    <input type="text" class="" id="card" name="card" value="<%= data.shop.card %>" placeholder="<%= data.shop.card %>" minlength="18" maxlength="18" data-validation-message="请输入正确的身份证号" required>
+                                    <label for="passportNum">营业执照编号 <b>*</b></label>
+                                    <input type="number" class="" id="passportNum" name="passportNum" value="<%= data.shop.passportNum %>" placeholder="" data-validation-message="请输入正确的营业执照编号" required>
                                 </div>
                                 <div class="am-form-group">
-                                    <label for="shop_address">经营地址</label>
-                                    <input type="text" class="" id="shop_address" name="shop_address" value="<%= data.shop.shop_address %>" placeholder="<%= data.shop.shop_address %>" data-validation-message="贵店座落何方啊" required>
+                                    <div class="am-g">
+                                        <div class="am-u-sm-6">
+                                            <label for="passport">营业执照 <b>*</b></label>
+                                            <input type="hidden" id="passport" name="passport">
+                                            <div class="am-g">
+                                                <div class="weui-uploader">
+                                                    <div class="weui-uploader__bd">
+                                                        <ul class="weui-uploader__files" id="uploaderFiles1" style="margin: 0;padding-left: 0;">
+                                                            <li class="weui-uploader__file" style="background-image:url('http://srnswx.huahuayu.com.cn/srnswx/images/<%= data.shop.passport %>')"></li>
+                                                        </ul>
+                                                        <div class="weui-uploader__input-box">
+                                                            <input id="uploaderInput1" class="weui-uploader__input" type="button">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="am-u-sm-6">
+                                            <label for="shop_img">商铺情况 <b>*</b></label>
+                                            <input type="hidden" id="shop_img" name="shop_img">
+                                            <div class="am-g">
+                                                <div class="weui-uploader">
+                                                    <div class="weui-uploader__bd">
+                                                        <ul class="weui-uploader__files" id="uploaderFiles2" style="margin: 0;padding-left: 0;">
+                                                            <li class="weui-uploader__file" style="background-image:url('http://srnswx.huahuayu.com.cn/srnswx/images/<%= data.shop.shop_img %>')"></li>
+                                                        </ul>
+                                                        <div class="weui-uploader__input-box">
+                                                            <input id="uploaderInput2" class="weui-uploader__input" type="button">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <input type="hidden" name="area" value="<%= data.shop.area %>">
-                                <script>
-                                Bmob.initialize("538f776dcefb77707ab90e41cf31ed68", "c7f325c97022993c82b6d46b204e3f97");
-                                </script>
                                 <div class="am-form-group">
-                                    <label for="shop_year">经营年限（年）</label>
-                                    <input type="number" class="" id="shop_year" name="shop_year" value="<%= data.shop.shop_year %>" placeholder="<%= data.shop.shop_year %>" min="1" max="200" data-validation-message="旺铺兴荣，年久不衰">
+                                    <label for="shop_address">经营地址 <b>*</b></label>
+                                    <input type="text" class="" id="shop_address" name="shop_address" placeholder="" data-validation-message="请输入正确的经营地址" required>
+                                    <input type="hidden" id="area" name="area" value="<%= data.shop.area %>">
+                                </div>
+                                <div class="am-form-group">
+                                    <label for="shop_year">经营年限</label>
+                                    <input type="number" class="" id="shop_year" name="shop_year" value="<%= data.shop.shop_year %>" placeholder="">
                                 </div>
                                 <div class="am-form-group">
                                     <label for="shop_state">经营场所情况</label>
@@ -79,15 +116,15 @@
                                 </div>
                                 <div class="am-form-group">
                                     <label for="income">年营业额（万元）</label>
-                                    <input type="number" class="" id="income" name="income" value="<%= data.shop.income %>" placeholder="<%= data.shop.income %>" data-validation-message="日进斗金啊">
+                                    <input type="number" class="" id="income" name="income" value="<%= data.shop.income %>" placeholder="" data-validation-message="请输入正确的年营业额">
                                 </div>
                                 <div class="am-form-group">
                                     <label for="high_authority">上级主管部门</label>
-                                    <input type="text" class="" id="high_authority" name="high_authority" value="<%= data.shop.high_authority %>" placeholder="<%= data.shop.high_authority %>" data-validation-message="想想老大是谁">
+                                    <input type="text" class="" id="high_authority" name="high_authority" value="<%= data.shop.high_authority %>">
                                 </div>
                                 <div class="am-form-group">
                                     <label for="person_in_charge">行业协会负责人</label>
-                                    <input type="text" class="" id="person_in_charge" name="person_in_charge" value="<%= data.shop.person_in_charge %>" placeholder="<%= data.shop.person_in_charge %>" data-validation-message="想想老大是谁">
+                                    <input type="text" class="" id="person_in_charge" name="person_in_charge" value="<%= data.shop.person_in_charge %>">
                                 </div>
                                 <div class="am-form-group">
                                     <label for="industry">商户类型</label>
@@ -176,9 +213,6 @@
                         <div class="am-form">
                             <fieldset>
                                 <legend>第三步：营销记录</legend>
-                                <style>
-
-                                </style>
                                 <div class="am-g xb-record">
                                     <% for(var i=0; i<data.record.length; i++){ %>
                                         <div class="am-u-sm-12 xb-record-item">
@@ -211,89 +245,9 @@
                     <div class="swiper-slide">
                         <div class="am-form">
                             <fieldset>
-                                <legend>第四步：信息确认</legend>
-                                <style>
-
-                                </style>
-                                <div class="am-g" id="formInfo">
-                                    <div class="xb-formInfo">
-                                        <div class=" xb-formInfo-key">商户名称：</div>
-                                        <div class=" xb-formInfo-value">
-                                            <%= data.shop.shop_name %>
-                                        </div>
-                                    </div>
-                                    <div class="xb-formInfo">
-                                        <div class=" xb-formInfo-key">法人姓名：</div>
-                                        <div class=" xb-formInfo-value">
-                                            <%= data.shop.name %>
-                                        </div>
-                                    </div>
-                                    <div class="xb-formInfo">
-                                        <div class=" xb-formInfo-key">联系电话：</div>
-                                        <div class=" xb-formInfo-value">
-                                            <%= data.shop.tel %>
-                                        </div>
-                                    </div>
-                                    <div class="xb-formInfo">
-                                        <div class=" xb-formInfo-key">身份证号：</div>
-                                        <div class=" xb-formInfo-value">
-                                            <%= data.shop.card %>
-                                        </div>
-                                    </div>
-                                    <div class="xb-formInfo">
-                                        <div class=" xb-formInfo-key">经营地址：</div>
-                                        <div class=" xb-formInfo-value">
-                                            <%= data.shop.shop_address %>
-                                        </div>
-                                    </div>
-                                    <div class="xb-formInfo">
-                                        <div class=" xb-formInfo-key">经营年限：</div>
-                                        <div class=" xb-formInfo-value">
-                                            <%= data.shop.shop_year %>年
-                                        </div>
-                                    </div>
-                                    <div class="xb-formInfo" style="display: none;">
-                                        <div class=" xb-formInfo-key">经营场所情况：</div>
-                                        <div class=" xb-formInfo-value">
-                                            <%= data.shop.shop_state %>
-                                        </div>
-                                    </div>
-                                    <div class="xb-formInfo">
-                                        <div class=" xb-formInfo-key">年营业额：</div>
-                                        <div class=" xb-formInfo-value">
-                                            <%= data.shop.income %>万元
-                                        </div>
-                                    </div>
-                                    <div class="xb-formInfo">
-                                        <div class=" xb-formInfo-key">上级主管部门：</div>
-                                        <div class=" xb-formInfo-value">
-                                            <%= data.shop.high_authority %>
-                                        </div>
-                                    </div>
-                                    <div class="xb-formInfo">
-                                        <div class=" xb-formInfo-key">行业协会负责人：</div>
-                                        <div class=" xb-formInfo-value">
-                                            <%= data.shop.person_in_charge %>
-                                        </div>
-                                    </div>
-                                    <div class="xb-formInfo">
-                                        <div class="xb-formInfo-key">已有他行金融产品或金融服务：</div>
-                                        <div class="xb-formInfo-value">
-                                            <%= data.service.string.exsit.toString() %>
-                                        </div>
-                                    </div>
-                                    <div class="xb-formInfo">
-                                        <div class="xb-formInfo-key">本次营销我行金融服务：</div>
-                                        <div class="xb-formInfo-value">
-                                            <%= data.service.string.handle.toString() %>
-                                        </div>
-                                    </div>
-                                    <div class="xb-formInfo">
-                                        <div class="xb-formInfo-key">意向我行金融服务：</div>
-                                        <div class="xb-formInfo-value">
-                                            <%= data.service.string.intention.toString() %>
-                                        </div>
-                                    </div>
+                                <legend>第四步：营销日志</legend>
+                                <div class="am-form-group">
+                                    <textarea id="shop_detail" name="shop_detail" class="am-textarea" value="<%= data.shop.shop_detail %>" rows="15" placeholder="在这里记录对商户的营销信息或你的营销情况"><%= data.shop.shop_detail %></textarea>
                                 </div>
                                 <div class="am-g">
                                     <div class="am-u-sm-4 am-u-sm-offset-2 am-text-center">
@@ -337,87 +291,6 @@
                 e.preventDefault();
                 prevButton.click();
             })
-        }
-
-        var storage = window.localStorage;
-        storage.clear();
-        storage.setItem('shop_name', '<%= data.shop.shop_name %>');
-        storage.setItem('name', '<%= data.shop.name %>');
-        storage.setItem('tel', <%= data.shop.tel %>);
-        storage.setItem('card', <%= data.shop.card %>);
-        storage.setItem('shop_address', '<%= data.shop.shop_address %>');
-        storage.setItem('shop_year', <%= data.shop.shop_year %>);
-        storage.setItem('shop_state', '<%= data.shop.shop_state %>');
-        storage.setItem('income', <%= data.shop.income %>);
-        storage.setItem('high_authority', '<%= data.shop.high_authority %>');
-        storage.setItem('person_in_charge', '<%= data.shop.person_in_charge %>');
-        storage.setItem('exsit_service', '<%= data.service.string.exsit %>');
-        storage.setItem('handle_service', '<%= data.service.string.handle %>');
-        storage.setItem('intention_service', '<%= data.service.string.intention %>');
-        var input = document.querySelectorAll('.am-form .am-form-group > input');
-        for (var i = 0; i < input.length; i++) {
-            input[i].addEventListener('change', function() {
-                storage.setItem(this.name, this.value);
-                updateForm();
-            });
-        }
-
-        var exsit_service = document.querySelectorAll('input[name="exsit_service"]');
-        for (var i = 0; i < exsit_service.length; i++) {
-            exsit_service[i].addEventListener('change', function(e) {
-                var checked_service = document.querySelectorAll('input[name="exsit_service"]:checked');
-                var checked_array = new Array();
-                for (var j = 0; j < checked_service.length; j++) {
-                    checked_array.push(checked_service[j].dataset.id);
-                }
-                storage.setItem('exsit_service', checked_array.toString() ? checked_array : "还没选择服务哦");
-                updateForm();
-            });
-        }
-
-        var handle_service = document.querySelectorAll('input[name="handle_service"]');
-        for (var i = 0; i < handle_service.length; i++) {
-            handle_service[i].addEventListener('change', function(e) {
-                var checked_service = document.querySelectorAll('input[name="handle_service"]:checked');
-                var checked_array = new Array();
-                for (var j = 0; j < checked_service.length; j++) {
-                    checked_array.push(checked_service[j].dataset.id);
-                }
-                storage.setItem('handle_service', checked_array.toString() ? checked_array : "还没选择服务哦");
-                updateForm();
-            });
-        }
-
-        var intention_service = document.querySelectorAll('input[name="intention_service"]');
-        for (var i = 0; i < intention_service.length; i++) {
-            intention_service[i].addEventListener('change', function(e) {
-                var checked_service = document.querySelectorAll('input[name="intention_service"]:checked');
-                var checked_array = new Array();
-                for (var j = 0; j < checked_service.length; j++) {
-                    checked_array.push(checked_service[j].dataset.id);
-                }
-                storage.setItem('intention_service', checked_array.toString() ? checked_array : "还没选择服务哦");
-                updateForm();
-            });
-        }
-
-
-        function updateForm() {
-            var formInfo = document.querySelectorAll('#formInfo > .xb-formInfo > .xb-formInfo-value');
-            formInfo[0].innerText = storage.shop_name;
-            formInfo[1].innerText = storage.name;
-            formInfo[2].innerText = storage.tel;
-            formInfo[3].innerText = storage.card;
-            formInfo[4].innerText = storage.shop_address;
-            formInfo[5].innerText = storage.shop_year + '年';
-            formInfo[6].innerText = storage.shop_state;
-            formInfo[7].innerText = storage.income + '万元';
-            formInfo[8].innerText = storage.high_authority;
-            formInfo[9].innerText = storage.person_in_charge;
-
-            formInfo[10].innerText = storage.exsit_service;
-            formInfo[11].innerText = storage.handle_service;
-            formInfo[12].innerText = storage.intention_service;
         }
 
         window.onload = function() {
