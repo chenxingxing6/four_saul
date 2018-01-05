@@ -315,6 +315,10 @@ router.get('/shop/update/:id', function(req, res, next) {
             shop: {
                 id: id,
                 industry: update.obj.people.industryid,
+                passportNum: update.obj.people.operateId,
+                passport: update.obj.people.operateImg,
+                shop_img: update.obj.people.shopStatus,
+                shop_detail: update.obj.people.remark,
                 shop_name: update.obj.people.shop_name,
                 name: update.obj.people.name,
                 tel: update.obj.people.tel,
