@@ -310,7 +310,7 @@ router.get('/shop/update/:id', function(req, res, next) {
         var service = JSON.parse(results[0]);
         var update = JSON.parse(results[1]);
         var industry = JSON.parse(results[2]);
-        // console.log(update)
+        console.log(update)
         var data = {
             shop: {
                 id: id,
@@ -349,7 +349,7 @@ router.get('/shop/update/:id', function(req, res, next) {
             }
             data.record.push(item);
         }
-        // console.log(data);
+        console.log(data);
         res.render('task/shop/update', {
             service: service.obj,
             data: data,
