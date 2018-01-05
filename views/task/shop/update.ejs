@@ -21,7 +21,7 @@
         data: { 'url': encodeURI(location.origin + location.pathname) },
         success: function(res) {
             wx.config({
-                debug: true,
+                debug: false,
                 appId: res.appid,
                 timestamp: res.timestamp,
                 nonceStr: res.noncestr,
@@ -76,6 +76,7 @@
             });
             $uploaderFiles1.on("click", "li", function() {
                 $galleryImg1.attr("style", this.getAttribute("style"));
+                $galleryImg1.html(this.innerHTML);
                 $gallery1.fadeIn(100);
             });
 
@@ -100,6 +101,7 @@
             });
             $uploaderFiles2.on("click", "li", function() {
                 $galleryImg2.attr("style", this.getAttribute("style"));
+                $galleryImg2.html(this.innerHTML);
                 $gallery2.fadeIn(100);
             });
 
