@@ -50,7 +50,7 @@ router.get('/list/leader/:id', function(req, res, next) {
     var id = req.params.id;
     // console.log(id);
     request.get(config.detail + '/' + id, function(err, response, body) {
-        // console.log(body);
+        console.log(body);
         var _body = JSON.parse(JSON.parse(body));
         // console.log(_body);
 
@@ -85,7 +85,7 @@ router.get('/list/leader/:id', function(req, res, next) {
 
 router.get('/list/member/:id', function(req, res, next) {
     var id = req.params.id;
-    // console.log(id);
+    console.log(id);
     request.get(config.detail + '/' + id, function(err, response, body) {
         // console.log(body);
         var _body = JSON.parse(JSON.parse(body));
