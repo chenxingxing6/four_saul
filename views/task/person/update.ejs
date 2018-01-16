@@ -2,186 +2,187 @@
 <html>
 
 <head>
-    <title>上饶农商行四扫系统</title>
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
-    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js" async></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.min.js"></script>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
-    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
-    <script type="text/javascript" src="https://res.wx.qq.com/open/libs/weuijs/1.1.3/weui.min.js"></script>
-    <script>
+  <title>上饶农商行四扫系统</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
+  <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js" async></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.min.js"></script>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+  <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
+  <script type="text/javascript" src="https://res.wx.qq.com/open/libs/weuijs/1.1.3/weui.min.js"></script>
+  <script>
     $.ajax({
-        url: "/weixin",
-        type: 'post',
-        dataType: 'json',
-        data: { 'url': encodeURI(location.origin + location.pathname) },
-        success: function(res) {
-            wx.config({
-                debug: false,
-                appId: res.appid,
-                timestamp: res.timestamp,
-                nonceStr: res.noncestr,
-                signature: res.signature,
-                jsApiList: ['chooseImage', 'uploadImage']
-            });
-        },
-        error: function(err) {
-            console.log(err)
-        }
+      url: "/weixin",
+      type: 'post',
+      dataType: 'json',
+      data: {
+        'url': encodeURI(location.origin + location.pathname)
+      },
+      success: function(res) {
+        wx.config({
+          debug: false,
+          appId: res.appid,
+          timestamp: res.timestamp,
+          nonceStr: res.noncestr,
+          signature: res.signature,
+          jsApiList: ['chooseImage', 'uploadImage']
+        });
+      },
+      error: function(err) {
+        console.log(err)
+      }
     });
 
     wx.ready(function() {
-        $(function() {
-            var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#);overflow:hidden;"><img style="width:100%;height:100%;" src="#url#"></li>',
-                $gallery = $("#gallery"),
-                $galleryImg = $("#galleryImg"),
-                $gallery_btn = $("#gallery_btn"),
-                $uploaderInput = $("#uploaderInput"),
-                $uploaderFiles = $("#uploaderFiles");
+      $(function() {
+        var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#);overflow:hidden;"><img style="width:100%;height:100%;" src="#url#"></li>',
+          $gallery = $("#gallery"),
+          $galleryImg = $("#galleryImg"),
+          $gallery_btn = $("#gallery_btn"),
+          $uploaderInput = $("#uploaderInput"),
+          $uploaderFiles = $("#uploaderFiles");
 
-            $uploaderInput.on("click", function(e) {
-                wx.chooseImage({
-                    count: 1,
-                    sizeType: ['original', 'compressed'],
-                    sourceType: ['album', 'camera'],
-                    success: function(res) {
-                        $uploaderFiles.empty();
-                        $uploaderFiles.append($(tmpl.replace('#url#', res.localIds[0]).replace('#url#', res.localIds[0])));
-                        wx.uploadImage({
-                            localId: res.localIds[0],
-                            isShowProgressTips: 1,
-                            success: function(response) {
-                                var media = document.querySelector('#house');
-                                media.value = JSON.stringify(response);
-                            }
-                        });
-                    }
-                });
-            });
-            $uploaderFiles.on("click", "li", function() {
-                $galleryImg.attr("style", this.getAttribute("style"));
-                $galleryImg.html(this.innerHTML);
-                $gallery.fadeIn(100);
-            });
-            $gallery.on("click", function() {
-                $gallery.fadeOut(100);
-            });
-            $gallery_btn.on("click", function() {
-                $uploaderFiles.empty();
-            })
+        $uploaderInput.on("click", function(e) {
+          wx.chooseImage({
+            count: 1,
+            sizeType: ['original', 'compressed'],
+            sourceType: ['album', 'camera'],
+            success: function(res) {
+              $uploaderFiles.empty();
+              $uploaderFiles.append($(tmpl.replace('#url#', res.localIds[0]).replace('#url#', res.localIds[0])));
+              wx.uploadImage({
+                localId: res.localIds[0],
+                isShowProgressTips: 1,
+                success: function(response) {
+                  var media = document.querySelector('#house');
+                  media.value = JSON.stringify(response);
+                }
+              });
+            }
+          });
         });
+        $uploaderFiles.on("click", "li", function() {
+          $galleryImg.attr("style", this.getAttribute("style"));
+          $galleryImg.html(this.innerHTML);
+          $gallery.fadeIn(100);
+        });
+        $gallery.on("click", function() {
+          $gallery.fadeOut(100);
+        });
+        $gallery_btn.on("click", function() {
+          $uploaderFiles.empty();
+        })
+      });
     })
-    </script>
+  </script>
 </head>
 
 <body>
-    <div class="weui-gallery" id="gallery">
-        <span class="weui-gallery__img" id="galleryImg"></span>
-        <div class="weui-gallery__opr">
-            <a href="javascript:" class="weui-gallery__del" id="gallery_btn">
+  <div class="weui-gallery" id="gallery">
+    <span class="weui-gallery__img" id="galleryImg"></span>
+    <div class="weui-gallery__opr">
+      <a href="javascript:" class="weui-gallery__del" id="gallery_btn">
                 <i class="weui-icon-delete weui-icon_gallery-delete"></i>
             </a>
-        </div>
     </div>
-    <!-- common header -->
-    <header data-am-widget="header" class="am-header am-header-default">
-        <div class="am-header-left am-header-nav">
-            <a href="javascript:window.history.back();" class="">
+  </div>
+  <!-- common header -->
+  <header data-am-widget="header" class="am-header am-header-default">
+    <div class="am-header-left am-header-nav">
+      <a href="javascript:window.history.back();" class="">
                 <i class="am-header-icon am-icon-angle-left am-icon-sm"></i>
             </a>
-        </div>
-        <h1 class="am-header-title">
+    </div>
+    <h1 class="am-header-title">
             <a href="#" class="">个人用户</a>
         </h1>
-    </header>
-    <!-- end header -->
-    <!-- start contain -->
-    <style>
-
-    </style>
-    <section class="xb-section">
-        <form action="/task/person/update" method="post" class="am-u-sm-12 xb-form" id="doc-vld-msg">
-            <div class="swiper-container swiper-container-horizontal">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="am-form">
-                            <fieldset>
-                                <input type="hidden" name="id" value="<%= data.person.id %>">
-                                <legend>第一步：个人基本数据录入</legend>
-                                <div class="am-form-group">
-                                    <label for="name">姓名 <b>*</b></label>
-                                    <input type="text" class="" id="name" name="name" value="<%= data.person.name %>" placeholder="" minlength="2" required>
-                                </div>
-                                <div class="am-form-group">
-                                    <label for="tel">联系电话 <b>*</b></label>
-                                    <input type="number" class="" id="tel" name="tel" value="<%= data.person.tel %>" placeholder="" minlength="11" maxlength="11" data-validation-message="请输入正确的手机号码" required>
-                                </div>
-                                <div class="am-form-group">
-                                    <label for="card">身份证号 <b>*</b></label>
-                                    <input type="text" class="" id="card" name="card" value="<%= data.person.card %>" placeholder="" minlength="18" maxlength="18" data-validation-message="请输入正确的身份证号" required>
-                                </div>
-                                <div class="am-form-group">
-                                    <label for="address">详细地址 <b>*</b></label>
-                                    <input type="text" class="" id="address" name="address" value="<%= data.person.address %>" placeholder="" data-validation-message="请输入正确的地址" required>
-                                    <input type="hidden" name="area" id="area" value="<%= data.person.area %>">
-                                </div>
-                                <div class="am-form-group">
-                                    <label for="house">住宅情况 <b>*</b></label>
-                                    <input type="hidden" id="house" name="house" value="">
-                                    <div class="am-g">
-                                        <div class="weui-uploader">       
-                                            <div class="weui-uploader__bd">
-                                                <ul class="weui-uploader__files" id="uploaderFiles" style="margin: 0;padding-left: 0;">
-                                                    <li class="weui-uploader__file" style="background-image:url('http://four.huahuayu.com.cn/srnswx/images/<%= data.person.house %>');overflow:hidden;"><img style="width:100%;height:100%;" src="'http://four.huahuayu.com.cn/srnswx/images/<%= data.person.house %>'"></li>
-                                                </ul>
-                                                <div class="weui-uploader__input-box">
-                                                    <input id="uploaderInput" class="weui-uploader__input" type="button">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="am-form-group">
-                                    <label for="member">家庭人口（人）</label>
-                                    <input type="number" class="" id="member" name="member" value="<%= data.person.member == 0 ? '' : data.person.member %>">
-                                </div>
-                                <div class="am-form-group">
-                                    <label for="income">家庭年收入（万元）</label>
-                                    <input type="number" class="" id="income" name="income" value="<%= data.person.income == 0 ? '' : data.person.income %>">
-                                </div>
-                                <div class="am-form-group">
-                                    <label for="assets">家庭资产情况（万元）</label>
-                                    <input type="number" class="" id="assets" name="assets" value="<%= data.person.assets == 0 ? '' : data.person.assets %>">
-                                </div>
-                                <div class="am-form-group">
-                                    <label for="work">经营项目或工作单位</label>
-                                    <input type="text" class="" id="work" name="work" value="<%= data.person.work %>">
-                                </div>
-                                <div class="am-form-group">
-                                    <label for="work_date">经营或工作年限（年）</label>
-                                    <input type="number" class="" id="work_date" name="work_date" value="<%= data.person.work_date == 0 ? '' : data.person.work_date %>">
-                                </div>
-                                <div class="am-g">
-                                    <div class="am-u-sm-4 am-u-sm-offset-4 am-text-center">
-                                        <button type="button" class="am-btn xb-btn-green xb-btn-next">下一步</button>
-                                    </div>
-                                </div>
-                            </fieldset>
+  </header>
+  <!-- end header -->
+  <!-- start contain -->
+  <style>
+  </style>
+  <section class="xb-section">
+    <form action="/task/person/update" method="post" class="am-u-sm-12 xb-form" id="doc-vld-msg">
+      <div class="swiper-container swiper-container-horizontal">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="am-form">
+              <fieldset>
+                <input type="hidden" name="id" value="<%= data.person.id %>">
+                <legend>第一步：个人基本数据录入</legend>
+                <div class="am-form-group">
+                  <label for="name">姓名 <b>*</b></label>
+                  <input type="text" class="" id="name" name="name" value="<%= data.person.name %>" placeholder="" minlength="2" required>
+                </div>
+                <div class="am-form-group">
+                  <label for="tel">联系电话 <b>*</b></label>
+                  <input type="number" class="" id="tel" name="tel" value="<%= data.person.tel %>" placeholder="">
+                </div>
+                <div class="am-form-group">
+                  <label for="card">身份证号 <b>*</b></label>
+                  <input type="text" class="" id="card" name="card" value="<%= data.person.card %>" placeholder="">
+                </div>
+                <div class="am-form-group">
+                  <label for="address">详细地址 <b>*</b></label>
+                  <input type="text" class="" id="address" name="address" value="<%= data.person.address %>" placeholder="">
+                  <input type="hidden" name="area" id="area" value="<%= data.person.area %>">
+                </div>
+                <div class="am-form-group">
+                  <label for="house">住宅情况 <b>*</b></label>
+                  <input type="hidden" id="house" name="house" value="">
+                  <div class="am-g">
+                    <div class="weui-uploader">
+                      <div class="weui-uploader__bd">
+                        <ul class="weui-uploader__files" id="uploaderFiles" style="margin: 0;padding-left: 0;">
+                          <li class="weui-uploader__file" style="background-image:url('http://four.huahuayu.com.cn/srnswx/images/<%= data.person.house %>');overflow:hidden;"><img style="width:100%;height:100%;" src="'http://four.huahuayu.com.cn/srnswx/images/<%= data.person.house %>'"></li>
+                        </ul>
+                        <div class="weui-uploader__input-box">
+                          <input id="uploaderInput" class="weui-uploader__input" type="button">
                         </div>
+                      </div>
                     </div>
-                    <div class="swiper-slide">
-                        <div class="am-form">
-                            <fieldset>
-                                <legend>第二步：金融产品选择</legend>
-                                <div class="am-form-group">
-                                    <h3>1.已有他行金融产品或金融服务（多选）</h3>
-                                    <% if(service.exsit_service){ %>
-                                        <% for(var i=0; i<service.exsit_service.length; i++){ %>
-                                            <label class="am-checkbox am-success">
+                  </div>
+                </div>
+                <div class="am-form-group">
+                  <label for="member">家庭人口（人）</label>
+                  <input type="number" class="" id="member" name="member" value="<%= data.person.member == 0 ? '' : data.person.member %>">
+                </div>
+                <div class="am-form-group">
+                  <label for="income">家庭年收入（万元）</label>
+                  <input type="number" class="" id="income" name="income" value="<%= data.person.income == 0 ? '' : data.person.income %>">
+                </div>
+                <div class="am-form-group">
+                  <label for="assets">家庭资产情况（万元）</label>
+                  <input type="number" class="" id="assets" name="assets" value="<%= data.person.assets == 0 ? '' : data.person.assets %>">
+                </div>
+                <div class="am-form-group">
+                  <label for="work">经营项目或工作单位</label>
+                  <input type="text" class="" id="work" name="work" value="<%= data.person.work %>">
+                </div>
+                <div class="am-form-group">
+                  <label for="work_date">经营或工作年限（年）</label>
+                  <input type="number" class="" id="work_date" name="work_date" value="<%= data.person.work_date == 0 ? '' : data.person.work_date %>">
+                </div>
+                <div class="am-g">
+                  <div class="am-u-sm-4 am-u-sm-offset-4 am-text-center">
+                    <button type="button" class="am-btn xb-btn-green xb-btn-next">下一步</button>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="am-form">
+              <fieldset>
+                <legend>第二步：金融产品选择</legend>
+                <div class="am-form-group">
+                  <h3>1.已有他行金融产品或金融服务（多选）</h3>
+                  <% if(service.exsit_service){ %>
+                    <% for(var i=0; i<service.exsit_service.length; i++){ %>
+                      <label class="am-checkbox am-success">
                                                 <input type="checkbox" value="<%= service.exsit_service[i].id %>" data-id="<%= service.exsit_service[i].serviceName %>" data-am-ucheck name="exsit_service" <% for(var j=0; j<data.service.value.exsit.length; j++){%>
                                                 <% if(data.service.value.exsit[j] == service.exsit_service[i].id){ %>
                                                     checked
@@ -190,14 +191,14 @@
                                                             >
                                                             <%= service.exsit_service[i].serviceName %>
                                             </label>
-                                            <% } %>
-                                                <% } %>
-                                </div>
-                                <div class="am-form-group">
-                                    <h3>2.本次营销我行金融服务（多选）</h3>
-                                    <% if(service.handle_service){ %>
-                                        <% for(var i=0; i<service.handle_service.length; i++){ %>
-                                            <label class="am-checkbox am-success">
+                      <% } %>
+                        <% } %>
+                </div>
+                <div class="am-form-group">
+                  <h3>2.本次营销我行金融服务（多选）</h3>
+                  <% if(service.handle_service){ %>
+                    <% for(var i=0; i<service.handle_service.length; i++){ %>
+                      <label class="am-checkbox am-success">
                                                 <input type="checkbox" value="<%= service.handle_service[i].id %>" data-id="<%= service.handle_service[i].serviceName %>" data-am-ucheck name="handle_service" <% for(var j=0; j<data.service.value.handle.length; j++){%>
                                                 <% if(data.service.value.handle[j] == service.handle_service[i].id){ %>
                                                     checked
@@ -206,14 +207,14 @@
                                                             >
                                                             <%= service.handle_service[i].serviceName %>
                                             </label>
-                                            <% } %>
-                                                <% } %>
-                                </div>
-                                <div class="am-form-group">
-                                    <h3>3.意向我行金融服务（多选）</h3>
-                                    <% if(service.intention_service){ %>
-                                        <% for(var i=0; i<service.intention_service.length; i++){ %>
-                                            <label class="am-checkbox am-success">
+                      <% } %>
+                        <% } %>
+                </div>
+                <div class="am-form-group">
+                  <h3>3.意向我行金融服务（多选）</h3>
+                  <% if(service.intention_service){ %>
+                    <% for(var i=0; i<service.intention_service.length; i++){ %>
+                      <label class="am-checkbox am-success">
                                                 <input type="checkbox" value="<%= service.intention_service[i].id %>" data-id="<%= service.intention_service[i].serviceName %>" data-am-ucheck name="intention_service" <% for(var j=0; j<data.service.value.intention.length; j++){%>
                                                 <% if(data.service.value.intention[j] == service.intention_service[i].id){ %>
                                                     checked
@@ -222,137 +223,136 @@
                                                             >
                                                             <%= service.intention_service[i].serviceName %>
                                             </label>
-                                            <% } %>
-                                                <% } %>
-                                </div>
-                                <div class="am-g">
-                                    <div class="am-u-sm-4 am-u-sm-offset-2 am-text-center">
-                                        <button type="button" class="am-btn xb-btn-green xb-btn-prev">上一步</button>
-                                    </div>
-                                    <div class="am-u-sm-4 am-u-end am-text-center">
-                                        <button type="button" class="am-btn xb-btn-green xb-btn-next">下一步</button>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
+                      <% } %>
+                        <% } %>
+                </div>
+                <div class="am-g">
+                  <div class="am-u-sm-4 am-u-sm-offset-2 am-text-center">
+                    <button type="button" class="am-btn xb-btn-green xb-btn-prev">上一步</button>
+                  </div>
+                  <div class="am-u-sm-4 am-u-end am-text-center">
+                    <button type="button" class="am-btn xb-btn-green xb-btn-next">下一步</button>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="am-form">
+              <fieldset>
+                <legend>第三步：营销记录</legend>
+                <style>
+                </style>
+                <div class="am-g xb-record">
+                  <% for(var i=0; i<data.record.length; i++){ %>
+                    <div class="am-u-sm-12 xb-record-item">
+                      <div class="am-u-sm-12 xb-record-group">
+                        <span>操作人：</span>
+                        <span><%= data.record[i].name %></span>
+                      </div>
+                      <div class="am-u-sm-12 xb-record-group">
+                        <span>操作时间：</span>
+                        <span><%= data.record[i].time %></span>
+                      </div>
+                      <div class="am-u-sm-12 xb-record-group">
+                        <span>操作内容：</span>
+                        <span><%= data.record[i].content %></span>
+                      </div>
                     </div>
-                    <div class="swiper-slide">
-                        <div class="am-form">
-                            <fieldset>
-                                <legend>第三步：营销记录</legend>
-                                <style>
-
-                                </style>
-                                <div class="am-g xb-record">
-                                    <% for(var i=0; i<data.record.length; i++){ %>
-                                        <div class="am-u-sm-12 xb-record-item">
-                                            <div class="am-u-sm-12 xb-record-group">
-                                                <span>操作人：</span>
-                                                <span><%= data.record[i].name %></span>
-                                            </div>
-                                            <div class="am-u-sm-12 xb-record-group">
-                                                <span>操作时间：</span>
-                                                <span><%= data.record[i].time %></span>
-                                            </div>
-                                            <div class="am-u-sm-12 xb-record-group">
-                                                <span>操作内容：</span>
-                                                <span><%= data.record[i].content %></span>
-                                            </div>
-                                        </div>
-                                        <% } %>
-                                </div>
-                                <div class="am-g" style="margin-top: 10px;">
-                                    <div class="am-u-sm-4 am-u-sm-offset-2 am-text-center">
-                                        <button type="button" class="am-btn xb-btn-green xb-btn-prev">上一步</button>
-                                    </div>
-                                    <div class="am-u-sm-4 am-u-end am-text-center">
-                                        <button type="button" class="am-btn xb-btn-green xb-btn-next">下一步</button>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="am-form">
-                            <fieldset>
-                                <legend>第四步：营销日志</legend>
-                                <div class="am-form-group">
-                                    <textarea id="user_detail" name="user_detail" class="am-textarea" value="<%= data.person.user_detail %>" rows="15" placeholder="在这里记录对客户的营销信息或你的营销情况">
+                    <% } %>
+                </div>
+                <div class="am-g" style="margin-top: 10px;">
+                  <div class="am-u-sm-4 am-u-sm-offset-2 am-text-center">
+                    <button type="button" class="am-btn xb-btn-green xb-btn-prev">上一步</button>
+                  </div>
+                  <div class="am-u-sm-4 am-u-end am-text-center">
+                    <button type="button" class="am-btn xb-btn-green xb-btn-next">下一步</button>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="am-form">
+              <fieldset>
+                <legend>第四步：营销日志</legend>
+                <div class="am-form-group">
+                  <textarea id="user_detail" name="user_detail" class="am-textarea" value="<%= data.person.user_detail %>" rows="15" placeholder="在这里记录对客户的营销信息或你的营销情况">
                                         <%= data.person.user_detail %>
                                     </textarea>
-                                </div>
-                                <div class="am-g">
-                                    <div class="am-u-sm-4 am-u-sm-offset-2 am-text-center">
-                                        <button type="button" class="am-btn xb-btn-green xb-btn-prev">上一步</button>
-                                    </div>
-                                    <div class="am-u-sm-4 am-u-end am-text-center">
-                                        <button type="submit" class="am-btn xb-btn-green">提&nbsp;交</button>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                    </div>
                 </div>
-                <div class="swiper-pagination swiper-pagination-progress"></div>
-                <div class="swiper-button-prev" style="display: none;"></div>
-                <div class="swiper-button-next" style="display: none;"></div>
+                <div class="am-g">
+                  <div class="am-u-sm-4 am-u-sm-offset-2 am-text-center">
+                    <button type="button" class="am-btn xb-btn-green xb-btn-prev">上一步</button>
+                  </div>
+                  <div class="am-u-sm-4 am-u-end am-text-center">
+                    <button type="submit" class="am-btn xb-btn-green">提&nbsp;交</button>
+                  </div>
+                </div>
+              </fieldset>
             </div>
-        </form>
-        <script>
-        var swiper = new Swiper('.swiper-container', {
-            initialSlide: 0,
-            hashnav: true,
-            hashnavWatchState: true,
-            pagination: '.swiper-pagination',
-            paginationType: 'progress',
-            prevButton: '.swiper-button-prev',
-            nextButton: '.swiper-button-next'
-        })
-        var prevButton = document.querySelector('.swiper-button-prev');
-        var nextButton = document.querySelector('.swiper-button-next');
-        var btnNext = document.querySelectorAll('.xb-btn-next');
-        var btnPrev = document.querySelectorAll('.xb-btn-prev');
-        for (var i = 0; i < btnNext.length; i++) {
-            btnNext[i].addEventListener("touchstart", function(e) {
-                e.preventDefault();
-                nextButton.click();
-            })
-        }
-        for (var i = 0; i < btnPrev.length; i++) {
-            btnPrev[i].addEventListener("touchstart", function(e) {
-                e.preventDefault();
-                prevButton.click();
-            })
-        }
-
-        window.onload = function() {
-            $(function() {
-                $("#doc-vld-msg").validator({
-                    onValid: function(a) {
-                        $(a.field).closest(".am-form-group").find(".am-alert").hide()
-                    },
-                    onInValid: function(a) {
-                        var i = $(a.field),
-                            d = i.closest(".am-form-group"),
-                            e = d.find(".am-alert"),
-                            l = i.data("validationMessage") || this.getValidationMessage(a);
-                        e.length || (e = $('<div class="am-alert am-alert-danger"></div>').hide().appendTo(d)), e.html(l).show()
-                    }
-                })
-            })
-        }
-        </script>
-    </section>
-    <!-- end contain -->
-    <!-- common footer -->
-    <footer class="xb-logo">
-        <div class="am-g">
-            <div class="am-u-sm-6 am-u-sm-offset-3">
-                <img src="/images/logo.jpg" alt="">
-            </div>
+          </div>
         </div>
-    </footer>
-    <!-- end footer -->
+        <div class="swiper-pagination swiper-pagination-progress"></div>
+        <div class="swiper-button-prev" style="display: none;"></div>
+        <div class="swiper-button-next" style="display: none;"></div>
+      </div>
+    </form>
+    <script>
+      var swiper = new Swiper('.swiper-container', {
+        initialSlide: 0,
+        hashnav: true,
+        hashnavWatchState: true,
+        pagination: '.swiper-pagination',
+        paginationType: 'progress',
+        prevButton: '.swiper-button-prev',
+        nextButton: '.swiper-button-next'
+      })
+      var prevButton = document.querySelector('.swiper-button-prev');
+      var nextButton = document.querySelector('.swiper-button-next');
+      var btnNext = document.querySelectorAll('.xb-btn-next');
+      var btnPrev = document.querySelectorAll('.xb-btn-prev');
+      for (var i = 0; i < btnNext.length; i++) {
+        btnNext[i].addEventListener("touchstart", function(e) {
+          e.preventDefault();
+          nextButton.click();
+        })
+      }
+      for (var i = 0; i < btnPrev.length; i++) {
+        btnPrev[i].addEventListener("touchstart", function(e) {
+          e.preventDefault();
+          prevButton.click();
+        })
+      }
+
+      window.onload = function() {
+        $(function() {
+          $("#doc-vld-msg").validator({
+            onValid: function(a) {
+              $(a.field).closest(".am-form-group").find(".am-alert").hide()
+            },
+            onInValid: function(a) {
+              var i = $(a.field),
+                d = i.closest(".am-form-group"),
+                e = d.find(".am-alert"),
+                l = i.data("validationMessage") || this.getValidationMessage(a);
+              e.length || (e = $('<div class="am-alert am-alert-danger"></div>').hide().appendTo(d)), e.html(l).show()
+            }
+          })
+        })
+      }
+    </script>
+  </section>
+  <!-- end contain -->
+  <!-- common footer -->
+  <footer class="xb-logo">
+    <div class="am-g">
+      <div class="am-u-sm-6 am-u-sm-offset-3">
+        <img src="/images/logo.jpg" alt="">
+      </div>
+    </div>
+  </footer>
+  <!-- end footer -->
 </body>
 
 </html>

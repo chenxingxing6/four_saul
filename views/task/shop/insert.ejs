@@ -2,399 +2,400 @@
 <html>
 
 <head>
-    <title>上饶农商行四扫系统</title>
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
-    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js" async></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.min.js"></script>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
-    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
-    <script type="text/javascript" src="https://res.wx.qq.com/open/libs/weuijs/1.1.3/weui.min.js"></script>
-    <script>
+  <title>上饶农商行四扫系统</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
+  <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js" async></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.min.js"></script>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+  <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
+  <script type="text/javascript" src="https://res.wx.qq.com/open/libs/weuijs/1.1.3/weui.min.js"></script>
+  <script>
     $.ajax({
-        url: "/weixin",
-        type: 'post',
-        dataType: 'json',
-        data: { 'url': encodeURI(location.origin + location.pathname) },
-        success: function(res) {
-            wx.config({
-                debug: false,
-                appId: res.appid,
-                timestamp: res.timestamp,
-                nonceStr: res.noncestr,
-                signature: res.signature,
-                jsApiList: ['getLocation', 'chooseImage', 'uploadImage']
-            });
-        },
-        error: function(err) {
-            console.log(err)
-        }
+      url: "/weixin",
+      type: 'post',
+      dataType: 'json',
+      data: {
+        'url': encodeURI(location.origin + location.pathname)
+      },
+      success: function(res) {
+        wx.config({
+          debug: false,
+          appId: res.appid,
+          timestamp: res.timestamp,
+          nonceStr: res.noncestr,
+          signature: res.signature,
+          jsApiList: ['getLocation', 'chooseImage', 'uploadImage']
+        });
+      },
+      error: function(err) {
+        console.log(err)
+      }
     });
 
     wx.ready(function() {
-        wx.getLocation({
-            type: 'wgs84',
+      wx.getLocation({
+        type: 'wgs84',
+        success: function(res) {
+          var area = document.querySelector('#area');
+          area.value = JSON.stringify(res);
+        }
+      });
+      $(function() {
+        var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#);overflow:hidden;"><img style="width:100%;height:100%;" src="#url#"></li>',
+          $gallery1 = $("#gallery1"),
+          $galleryImg1 = $("#galleryImg1"),
+          $gallery_btn1 = $("#gallery_btn1"),
+          $gallery2 = $("#gallery2"),
+          $galleryImg2 = $("#galleryImg2"),
+          $gallery_btn2 = $("#gallery_btn2"),
+          $uploaderInput1 = $("#uploaderInput1"),
+          $uploaderFiles1 = $("#uploaderFiles1"),
+          $uploaderInput2 = $("#uploaderInput2"),
+          $uploaderFiles2 = $("#uploaderFiles2");
+
+        $uploaderInput1.on("click", function(e) {
+          wx.chooseImage({
+            count: 1,
+            sizeType: ['original', 'compressed'],
+            sourceType: ['album', 'camera'],
             success: function(res) {
-                var area = document.querySelector('#area');
-                area.value = JSON.stringify(res);
+              $uploaderFiles1.empty();
+              $uploaderFiles1.append($(tmpl.replace('#url#', res.localIds[0]).replace('#url#', res.localIds[0])));
+              wx.uploadImage({
+                localId: res.localIds[0],
+                isShowProgressTips: 1,
+                success: function(response) {
+                  var media = document.querySelector('#passport');
+                  media.value = JSON.stringify(response);
+                }
+              });
             }
+          });
         });
-        $(function() {
-            var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#);overflow:hidden;"><img style="width:100%;height:100%;" src="#url#"></li>',
-                $gallery1 = $("#gallery1"),
-                $galleryImg1 = $("#galleryImg1"),
-                $gallery_btn1 = $("#gallery_btn1"),
-                $gallery2 = $("#gallery2"),
-                $galleryImg2 = $("#galleryImg2"),
-                $gallery_btn2 = $("#gallery_btn2"),
-                $uploaderInput1 = $("#uploaderInput1"),
-                $uploaderFiles1 = $("#uploaderFiles1"),
-                $uploaderInput2 = $("#uploaderInput2"),
-                $uploaderFiles2 = $("#uploaderFiles2");
-
-            $uploaderInput1.on("click", function(e) {
-                wx.chooseImage({
-                    count: 1,
-                    sizeType: ['original', 'compressed'],
-                    sourceType: ['album', 'camera'],
-                    success: function(res) {
-                        $uploaderFiles1.empty();
-                        $uploaderFiles1.append($(tmpl.replace('#url#', res.localIds[0]).replace('#url#', res.localIds[0])));
-                        wx.uploadImage({
-                            localId: res.localIds[0],
-                            isShowProgressTips: 1,
-                            success: function(response) {
-                                var media = document.querySelector('#passport');
-                                media.value = JSON.stringify(response);
-                            }
-                        });
-                    }
-                });
-            });
-            $uploaderFiles1.on("click", "li", function() {
-                $galleryImg1.attr("style", this.getAttribute("style"));
-                $galleryImg1.html(this.innerHTML);
-                $gallery1.fadeIn(100);
-            });
-
-            $uploaderInput2.on("click", function(e) {
-                wx.chooseImage({
-                    count: 1,
-                    sizeType: ['original', 'compressed'],
-                    sourceType: ['album', 'camera'],
-                    success: function(res) {
-                        $uploaderFiles2.empty();
-                        $uploaderFiles2.append($(tmpl.replace('#url#', res.localIds[0]).replace('#url#', res.localIds[0])));
-                        wx.uploadImage({
-                            localId: res.localIds[0],
-                            isShowProgressTips: 1,
-                            success: function(response) {
-                                var media = document.querySelector('#shop_img');
-                                media.value = JSON.stringify(response);
-                            }
-                        });
-                    }
-                });
-            });
-            $uploaderFiles2.on("click", "li", function() {
-                $galleryImg2.attr("style", this.getAttribute("style"));
-                $galleryImg2.html(this.innerHTML);
-                $gallery2.fadeIn(100);
-            });
-
-            $gallery1.on("click", function() {
-                $gallery1.fadeOut(100);
-            });
-            $gallery2.on("click", function() {
-                $gallery2.fadeOut(100);
-            });
-            $gallery_btn1.on("click", function() {
-                $uploaderFiles1.empty();
-            })
-            $gallery_btn2.on("click", function() {
-                $uploaderFiles2.empty();
-            })
+        $uploaderFiles1.on("click", "li", function() {
+          $galleryImg1.attr("style", this.getAttribute("style"));
+          $galleryImg1.html(this.innerHTML);
+          $gallery1.fadeIn(100);
         });
+
+        $uploaderInput2.on("click", function(e) {
+          wx.chooseImage({
+            count: 1,
+            sizeType: ['original', 'compressed'],
+            sourceType: ['album', 'camera'],
+            success: function(res) {
+              $uploaderFiles2.empty();
+              $uploaderFiles2.append($(tmpl.replace('#url#', res.localIds[0]).replace('#url#', res.localIds[0])));
+              wx.uploadImage({
+                localId: res.localIds[0],
+                isShowProgressTips: 1,
+                success: function(response) {
+                  var media = document.querySelector('#shop_img');
+                  media.value = JSON.stringify(response);
+                }
+              });
+            }
+          });
+        });
+        $uploaderFiles2.on("click", "li", function() {
+          $galleryImg2.attr("style", this.getAttribute("style"));
+          $galleryImg2.html(this.innerHTML);
+          $gallery2.fadeIn(100);
+        });
+
+        $gallery1.on("click", function() {
+          $gallery1.fadeOut(100);
+        });
+        $gallery2.on("click", function() {
+          $gallery2.fadeOut(100);
+        });
+        $gallery_btn1.on("click", function() {
+          $uploaderFiles1.empty();
+        })
+        $gallery_btn2.on("click", function() {
+          $uploaderFiles2.empty();
+        })
+      });
     })
-    </script>
+  </script>
 </head>
 
 <body>
-    <div class="weui-gallery" id="gallery1">
-        <span class="weui-gallery__img" id="galleryImg1"></span>
-        <div class="weui-gallery__opr">
-            <a href="javascript:" class="weui-gallery__del" id="gallery_btn1">
+  <div class="weui-gallery" id="gallery1">
+    <span class="weui-gallery__img" id="galleryImg1"></span>
+    <div class="weui-gallery__opr">
+      <a href="javascript:" class="weui-gallery__del" id="gallery_btn1">
                 <i class="weui-icon-delete weui-icon_gallery-delete"></i>
             </a>
-        </div>
     </div>
-    <div class="weui-gallery" id="gallery2">
-        <span class="weui-gallery__img" id="galleryImg2"></span>
-        <div class="weui-gallery__opr">
-            <a href="javascript:" class="weui-gallery__del" id="gallery_btn2">
+  </div>
+  <div class="weui-gallery" id="gallery2">
+    <span class="weui-gallery__img" id="galleryImg2"></span>
+    <div class="weui-gallery__opr">
+      <a href="javascript:" class="weui-gallery__del" id="gallery_btn2">
                 <i class="weui-icon-delete weui-icon_gallery-delete"></i>
             </a>
-        </div>
     </div>
-    <!-- common header -->
-    <header data-am-widget="header" class="am-header am-header-default">
-        <div class="am-header-left am-header-nav">
-            <a href="javascript:window.history.back();" class="">
+  </div>
+  <!-- common header -->
+  <header data-am-widget="header" class="am-header am-header-default">
+    <div class="am-header-left am-header-nav">
+      <a href="javascript:window.history.back();" class="">
                 <i class="am-header-icon am-icon-angle-left am-icon-sm"></i>
             </a>
-        </div>
-        <h1 class="am-header-title">
+    </div>
+    <h1 class="am-header-title">
             <a href="#" class="">商户</a>
         </h1>
-    </header>
-    <!-- end header -->
-    <!-- start contain -->
-    <style>
-
-    </style>
-    <section class="xb-section">
-        <form action="/task/shop" method="post" class="am-u-sm-12 xb-form" id="doc-vld-msg">
-            <div class="swiper-container swiper-container-horizontal">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="am-form">
-                            <fieldset>
-                                <legend>第一步：商户基本数据录入</legend>
-                                <div class="am-form-group">
-                                    <label for="shop_name">商户名称 <b>*</b></label>
-                                    <input type="text" class="" id="shop_name" name="shop_name" placeholder="" minlength="2" required>
-                                </div>
-                                <div class="am-form-group">
-                                    <label for="name">法人姓名 <b>*</b></label>
-                                    <input type="text" class="" id="name" name="name" placeholder="" minlength="2" required>
-                                </div>
-                                <div class="am-form-group">
-                                    <label for="tel">联系电话 <b>*</b></label>
-                                    <input type="number" class="" id="tel" name="tel" placeholder="" minlength="11" maxlength="11" data-validation-message="请输入正确的手机号码" required>
-                                </div>
-                                <div class="am-form-group">
-                                    <label for="card">身份证号 <b>*</b></label>
-                                    <input type="text" class="" id="card" name="card" placeholder="" minlength="18" maxlength="18" data-validation-message="请输入正确的身份证号" required>
-                                </div>
-                                <div class="am-form-group">
-                                    <label for="passportNum">营业执照编号 <b>*</b></label>
-                                    <input type="number" class="" id="passportNum" name="passportNum" placeholder="" data-validation-message="请输入正确的营业执照编号" required>
-                                </div>
-                                <div class="am-form-group">
-                                    <div class="am-g">
-                                        <div class="am-u-sm-6">
-                                            <label for="passport">营业执照 <b>*</b></label>
-                                            <input type="hidden" id="passport" name="passport">
-                                            <div class="am-g">
-                                                <div class="weui-uploader">
-                                                    <div class="weui-uploader__bd">
-                                                        <ul class="weui-uploader__files" id="uploaderFiles1" style="margin: 0;padding-left: 0;">
-                                                        </ul>
-                                                        <div class="weui-uploader__input-box">
-                                                            <input id="uploaderInput1" class="weui-uploader__input" type="button">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="am-u-sm-6">
-                                            <label for="shop_img">商铺情况 <b>*</b></label>
-                                            <input type="hidden" id="shop_img" name="shop_img">
-                                            <div class="am-g">
-                                                <div class="weui-uploader">
-                                                    <div class="weui-uploader__bd">
-                                                        <ul class="weui-uploader__files" id="uploaderFiles2" style="margin: 0;padding-left: 0;">
-                                                        </ul>
-                                                        <div class="weui-uploader__input-box">
-                                                            <input id="uploaderInput2" class="weui-uploader__input" type="button">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="am-form-group">
-                                    <label for="shop_address">经营地址 <b>*</b></label>
-                                    <input type="text" class="" id="shop_address" name="shop_address"  data-validation-message="请输入正确的经营地址" required>
-                                    <input type="hidden" id="area" name="area" value="">
-                                </div>
-                                <div class="am-form-group">
-                                    <label for="shop_year">经营年限</label>
-                                    <input type="number" class="" id="shop_year" name="shop_year" >
-                                </div>
-                                <div class="am-form-group">
-                                    <label for="shop_state">经营场所情况</label>
-                                    <input type="text" class="" id="shop_state" value="自有" style="display: none;">
-                                    <select name="shop_state" required data-am-selected="{btnWidth: '100%', btnSize: 'md'}">
+  </header>
+  <!-- end header -->
+  <!-- start contain -->
+  <style>
+  </style>
+  <section class="xb-section">
+    <form action="/task/shop" method="post" class="am-u-sm-12 xb-form" id="doc-vld-msg">
+      <div class="swiper-container swiper-container-horizontal">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="am-form">
+              <fieldset>
+                <legend>第一步：商户基本数据录入</legend>
+                <div class="am-form-group">
+                  <label for="shop_name">商户名称 <b>*</b></label>
+                  <input type="text" class="" id="shop_name" name="shop_name" placeholder="" minlength="2" required>
+                </div>
+                <div class="am-form-group">
+                  <label for="name">法人姓名 <b>*</b></label>
+                  <input type="text" class="" id="name" name="name" placeholder="" minlength="2" required>
+                </div>
+                <div class="am-form-group">
+                  <label for="tel">联系电话 <b>*</b></label>
+                  <input type="number" class="" id="tel" name="tel" placeholder="">
+                </div>
+                <div class="am-form-group">
+                  <label for="card">身份证号 <b>*</b></label>
+                  <input type="text" class="" id="card" name="card" placeholder="">
+                </div>
+                <div class="am-form-group">
+                  <label for="passportNum">营业执照编号 <b>*</b></label>
+                  <input type="text" class="" id="passportNum" name="passportNum" placeholder="">
+                </div>
+                <div class="am-form-group">
+                  <div class="am-g">
+                    <div class="am-u-sm-6">
+                      <label for="passport">营业执照 <b>*</b></label>
+                      <input type="hidden" id="passport" name="passport">
+                      <div class="am-g">
+                        <div class="weui-uploader">
+                          <div class="weui-uploader__bd">
+                            <ul class="weui-uploader__files" id="uploaderFiles1" style="margin: 0;padding-left: 0;">
+                            </ul>
+                            <div class="weui-uploader__input-box">
+                              <input id="uploaderInput1" class="weui-uploader__input" type="button">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="am-u-sm-6">
+                      <label for="shop_img">商铺情况 <b>*</b></label>
+                      <input type="hidden" id="shop_img" name="shop_img">
+                      <div class="am-g">
+                        <div class="weui-uploader">
+                          <div class="weui-uploader__bd">
+                            <ul class="weui-uploader__files" id="uploaderFiles2" style="margin: 0;padding-left: 0;">
+                            </ul>
+                            <div class="weui-uploader__input-box">
+                              <input id="uploaderInput2" class="weui-uploader__input" type="button">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="am-form-group">
+                  <label for="shop_address">经营地址 <b>*</b></label>
+                  <input type="text" class="" id="shop_address" name="shop_address" data-validation-message="请输入正确的经营地址" required>
+                  <input type="hidden" id="area" name="area" value="">
+                </div>
+                <div class="am-form-group">
+                  <label for="shop_year">经营年限</label>
+                  <input type="number" class="" id="shop_year" name="shop_year">
+                </div>
+                <div class="am-form-group">
+                  <label for="shop_state">经营场所情况</label>
+                  <input type="text" class="" id="shop_state" value="自有" style="display: none;">
+                  <select name="shop_state" required data-am-selected="{btnWidth: '100%', btnSize: 'md'}">
                                         <option value="1"> 自有
                                         </option>
                                         <option value="0"> 租赁
                                         </option>
                                     </select>
-                                </div>
-                                <div class="am-form-group">
-                                    <label for="income">年营业额（万元）</label>
-                                    <input type="number" class="" id="income" name="income">
-                                </div>
-                                <div class="am-form-group">
-                                    <label for="high_authority">上级主管部门</label>
-                                    <input type="text" class="" id="high_authority" name="high_authority">
-                                </div>
-                                <div class="am-form-group">
-                                    <label for="person_in_charge">行业协会负责人</label>
-                                    <input type="text" class="" id="person_in_charge" name="person_in_charge">
-                                </div>
-                                <div class="am-form-group">
-                                    <label for="industry">商户类型</label>
-                                    <div class="am-sm-u-12" id="industry">
-                                        <select name="industry" required data-am-selected="{btnWidth: '100%', btnSize: 'md', searchBox: 1}">
+                </div>
+                <div class="am-form-group">
+                  <label for="income">年营业额（万元）</label>
+                  <input type="number" class="" id="income" name="income">
+                </div>
+                <div class="am-form-group">
+                  <label for="high_authority">上级主管部门</label>
+                  <input type="text" class="" id="high_authority" name="high_authority">
+                </div>
+                <div class="am-form-group">
+                  <label for="person_in_charge">行业协会负责人</label>
+                  <input type="text" class="" id="person_in_charge" name="person_in_charge">
+                </div>
+                <div class="am-form-group">
+                  <label for="industry">商户类型</label>
+                  <div class="am-sm-u-12" id="industry">
+                    <select name="industry" required data-am-selected="{btnWidth: '100%', btnSize: 'md', searchBox: 1}">
                                             <% for(var i=0;i<industry.length;i++){ %>
                                                 <option value="<%= industry[i].id %>">
                                                     <%= industry[i].industryName %>
                                                 </option>
                                                 <% } %>
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="am-g">
-                                    <div class="am-u-sm-4 am-u-sm-offset-4 am-text-center">
-                                        <button type="button" class="am-btn xb-btn-green xb-btn-next">下一步</button>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="am-form">
-                            <fieldset>
-                                <legend>第二步：金融产品选择</legend>
-                                <div class="am-form-group">
-                                    <h3>1.已有他行金融产品或金融服务（多选）</h3>
-                                    <% if(service.exsit_service){ %>
-                                        <% for(var i=0; i<service.exsit_service.length; i++){ %>
-                                            <label class="am-checkbox am-success">
+                  </div>
+                </div>
+                <div class="am-g">
+                  <div class="am-u-sm-4 am-u-sm-offset-4 am-text-center">
+                    <button type="button" class="am-btn xb-btn-green xb-btn-next">下一步</button>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="am-form">
+              <fieldset>
+                <legend>第二步：金融产品选择</legend>
+                <div class="am-form-group">
+                  <h3>1.已有他行金融产品或金融服务（多选）</h3>
+                  <% if(service.exsit_service){ %>
+                    <% for(var i=0; i<service.exsit_service.length; i++){ %>
+                      <label class="am-checkbox am-success">
                                                 <input type="checkbox" value="<%= service.exsit_service[i].id %>" data-id="<%= service.exsit_service[i].serviceName %>" data-am-ucheck name="exsit_service">
                                                 <%= service.exsit_service[i].serviceName %>
                                             </label>
-                                            <% } %>
-                                                <% } %>
-                                </div>
-                                <div class="am-form-group">
-                                    <h3>2.本次营销我行金融服务（多选）</h3>
-                                    <% if(service.handle_service){ %>
-                                        <% for(var i=0; i<service.handle_service.length; i++){ %>
-                                            <label class="am-checkbox am-success">
+                      <% } %>
+                        <% } %>
+                </div>
+                <div class="am-form-group">
+                  <h3>2.本次营销我行金融服务（多选）</h3>
+                  <% if(service.handle_service){ %>
+                    <% for(var i=0; i<service.handle_service.length; i++){ %>
+                      <label class="am-checkbox am-success">
                                                 <input type="checkbox" value="<%= service.handle_service[i].id %>" data-id="<%= service.handle_service[i].serviceName %>" data-am-ucheck name="handle_service">
                                                 <%= service.handle_service[i].serviceName %>
                                             </label>
-                                            <% } %>
-                                                <% } %>
-                                </div>
-                                <div class="am-form-group">
-                                    <h3>3.意向我行金融服务（多选）</h3>
-                                    <% if(service.intention_service){ %>
-                                        <% for(var i=0; i<service.intention_service.length; i++){ %>
-                                            <label class="am-checkbox am-success">
+                      <% } %>
+                        <% } %>
+                </div>
+                <div class="am-form-group">
+                  <h3>3.意向我行金融服务（多选）</h3>
+                  <% if(service.intention_service){ %>
+                    <% for(var i=0; i<service.intention_service.length; i++){ %>
+                      <label class="am-checkbox am-success">
                                                 <input type="checkbox" value="<%= service.intention_service[i].id %>" data-id="<%= service.intention_service[i].serviceName %>" data-am-ucheck name="intention_service">
                                                 <%= service.intention_service[i].serviceName %>
                                             </label>
-                                            <% } %>
-                                                <% } %>
-                                </div>
-                                <div class="am-g">
-                                    <div class="am-u-sm-4 am-u-sm-offset-2 am-text-center">
-                                        <button type="button" class="am-btn xb-btn-green xb-btn-prev">上一步</button>
-                                    </div>
-                                    <div class="am-u-sm-4 am-u-end am-text-center">
-                                        <button type="button" class="am-btn xb-btn-green xb-btn-next">下一步</button>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="am-form">
-                            <fieldset>
-                                <legend>第三步：营销日志</legend>
-                                <div class="am-form-group">
-                                    <textarea id="shop_detail" name="shop_detail" class="am-textarea" rows="15" placeholder="在这里记录对商户的营销信息或你的营销情况"></textarea>
-                                </div>
-                                <div class="am-g">
-                                    <div class="am-u-sm-4 am-u-sm-offset-2 am-text-center">
-                                        <button type="button" class="am-btn xb-btn-green xb-btn-prev">上一步</button>
-                                    </div>
-                                    <div class="am-u-sm-4 am-u-end am-text-center">
-                                        <button type="submit" class="am-btn xb-btn-green">提&nbsp;交</button>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                    </div>
+                      <% } %>
+                        <% } %>
                 </div>
-                <div class="swiper-pagination swiper-pagination-progress"></div>
-                <div class="swiper-button-prev" style="display: none;"></div>
-                <div class="swiper-button-next" style="display: none;"></div>
+                <div class="am-g">
+                  <div class="am-u-sm-4 am-u-sm-offset-2 am-text-center">
+                    <button type="button" class="am-btn xb-btn-green xb-btn-prev">上一步</button>
+                  </div>
+                  <div class="am-u-sm-4 am-u-end am-text-center">
+                    <button type="button" class="am-btn xb-btn-green xb-btn-next">下一步</button>
+                  </div>
+                </div>
+              </fieldset>
             </div>
-        </form>
-        <script>
-        var swiper = new Swiper('.swiper-container', {
-            initialSlide: 0,
-            hashnav: true,
-            hashnavWatchState: true,
-            pagination: '.swiper-pagination',
-            paginationType: 'progress',
-            prevButton: '.swiper-button-prev',
-            nextButton: '.swiper-button-next'
-        })
-        var prevButton = document.querySelector('.swiper-button-prev');
-        var nextButton = document.querySelector('.swiper-button-next');
-        var btnNext = document.querySelectorAll('.xb-btn-next');
-        var btnPrev = document.querySelectorAll('.xb-btn-prev');
-        for (var i = 0; i < btnNext.length; i++) {
-            btnNext[i].addEventListener("touchstart", function(e) {
-                e.preventDefault();
-                nextButton.click();
-            })
-        }
-        for (var i = 0; i < btnPrev.length; i++) {
-            btnPrev[i].addEventListener("touchstart", function(e) {
-                e.preventDefault();
-                prevButton.click();
-            })
-        }
-
-        window.onload = function() {
-            $(function() {
-                $("#doc-vld-msg").validator({
-                    onValid: function(a) {
-                        $(a.field).closest(".am-form-group").find(".am-alert").hide()
-                    },
-                    onInValid: function(a) {
-                        var i = $(a.field),
-                            d = i.closest(".am-form-group"),
-                            e = d.find(".am-alert"),
-                            l = i.data("validationMessage") || this.getValidationMessage(a);
-                        e.length || (e = $('<div class="am-alert am-alert-danger"></div>').hide().appendTo(d)), e.html(l).show()
-                    }
-                })
-            })
-        }
-        </script>
-    </section>
-    <!-- end contain -->
-    <!-- common footer -->
-    <footer class="xb-logo">
-        <div class="am-g">
-            <div class="am-u-sm-6 am-u-sm-offset-3">
-                <img src="/images/logo.jpg" alt="">
+          </div>
+          <div class="swiper-slide">
+            <div class="am-form">
+              <fieldset>
+                <legend>第三步：营销日志</legend>
+                <div class="am-form-group">
+                  <textarea id="shop_detail" name="shop_detail" class="am-textarea" rows="15" placeholder="在这里记录对商户的营销信息或你的营销情况"></textarea>
+                </div>
+                <div class="am-g">
+                  <div class="am-u-sm-4 am-u-sm-offset-2 am-text-center">
+                    <button type="button" class="am-btn xb-btn-green xb-btn-prev">上一步</button>
+                  </div>
+                  <div class="am-u-sm-4 am-u-end am-text-center">
+                    <button type="submit" class="am-btn xb-btn-green">提&nbsp;交</button>
+                  </div>
+                </div>
+              </fieldset>
             </div>
+          </div>
         </div>
-    </footer>
-    <!-- end footer -->
+        <div class="swiper-pagination swiper-pagination-progress"></div>
+        <div class="swiper-button-prev" style="display: none;"></div>
+        <div class="swiper-button-next" style="display: none;"></div>
+      </div>
+    </form>
+    <script>
+      var swiper = new Swiper('.swiper-container', {
+        initialSlide: 0,
+        hashnav: true,
+        hashnavWatchState: true,
+        pagination: '.swiper-pagination',
+        paginationType: 'progress',
+        prevButton: '.swiper-button-prev',
+        nextButton: '.swiper-button-next'
+      })
+      var prevButton = document.querySelector('.swiper-button-prev');
+      var nextButton = document.querySelector('.swiper-button-next');
+      var btnNext = document.querySelectorAll('.xb-btn-next');
+      var btnPrev = document.querySelectorAll('.xb-btn-prev');
+      for (var i = 0; i < btnNext.length; i++) {
+        btnNext[i].addEventListener("touchstart", function(e) {
+          e.preventDefault();
+          nextButton.click();
+        })
+      }
+      for (var i = 0; i < btnPrev.length; i++) {
+        btnPrev[i].addEventListener("touchstart", function(e) {
+          e.preventDefault();
+          prevButton.click();
+        })
+      }
+
+      window.onload = function() {
+        $(function() {
+          $("#doc-vld-msg").validator({
+            onValid: function(a) {
+              $(a.field).closest(".am-form-group").find(".am-alert").hide()
+            },
+            onInValid: function(a) {
+              var i = $(a.field),
+                d = i.closest(".am-form-group"),
+                e = d.find(".am-alert"),
+                l = i.data("validationMessage") || this.getValidationMessage(a);
+              e.length || (e = $('<div class="am-alert am-alert-danger"></div>').hide().appendTo(d)), e.html(l).show()
+            }
+          })
+        })
+      }
+    </script>
+  </section>
+  <!-- end contain -->
+  <!-- common footer -->
+  <footer class="xb-logo">
+    <div class="am-g">
+      <div class="am-u-sm-6 am-u-sm-offset-3">
+        <img src="/images/logo.jpg" alt="">
+      </div>
+    </div>
+  </footer>
+  <!-- end footer -->
 </body>
 
 </html>
