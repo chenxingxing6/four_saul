@@ -37,13 +37,19 @@
     });
 
     wx.ready(function() {
-      wx.getLocation({
-        type: 'wgs84',
-        success: function(res) {
-          var area = document.querySelector('#area');
-          area.value = JSON.stringify(res);
-        }
+      $(function() {
+        var addressBtn = document.querySelector('#address_btn');
+        addressBtn.addEventListener('touchstart', function() {
+          wx.getLocation({
+            type: 'wgs84',
+            success: function(res) {
+              var area = document.querySelector('#area');
+              area.value = JSON.stringify(res);
+            }
+          });
+        })
       });
+
       $(function() {
         var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#);overflow:hidden;"><img style="width:100%;height:100%;" src="#url#"></li>',
           $gallery = $("#gallery"),
@@ -56,7 +62,7 @@
           wx.chooseImage({
             count: 1,
             sizeType: ['original', 'compressed'],
-            sourceType: ['album', 'camera'],
+            sourceType: ['camera'],
             success: function(res) {
               $uploaderFiles.empty();
               $uploaderFiles.append($(tmpl.replace('#url#', res.localIds[0]).replace('#url#', res.localIds[0])));
@@ -119,10 +125,25 @@
           <div class="swiper-slide">
             <div class="am-form">
               <fieldset>
+                <style>
+                  #address,
+                  #name {
+                    width: 80%;
+                    display: inline-block;
+                  }
+
+                  #address_btn,
+                  #name_btn {
+                    width: 18%;
+                    border-radius: 3px;
+                    font-weight: bold;
+                  }
+                </style>
                 <legend>第一步：个人基本数据录入</legend>
                 <div class="am-form-group">
-                  <label for="name">姓名 <b>*</b></label>
+                  <label for="name" style="display: block;">姓名 <b>*</b></label>
                   <input type="text" class="" id="name" name="name" placeholder="" minlength="2" required>
+                  <a href="#" id="name_btn" class="am-btn am-btn-success">查重</a>
                 </div>
                 <div class="am-form-group">
                   <label for="tel">联系电话 <b>*</b></label>
@@ -135,11 +156,13 @@
                 <div class="am-form-group">
                   <label for="address">详细地址 <b>*</b></label>
                   <input type="text" class="" id="address" name="address" placeholder="">
+                  <a href="#" id="address_btn" class="am-btn am-btn-success">GPS</a>
                   <input type="hidden" name="area" id="area" value="">
                 </div>
+
                 <div class="am-form-group">
                   <label for="house">住宅情况 <b>*</b></label>
-                  <input type="hidden" id="house" name="house">
+                  <input type="hidden" id="house" name="house" required>
                   <div class="am-g">
                     <div class="weui-uploader">
                       <div class="weui-uploader__bd">
