@@ -96,7 +96,7 @@
           wx.chooseImage({
             count: 1,
             sizeType: ['original', 'compressed'],
-            sourceType: ['album', 'camera'],
+            sourceType: ['camera'],
             success: function(res) {
               $uploaderFiles2.empty();
               $uploaderFiles2.append($(tmpl.replace('#url#', res.localIds[0]).replace('#url#', res.localIds[0])));
@@ -172,6 +172,18 @@
         <div class="swiper-wrapper">
           <div class="swiper-slide">
             <div class="am-form">
+              <style>
+                #shop_address {
+                  width: 80%;
+                  display: inline-block;
+                }
+
+                #shop_address_btn {
+                  width: 18%;
+                  border-radius: 3px;
+                  font-weight: bold;
+                }
+              </style>
               <fieldset>
                 <legend>第一步：商户基本数据录入</legend>
                 <div class="am-form-group">
@@ -184,15 +196,15 @@
                   <input type="text" class="" id="name" name="name" value="<%= data.shop.name %>" placeholder="" minlength="2" required>
                 </div>
                 <div class="am-form-group">
-                  <label for="tel">联系电话 <b>*</b></label>
+                  <label for="tel">联系电话</label>
                   <input type="number" class="" id="tel" name="tel" value="<%= data.shop.tel %>" placeholder="">
                 </div>
                 <div class="am-form-group">
-                  <label for="card">身份证号 <b>*</b></label>
+                  <label for="card">身份证号</label>
                   <input type="text" class="" id="card" name="card" value="<%= data.shop.card %>" placeholder="">
                 </div>
                 <div class="am-form-group">
-                  <label for="passportNum">营业执照编号 <b>*</b></label>
+                  <label for="passportNum">营业执照编号</label>
                   <input type="text" class="" id="passportNum" name="passportNum" value="<%= data.shop.passportNum %>" placeholder="">
                 </div>
                 <div class="am-form-group">

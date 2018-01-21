@@ -71,7 +71,7 @@
           wx.chooseImage({
             count: 1,
             sizeType: ['original', 'compressed'],
-            sourceType: ['album', 'camera'],
+            sourceType: ['camera'],
             success: function(res) {
               $uploaderFiles1.empty();
               $uploaderFiles1.append($(tmpl.replace('#url#', res.localIds[0]).replace('#url#', res.localIds[0])));
