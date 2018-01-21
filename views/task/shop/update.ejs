@@ -245,9 +245,9 @@
                 </div>
                 <div class="am-form-group">
                   <label for="shop_address">经营地址 <b>*</b></label>
-                  <input type="text" class="" id="shop_address" name="shop_address" value="<%= data.shop.shop_address %>" placeholder="" data-validation-message="请输入正确的经营地址" required>
+                  <input type="text" class="" id="shop_address" name="shop_address" value="<%= data.shop.shop_address %>" style="<%= data.shop.shop_address ? 'width:100%;' : '' %>" placeholder="" data-validation-message="请输入正确的经营地址" required>
                   <input type="hidden" id="area" name="area" value="<%= data.shop.area %>">
-                  <a href="#" id="shop_address_btn" class="am-btn am-btn-success">GPS</a>
+                  <a href="#" id="shop_address_btn" class="am-btn am-btn-success" style="<%= data.shop.shop_address ? 'display: none;' : '' %>">GPS</a>
                 </div>
                 <div class="am-form-group">
                   <label for="shop_year">经营年限</label>
@@ -298,9 +298,8 @@
           <div class="swiper-slide">
             <div class="am-form">
               <fieldset>
-                <legend>第二步：金融产品选择</legend>
+                <legend>第二步：已有他行金融产品或金融服务</legend>
                 <div class="am-form-group">
-                  <h3>1.已有他行金融产品或金融服务（多选）</h3>
                   <% if(service.exsit_service){ %>
                     <% for(var i=0; i<service.exsit_service.length; i++){ %>
                       <label class="am-checkbox am-success">
@@ -315,8 +314,22 @@
                       <% } %>
                         <% } %>
                 </div>
+                <div class="am-g">
+                  <div class="am-u-sm-4 am-u-sm-offset-2 am-text-center">
+                    <button type="button" class="am-btn xb-btn-green xb-btn-prev">上一步</button>
+                  </div>
+                  <div class="am-u-sm-4 am-u-end am-text-center">
+                    <button type="button" class="am-btn xb-btn-green xb-btn-next">下一步</button>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="am-form">
+              <fieldset>
+                <legend>第三步：本次营销我行金融服务</legend>
                 <div class="am-form-group">
-                  <h3>2.本次营销我行金融服务（多选）</h3>
                   <% if(service.handle_service){ %>
                     <% for(var i=0; i<service.handle_service.length; i++){ %>
                       <label class="am-checkbox am-success">
@@ -331,8 +344,22 @@
                       <% } %>
                         <% } %>
                 </div>
+                <div class="am-g">
+                  <div class="am-u-sm-4 am-u-sm-offset-2 am-text-center">
+                    <button type="button" class="am-btn xb-btn-green xb-btn-prev">上一步</button>
+                  </div>
+                  <div class="am-u-sm-4 am-u-end am-text-center">
+                    <button type="button" class="am-btn xb-btn-green xb-btn-next">下一步</button>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="am-form">
+              <fieldset>
+                <legend>第四步：意向我行金融服务</legend>
                 <div class="am-form-group">
-                  <h3>3.意向我行金融服务（多选）</h3>
                   <% if(service.intention_service){ %>
                     <% for(var i=0; i<service.intention_service.length; i++){ %>
                       <label class="am-checkbox am-success">
@@ -361,7 +388,7 @@
           <div class="swiper-slide">
             <div class="am-form">
               <fieldset>
-                <legend>第三步：营销记录</legend>
+                <legend>第五步：营销记录</legend>
                 <div class="am-g xb-record">
                   <% for(var i=0; i<data.record.length; i++){ %>
                     <div class="am-u-sm-12 xb-record-item">
@@ -394,7 +421,7 @@
           <div class="swiper-slide">
             <div class="am-form">
               <fieldset>
-                <legend>第四步：营销日志</legend>
+                <legend>第六步：营销日志</legend>
                 <div class="am-form-group">
                   <textarea id="shop_detail" name="shop_detail" class="am-textarea" value="<%= data.shop.shop_detail %>" rows="15" placeholder="在这里记录对商户的营销信息或你的营销情况">
                                         <%= data.shop.shop_detail %>
