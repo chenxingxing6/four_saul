@@ -207,9 +207,8 @@
           <div class="swiper-slide">
             <div class="am-form">
               <fieldset>
-                <legend>第二步：金融产品选择</legend>
+                <legend>第二步：已有他行金融产品或金融服务（多选）</legend>
                 <div class="am-form-group">
-                  <h3>1.已有他行金融产品或金融服务（多选）</h3>
                   <% if(service.exsit_service){ %>
                     <% for(var i=0; i<service.exsit_service.length; i++){ %>
                       <label class="am-checkbox am-success">
@@ -224,6 +223,23 @@
                       <% } %>
                         <% } %>
                 </div>
+                <div class="am-g">
+                  <div class="am-u-sm-4 am-u-sm-offset-2 am-text-center">
+                    <button type="button" class="am-btn xb-btn-green xb-btn-prev">上一步</button>
+                  </div>
+                  <div class="am-u-sm-4 am-u-end am-text-center">
+                    <button type="button" class="am-btn xb-btn-green xb-btn-next">下一步</button>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="am-form">
+              <fieldset>
+                <legend>第三步：本次营销我行金融服务（多选）</legend>
+
                 <div class="am-form-group">
                   <h3>2.本次营销我行金融服务（多选）</h3>
                   <% if(service.handle_service){ %>
@@ -240,8 +256,23 @@
                       <% } %>
                         <% } %>
                 </div>
+                <div class="am-g">
+                  <div class="am-u-sm-4 am-u-sm-offset-2 am-text-center">
+                    <button type="button" class="am-btn xb-btn-green xb-btn-prev">上一步</button>
+                  </div>
+                  <div class="am-u-sm-4 am-u-end am-text-center">
+                    <button type="button" class="am-btn xb-btn-green xb-btn-next">下一步</button>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="am-form">
+              <fieldset>
+                <legend>第四步：意向我行金融服务（多选）</legend>
                 <div class="am-form-group">
-                  <h3>3.意向我行金融服务（多选）</h3>
                   <% if(service.intention_service){ %>
                     <% for(var i=0; i<service.intention_service.length; i++){ %>
                       <label class="am-checkbox am-success">
@@ -270,7 +301,7 @@
           <div class="swiper-slide">
             <div class="am-form">
               <fieldset>
-                <legend>第三步：营销记录</legend>
+                <legend>第五步：营销记录</legend>
                 <style>
                 </style>
                 <div class="am-g xb-record">
