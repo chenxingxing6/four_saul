@@ -45,6 +45,7 @@
             success: function(res) {
               var area = document.querySelector('#area');
               area.value = JSON.stringify(res);
+              alert("获取用户GPS信息成功");
             }
           });
         })
@@ -73,7 +74,6 @@
                 success: function(response) {
                   var media = document.querySelector('#house');
                   media.value = JSON.stringify(response);
-                  alert("获取用户GPS信息成功");
                 }
               });
             }
