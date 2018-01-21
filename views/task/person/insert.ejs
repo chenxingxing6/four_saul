@@ -73,6 +73,7 @@
                 success: function(response) {
                   var media = document.querySelector('#house');
                   media.value = JSON.stringify(response);
+                  alert("获取用户GPS信息成功");
                 }
               });
             }
