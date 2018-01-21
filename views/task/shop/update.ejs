@@ -37,13 +37,23 @@
     });
 
     wx.ready(function() {
-      wx.getLocation({
-        type: 'wgs84',
-        success: function(res) {
-          var area = document.querySelector('#area');
-          area.value = JSON.stringify(res);
-        }
+      $(function() {
+        var addressBtn = document.querySelector('#shop_address_btn');
+        var address = document.querySelector('#shop_address');
+        addressBtn.addEventListener('touchstart', function() {
+          wx.getLocation({
+            type: 'wgs84',
+            success: function(res) {
+              var area = document.querySelector('#area');
+              area.value = JSON.stringify(res);
+              alert("获取用户GPS信息成功");
+              addressBtn.style.display = 'none';
+              address.style.width = '100%';
+            }
+          });
+        })
       });
+
       $(function() {
         var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#);overflow:hidden;"><img style="width:100%;height:100%;" src="#url#"></li>',
           $gallery1 = $("#gallery1"),
@@ -61,7 +71,7 @@
           wx.chooseImage({
             count: 1,
             sizeType: ['original', 'compressed'],
-            sourceType: ['album', 'camera'],
+            sourceType: ['camera'],
             success: function(res) {
               $uploaderFiles1.empty();
               $uploaderFiles1.append($(tmpl.replace('#url#', res.localIds[0]).replace('#url#', res.localIds[0])));
@@ -225,6 +235,7 @@
                   <label for="shop_address">经营地址 <b>*</b></label>
                   <input type="text" class="" id="shop_address" name="shop_address" value="<%= data.shop.shop_address %>" placeholder="" data-validation-message="请输入正确的经营地址" required>
                   <input type="hidden" id="area" name="area" value="<%= data.shop.area %>">
+                  <a href="#" id="shop_address_btn" class="am-btn am-btn-success">GPS</a>
                 </div>
                 <div class="am-form-group">
                   <label for="shop_year">经营年限</label>

@@ -37,13 +37,23 @@
     });
 
     wx.ready(function() {
-      wx.getLocation({
-        type: 'wgs84',
-        success: function(res) {
-          var area = document.querySelector('#area');
-          area.value = JSON.stringify(res);
-        }
+      $(function() {
+        var addressBtn = document.querySelector('#shop_address_btn');
+        var address = document.querySelector('#shop_address');
+        addressBtn.addEventListener('touchstart', function() {
+          wx.getLocation({
+            type: 'wgs84',
+            success: function(res) {
+              var area = document.querySelector('#area');
+              area.value = JSON.stringify(res);
+              alert("获取用户GPS信息成功");
+              addressBtn.style.display = 'none';
+              address.style.width = '100%';
+            }
+          });
+        })
       });
+
       $(function() {
         var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#);overflow:hidden;"><img style="width:100%;height:100%;" src="#url#"></li>',
           $gallery1 = $("#gallery1"),
@@ -86,7 +96,7 @@
           wx.chooseImage({
             count: 1,
             sizeType: ['original', 'compressed'],
-            sourceType: ['album', 'camera'],
+            sourceType: ['camera'],
             success: function(res) {
               $uploaderFiles2.empty();
               $uploaderFiles2.append($(tmpl.replace('#url#', res.localIds[0]).replace('#url#', res.localIds[0])));
@@ -162,33 +172,57 @@
         <div class="swiper-wrapper">
           <div class="swiper-slide">
             <div class="am-form">
+              <style>
+                #shop_name,
+                #shop_address {
+                  width: 80%;
+                  display: inline-block;
+                }
+
+                #shop_name_btn,
+                #shop_address_btn {
+                  width: 18%;
+                  border-radius: 3px;
+                  font-weight: bold;
+                }
+
+                #passport,
+                #shop_img {
+                  width: 0;
+                  height: 0;
+                  opacity: 0;
+                  padding: 0;
+                  margin: 0;
+                }
+              </style>
               <fieldset>
                 <legend>第一步：商户基本数据录入</legend>
                 <div class="am-form-group">
                   <label for="shop_name">商户名称 <b>*</b></label>
                   <input type="text" class="" id="shop_name" name="shop_name" placeholder="" minlength="2" required>
+                  <a href="#" id="shop_name_btn" class="am-btn am-btn-success">查重</a>
                 </div>
                 <div class="am-form-group">
                   <label for="name">法人姓名 <b>*</b></label>
                   <input type="text" class="" id="name" name="name" placeholder="" minlength="2" required>
                 </div>
                 <div class="am-form-group">
-                  <label for="tel">联系电话 <b>*</b></label>
+                  <label for="tel">联系电话</label>
                   <input type="number" class="" id="tel" name="tel" placeholder="">
                 </div>
                 <div class="am-form-group">
-                  <label for="card">身份证号 <b>*</b></label>
+                  <label for="card">身份证号</label>
                   <input type="text" class="" id="card" name="card" placeholder="">
                 </div>
                 <div class="am-form-group">
-                  <label for="passportNum">营业执照编号 <b>*</b></label>
+                  <label for="passportNum">营业执照编号</label>
                   <input type="text" class="" id="passportNum" name="passportNum" placeholder="">
                 </div>
                 <div class="am-form-group">
                   <div class="am-g">
                     <div class="am-u-sm-6">
                       <label for="passport">营业执照 <b>*</b></label>
-                      <input type="hidden" id="passport" name="passport">
+                      <input type="text" id="passport" name="passport" required>
                       <div class="am-g">
                         <div class="weui-uploader">
                           <div class="weui-uploader__bd">
@@ -203,7 +237,7 @@
                     </div>
                     <div class="am-u-sm-6">
                       <label for="shop_img">商铺情况 <b>*</b></label>
-                      <input type="hidden" id="shop_img" name="shop_img">
+                      <input type="text" id="shop_img" name="shop_img" required>
                       <div class="am-g">
                         <div class="weui-uploader">
                           <div class="weui-uploader__bd">
@@ -221,6 +255,7 @@
                 <div class="am-form-group">
                   <label for="shop_address">经营地址 <b>*</b></label>
                   <input type="text" class="" id="shop_address" name="shop_address" data-validation-message="请输入正确的经营地址" required>
+                  <a href="#" id="shop_address_btn" class="am-btn am-btn-success">GPS</a>
                   <input type="hidden" id="area" name="area" value="">
                 </div>
                 <div class="am-form-group">
