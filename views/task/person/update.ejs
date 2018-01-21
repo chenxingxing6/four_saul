@@ -139,6 +139,14 @@
                     border-radius: 3px;
                     font-weight: bold;
                   }
+
+                  #house {
+                    width: 0;
+                    height: 0;
+                    opacity: 0;
+                    padding: 0;
+                    margin: 0;
+                  }
                 </style>
                 <input type="hidden" name="id" value="<%= data.person.id %>">
                 <legend>第一步：个人基本数据录入</legend>
@@ -147,16 +155,16 @@
                   <input type="text" class="" id="name" name="name" value="<%= data.person.name %>" placeholder="" minlength="2" required>
                 </div>
                 <div class="am-form-group">
-                  <label for="tel">联系电话 <b>*</b></label>
+                  <label for="tel">联系电话</label>
                   <input type="number" class="" id="tel" name="tel" value="<%= data.person.tel %>" placeholder="">
                 </div>
                 <div class="am-form-group">
-                  <label for="card">身份证号 <b>*</b></label>
+                  <label for="card">身份证号</label>
                   <input type="text" class="" id="card" name="card" value="<%= data.person.card %>" placeholder="">
                 </div>
                 <div class="am-form-group">
                   <label for="address">详细地址 <b>*</b></label>
-                  <input type="text" class="" id="address" name="address" value="<%= data.person.address %>" placeholder="" style="<%= data.person.area ? 'width: 100%;' : '' %>">
+                  <input type="text" class="" id="address" name="address" value="<%= data.person.address %>" placeholder="" style="<%= data.person.area ? 'width: 100%;' : '' %>" required>
                   <a href="#" id="address_btn" class="am-btn am-btn-success" style="<%= data.person.area ? 'display: none;' : '' %>">GPS</a>
                   <input type="hidden" name="area" id="area" value="<%= data.person.area %>">
                 </div>

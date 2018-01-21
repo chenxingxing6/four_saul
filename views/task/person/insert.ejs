@@ -142,6 +142,14 @@
                     border-radius: 3px;
                     font-weight: bold;
                   }
+
+                  #house {
+                    width: 0;
+                    height: 0;
+                    opacity: 0;
+                    padding: 0;
+                    margin: 0;
+                  }
                 </style>
                 <legend>第一步：个人基本数据录入</legend>
                 <div class="am-form-group">
@@ -150,23 +158,23 @@
                   <a href="#" id="name_btn" class="am-btn am-btn-success">查重</a>
                 </div>
                 <div class="am-form-group">
-                  <label for="tel">联系电话 <b>*</b></label>
+                  <label for="tel">联系电话</label>
                   <input type="number" class="" id="tel" name="tel" placeholder="">
                 </div>
                 <div class="am-form-group">
-                  <label for="card">身份证号 <b>*</b></label>
+                  <label for="card">身份证号</label>
                   <input type="text" class="" id="card" name="card" placeholder="">
                 </div>
                 <div class="am-form-group">
                   <label for="address">详细地址 <b>*</b></label>
-                  <input type="text" class="" id="address" name="address" placeholder="">
+                  <input type="text" class="" id="address" name="address" placeholder="" required>
                   <a href="#" id="address_btn" class="am-btn am-btn-success">GPS</a>
                   <input type="hidden" name="area" id="area" value="">
                 </div>
 
                 <div class="am-form-group">
                   <label for="house">住宅情况 <b>*</b></label>
-                  <input type="text" style="width:0;height:0;opacity:0;" id="house" name="house" required>
+                  <input type="text" id="house" name="house" required>
                   <div class="am-g">
                     <div class="weui-uploader">
                       <div class="weui-uploader__bd">
