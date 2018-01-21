@@ -156,8 +156,8 @@
                 </div>
                 <div class="am-form-group">
                   <label for="address">详细地址 <b>*</b></label>
-                  <input type="text" class="" id="address" name="address" value="<%= data.person.address %>" placeholder="">
-                  <a href="#" id="address_btn" class="am-btn am-btn-success">GPS</a>
+                  <input type="text" class="" id="address" name="address" value="<%= data.person.address %>" placeholder="" style="<%= data.person.area ? 'width: 100%;' : '' %>">
+                  <a href="#" id="address_btn" class="am-btn am-btn-success" style="<%= data.person.area ? 'display: none;' : '' %>">GPS</a>
                   <input type="hidden" name="area" id="area" value="<%= data.person.area %>">
                 </div>
                 <div class="am-form-group">
