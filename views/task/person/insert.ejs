@@ -39,6 +39,7 @@
     wx.ready(function() {
       $(function() {
         var addressBtn = document.querySelector('#address_btn');
+        var address = document.querySelector('#address');
         addressBtn.addEventListener('touchstart', function() {
           wx.getLocation({
             type: 'wgs84',
@@ -46,6 +47,8 @@
               var area = document.querySelector('#area');
               area.value = JSON.stringify(res);
               alert("获取用户GPS信息成功");
+              addressBtn.style.display = 'none';
+              address.style.width = '100%';
             }
           });
         })
